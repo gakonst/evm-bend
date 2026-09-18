@@ -1,0 +1,22 @@
+{
+  "counts": {
+    "contract_creation": 2203,
+    "expected_transaction_rejection": 933,
+    "gas_limit_above_old_frame_host_cap": 7382,
+    "state_fixtures": 15918,
+    "state_post_variants": 15918,
+    "type_0": 12027,
+    "type_1": 802,
+    "type_2": 952,
+    "type_3": 1116,
+    "type_4": 1021,
+    "with_authorizations": 1015,
+    "with_blobs": 1114
+  },
+  "maximum": {
+    "gas_limit": 9223372036854775807,
+    "accounts": 1402,
+    "calldata_bytes": 261910,
+    "pre_code_bytes": 65536
+  }
+}

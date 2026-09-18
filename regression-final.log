@@ -1,0 +1,29 @@
+All terms check.
+True{}
+All terms check.
+All terms check.
+Rejected: stack limit 1025
+Rejected: incorrect gas subtraction
+Rejected: ADD overcharge
+Rejected: POP keeps the top
+Rejected: fault preserves gas
+Batch 0: 32/32 passed
+Batch 1: 64/64 passed
+Batch 2: 96/96 passed
+Batch 3: 128/128 passed
+Batch 4: 160/160 passed
+Batch 5: 192/192 passed
+Batch 6: 224/224 passed
+Batch 7: 256/256 passed
+Batch 8: 288/288 passed
+Batch 9: 320/320 passed
+Batch 10: 352/352 passed
+Batch 11: 384/384 passed
+Batch 12: 416/416 passed
+Batch 13: 448/448 passed
+Batch 14: 452/452 passed
+{"cases": 226, "backend_comparisons": 452, "passed": 452, "success": true}
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
+{"cases": 218, "backend_comparisons": 436, "passed": 436, "skipped_unsupported": ["unsupported-retains-gas-stack", "unsupported-2", "unsupported-32", "unsupported-81", "unsupported-94", "unsupported-128", "unsupported-253", "unsupported-255"], "success": true}
+Diagnostic differences: 0
+halted|91|5|W{5,0,0,0,0,0,0,0};

@@ -1,0 +1,17 @@
+**/target/
+__pycache__/
+evm-native
+evm-full.js
+evm-demo
+*-bin
+*-bin.js
+*.log
+*.tar.gz
+
+evm-transaction-native
+evm-transaction.js
+conformance/fixtures/
+conformance/upstream-index.json
+conformance/inventory.jsonl
+conformance/baseline/
+conformance/*results*/

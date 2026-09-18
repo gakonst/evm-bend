@@ -1,0 +1,27 @@
+[
+  {
+    "mutation": "stack limit 1025",
+    "rejected": true,
+    "diagnostic": "Error:\n- expected : {stack-proof.running_bounded(core.push_checked(Cmp.is_lt(Nat.cmp(List.length(&2, evmword.Word, stack), 1025n)), gas, pc, width, value, stack)) == True{} : Bool}\n- observed : {stack-proof.running_bounded(core.push_checked(Cmp.is_lt(Nat.cmp(List.length(&2, evmword.Word, stack), 1024n)), gas, pc, width, value, stack)) == True{} : Bool}\nContext:\n- gas   : Nat\n- pc    : Nat\n- width : Nat\n- value : evmword.Word\n- stack : List<&2, evmword.Word>\nLocation: stack-proof.push_bounded\n44 | def push_bounded(gas, pc, width, value, stack):\n45>|   push_branch(Nat.is_lt(List.length(&2, W.Word, stack), 1024n), gas, pc, width, value, stack, {==})\n46 | \n"
+  },
+  {
+    "mutation": "incorrect gas subtraction",
+    "rejected": true,
+    "diagnostic": "Error:\n- expected : Some{0n}\n- observed : Some{remaining}\nContext:\n- remaining : Nat\nLocation: LAWS.gas_exact\n10 |     case 0n:\n11>|       {==}\n12 |     case 1n+c:\n"
+  },
+  {
+    "mutation": "ADD overcharge",
+    "rejected": true,
+    "diagnostic": "Error:\n- expected : core.charged(gas.charge(1n, remaining), core.Add{}, pc, a <> b <> rest)\n- observed : core.S{remaining, 1n+pc, evmword.add(a, b) <> rest, core.Running{}}\nContext:\n- remaining : Nat\n- pc        : Nat\n- a         : evmword.Word\n- b         : evmword.Word\n- rest      : List<&2, evmword.Word>\nLocation: LAWS.add\n28 | def Laws.add(remaining, pc, a, b, rest):\n29>|   {==}\n30 | \n"
+  },
+  {
+    "mutation": "POP keeps the top",
+    "rejected": true,
+    "diagnostic": "Error:\n- expected : core.S{remaining, 1n+pc, top <> rest, core.Running{}}\n- observed : core.S{remaining, 1n+pc, rest, core.Running{}}\nContext:\n- remaining : Nat\n- pc        : Nat\n- top       : evmword.Word\n- rest      : List<&2, evmword.Word>\nLocation: LAWS.pop\n25 | def Laws.pop(remaining, pc, top, rest):\n26>|   {==}\n27 | \n"
+  },
+  {
+    "mutation": "fault preserves gas",
+    "rejected": true,
+    "diagnostic": "Error:\n- expected : core.S{gas, pc, stack, core.BadOpcode{}}\n- observed : core.S{0n, pc, stack, core.BadOpcode{}}\nContext:\n- gas   : Nat\n- pc    : Nat\n- stack : List<&2, evmword.Word>\nLocation: LAWS.invalid_burns_gas\n34 | def Laws.invalid_burns_gas(gas, pc, stack):\n35>|   {==}\n36 | \n"
+  }
+]

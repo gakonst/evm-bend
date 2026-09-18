@@ -1,0 +1,42 @@
+{
+  "native": {
+    "passed": 15,
+    "vectors": [
+      "empty",
+      "abc",
+      "pattern-1",
+      "pattern-31",
+      "pattern-32",
+      "pattern-64",
+      "pattern-134",
+      "pattern-135",
+      "pattern-136",
+      "pattern-137",
+      "pattern-271",
+      "pattern-272",
+      "pattern-273",
+      "pattern-512",
+      "pattern-1024"
+    ]
+  },
+  "js": {
+    "passed": 15,
+    "vectors": [
+      "empty",
+      "abc",
+      "pattern-1",
+      "pattern-31",
+      "pattern-32",
+      "pattern-64",
+      "pattern-134",
+      "pattern-135",
+      "pattern-136",
+      "pattern-137",
+      "pattern-271",
+      "pattern-272",
+      "pattern-273",
+      "pattern-512",
+      "pattern-1024"
+    ]
+  }
+}

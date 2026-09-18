@@ -1,0 +1,23 @@
+--- /srv/nanocodex/.bend/current/bend2/comp.ts	2026-09-17 16:35:50.000000000 -0700
++++ toolchain-debug/comp.ts	2026-09-17 18:26:35.539113448 -0700
+@@ -932,9 +932,10 @@
+     return BOX;
+   }
+   const tld = book.tlds[t.k];
+-  return WORDS[t.k] ?? (t.k === "Array" || t.k === "IO.OP" || tld?.$ !== "ADT"
++  const result = WORDS[t.k] ?? (t.k === "Array" || t.k === "IO.OP" || tld?.$ !== "ADT"
+     || lay_cyclic(book, t.k) ? BOX : lay_pack(tld.c.map((c): Arm =>
+     ({ k: c.k, fs: lay_fields(book, ctr_doms(book, c, t.x)) }))));
++  return result.ks.length > 32 ? BOX : result;
+ }
+ 
+ function lay_fields(book: Bend.Book, As: (HTerm | null)[]): Field[] {
+@@ -2754,7 +2755,7 @@
+   }
+   const table = (nm: string, vals: number[]) => {
+     if (vals.some((v) => v > 255)) {
+-      die("an arity over 255");
++      die("an arity over 255 in " + nm + ": " + entries.filter(s => s.params.length > 255).map(s => s.def + " / " + s.fid + "=" + s.params.length).join(", "));
+     }
+     defs.push(`CONSTV u8 ${nm}[] = { ${vals.join(", ")} };`);
+   };

@@ -1,0 +1,28 @@
+{
+  "cases": 6733,
+  "quick": false,
+  "seed": 256,
+  "backends": {
+    "js": 6733,
+    "native": 6733
+  },
+  "evidence": {
+    "js": "word-ops-full.log",
+    "native": [
+      {
+        "file": "word-ops-full.log",
+        "range": [
+          0,
+          2496
+        ]
+      },
+      {
+        "file": "word-ops-resume.log",
+        "range": [
+          2496,
+          6733
+        ]
+      }
+    ]
+  }
+}

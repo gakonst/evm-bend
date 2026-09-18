@@ -1,0 +1,2208 @@
+{
+  "reference": "alloy-rs/evm2",
+  "commit": "0a5314efb28cbef7dc1a83e38ac75860b974adcd",
+  "fork": "Shanghai",
+  "cases": 218,
+  "backend_comparisons": 436,
+  "passed": 436,
+  "skipped_unsupported": [
+    "unsupported-retains-gas-stack",
+    "unsupported-2",
+    "unsupported-32",
+    "unsupported-81",
+    "unsupported-94",
+    "unsupported-128",
+    "unsupported-253",
+    "unsupported-255"
+  ],
+  "failures": [],
+  "diagnostic_differences": [],
+  "results": [
+    {
+      "name": "empty",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "empty",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "stop-retains-pc",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "stop-retains-pc",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "add-oog-before-underflow",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "add-oog-before-underflow",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "add-underflow",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "add-underflow",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "pop-oog-before-underflow",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "pop-oog-before-underflow",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "pop-underflow",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "pop-underflow",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "one-add-underflow-retains-stack",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "one-add-underflow-retains-stack",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "one-add-oog-retains-stack",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "one-add-oog-retains-stack",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "invalid-retains-stack",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "invalid-retains-stack",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "invalid-zero-gas",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "invalid-zero-gas",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push0-exact",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push0-exact",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push0-oog",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push0-oog",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push1-exact",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push1-exact",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push1-oog",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push1-oog",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "pop-exact",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "pop-exact",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "add-exact",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "add-exact",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "payload-not-executed",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "payload-not-executed",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "full256-wrap",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "full256-wrap",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "carry-32",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "carry-32",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "carry-64",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "carry-64",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "carry-96",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "carry-96",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "carry-128",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "carry-128",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "carry-160",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "carry-160",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "carry-192",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "carry-192",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "carry-224",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "carry-224",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "carry-256",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "carry-256",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-1-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-1-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-1-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-1-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-2-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-2-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-2-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-2-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-3-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-3-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-3-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-3-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-4-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-4-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-4-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-4-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-5-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-5-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-5-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-5-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-6-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-6-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-6-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-6-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-7-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-7-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-7-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-7-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-8-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-8-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-8-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-8-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-9-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-9-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-9-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-9-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-10-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-10-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-10-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-10-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-11-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-11-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-11-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-11-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-12-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-12-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-12-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-12-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-13-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-13-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-13-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-13-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-14-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-14-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-14-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-14-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-15-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-15-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-15-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-15-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-16-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-16-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-16-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-16-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-17-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-17-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-17-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-17-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-18-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-18-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-18-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-18-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-19-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-19-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-19-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-19-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-20-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-20-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-20-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-20-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-21-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-21-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-21-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-21-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-22-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-22-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-22-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-22-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-23-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-23-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-23-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-23-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-24-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-24-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-24-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-24-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-25-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-25-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-25-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-25-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-26-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-26-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-26-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-26-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-27-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-27-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-27-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-27-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-28-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-28-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-28-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-28-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-29-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-29-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-29-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-29-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-30-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-30-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-30-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-30-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-31-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-31-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-31-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-31-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-32-endian",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-32-endian",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "push-32-truncated",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "push-32-truncated",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "stack-1024-gas-2048",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "stack-1024-gas-2048",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "stack-1025-gas-2050",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "stack-1025-gas-2050",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "stack-1025-gas-2048",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "stack-1025-gas-2048",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "stack-1025-gas-2049",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "stack-1025-gas-2049",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-00",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-00",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-01",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-01",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-02",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-02",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-03",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-03",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-04",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-04",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-05",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-05",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-06",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-06",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-07",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-07",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-08",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-08",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-09",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-09",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-10",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-10",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-11",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-11",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-12",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-12",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-13",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-13",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-14",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-14",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-15",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-15",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-16",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-16",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-17",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-17",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-18",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-18",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-19",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-19",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-20",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-20",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-21",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-21",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-22",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-22",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-23",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-23",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-24",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-24",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-25",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-25",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-26",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-26",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-27",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-27",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-28",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-28",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-29",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-29",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-30",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-30",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-31",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-31",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-32",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-32",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-33",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-33",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-34",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-34",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-35",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-35",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-36",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-36",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-37",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-37",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-38",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-38",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-39",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-39",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-40",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-40",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-41",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-41",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-42",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-42",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-43",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-43",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-44",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-44",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-45",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-45",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-46",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-46",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-47",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-47",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-48",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-48",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-49",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-49",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-50",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-50",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-51",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-51",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-52",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-52",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-53",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-53",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-54",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-54",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-55",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-55",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-56",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-56",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-57",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-57",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-58",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-58",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-59",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-59",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-00",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-00",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-01",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-01",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-02",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-02",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-03",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-03",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-04",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-04",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-05",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-05",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-06",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-06",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-07",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-07",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-08",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-08",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-09",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-09",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-10",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-10",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-11",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-11",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-12",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-12",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-13",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-13",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-14",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-14",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-15",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-15",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-16",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-16",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-17",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-17",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-18",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-18",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-19",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-19",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-20",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-20",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-21",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-21",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-22",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-22",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-23",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-23",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-24",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-24",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-25",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-25",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-26",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-26",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-27",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-27",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-28",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-28",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-29",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-29",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-30",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-30",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-31",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-31",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-32",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-32",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-33",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-33",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-34",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-34",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-35",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-35",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-36",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-36",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-37",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-37",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-38",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-38",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-39",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-39",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-40",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-40",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-41",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-41",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-42",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-42",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-43",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-43",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-44",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-44",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-45",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-45",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-46",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-46",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-47",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-47",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-48",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-48",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-49",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-49",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-50",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-50",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-51",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-51",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-52",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-52",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-53",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-53",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-54",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-54",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-55",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-55",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-56",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-56",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-57",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-57",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-58",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-58",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-59",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-59",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-60",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-60",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-61",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-61",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-62",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-62",
+      "backend": "native",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-63",
+      "backend": "js",
+      "passed": true
+    },
+    {
+      "name": "random-full256-add-63",
+      "backend": "native",
+      "passed": true
+    }
+  ],
+  "adapter_stderr": "",
+  "success": true,
+  "adapter_sha256": {
+    "evm2-adapter/src/main.rs": "47a0270581d3068d81c89aa84db17024f6c60715ec4c9168cf54a5b71dc87655",
+    "evm2-adapter/Cargo.lock": "6424ec8f077e06323dc333c62ee0fa695b9733fde0bb0e21f1a1a071664ad37a"
+  }
+}

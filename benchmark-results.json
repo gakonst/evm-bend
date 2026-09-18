@@ -1,0 +1,41 @@
+{
+  "scope": "End-to-end JSON encode, process startup, Bend execution, state decode; not isolated interpreter throughput",
+  "rows": [
+    {
+      "backend": "native",
+      "iterations": 10,
+      "gas_spent": 426,
+      "median_seconds": 0.008613180005340837
+    },
+    {
+      "backend": "js",
+      "iterations": 10,
+      "gas_spent": 426,
+      "median_seconds": 0.3972441299993079
+    },
+    {
+      "backend": "native",
+      "iterations": 100,
+      "gas_spent": 4026,
+      "median_seconds": 0.025718905992107466
+    },
+    {
+      "backend": "js",
+      "iterations": 100,
+      "gas_spent": 4026,
+      "median_seconds": 0.46686111799499486
+    },
+    {
+      "backend": "native",
+      "iterations": 1000,
+      "gas_spent": 40026,
+      "median_seconds": 0.10074629000155255
+    },
+    {
+      "backend": "js",
+      "iterations": 1000,
+      "gas_spent": 40026,
+      "median_seconds": 1.122321193004609
+    }
+  ]
+}

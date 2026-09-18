@@ -1,0 +1,446 @@
+{
+  "release": "tests-glamsterdam-devnet@v8.1.4",
+  "release_commit": "7341820b5b394b1934dfe7bb6f621fcdab7baf7f",
+  "archive_sha256": "aed315489163dc67c4e5607d7bbb8902e8329afe939be58193b125f2e81a85d4",
+  "upstream_root_hash": "0x417b20736eef8fe20cd98ca22aa0f736a5315c7e58f0cdce72803d03f3db4d9d",
+  "upstream_cases": 340012,
+  "amsterdam_cases": 90802,
+  "required_cases": 40911,
+  "protocol_api_cases": 49891,
+  "counts": [
+    {
+      "fork": "Amsterdam",
+      "format": "blockchain_test",
+      "count": 24901
+    },
+    {
+      "fork": "Amsterdam",
+      "format": "blockchain_test_engine",
+      "count": 24941
+    },
+    {
+      "fork": "Amsterdam",
+      "format": "blockchain_test_engine_x",
+      "count": 24941
+    },
+    {
+      "fork": "Amsterdam",
+      "format": "blockchain_test_sync",
+      "count": 9
+    },
+    {
+      "fork": "Amsterdam",
+      "format": "state_test",
+      "count": 15918
+    },
+    {
+      "fork": "Amsterdam",
+      "format": "transaction_test",
+      "count": 92
+    },
+    {
+      "fork": "BPO1ToBPO2AtTime15k",
+      "format": "blockchain_test",
+      "count": 23
+    },
+    {
+      "fork": "BPO1ToBPO2AtTime15k",
+      "format": "blockchain_test_engine",
+      "count": 23
+    },
+    {
+      "fork": "BPO1ToBPO2AtTime15k",
+      "format": "blockchain_test_engine_x",
+      "count": 23
+    },
+    {
+      "fork": "BPO2ToAmsterdamAtTime15k",
+      "format": "blockchain_test",
+      "count": 127
+    },
+    {
+      "fork": "BPO2ToAmsterdamAtTime15k",
+      "format": "blockchain_test_engine",
+      "count": 129
+    },
+    {
+      "fork": "BPO2ToAmsterdamAtTime15k",
+      "format": "blockchain_test_engine_x",
+      "count": 129
+    },
+    {
+      "fork": "BPO2ToBPO3AtTime15k",
+      "format": "blockchain_test",
+      "count": 25
+    },
+    {
+      "fork": "BPO2ToBPO3AtTime15k",
+      "format": "blockchain_test_engine",
+      "count": 25
+    },
+    {
+      "fork": "BPO2ToBPO3AtTime15k",
+      "format": "blockchain_test_engine_x",
+      "count": 25
+    },
+    {
+      "fork": "BPO3ToBPO4AtTime15k",
+      "format": "blockchain_test",
+      "count": 23
+    },
+    {
+      "fork": "BPO3ToBPO4AtTime15k",
+      "format": "blockchain_test_engine",
+      "count": 23
+    },
+    {
+      "fork": "BPO3ToBPO4AtTime15k",
+      "format": "blockchain_test_engine_x",
+      "count": 23
+    },
+    {
+      "fork": "Berlin",
+      "format": "blockchain_test",
+      "count": 3722
+    },
+    {
+      "fork": "Berlin",
+      "format": "state_test",
+      "count": 3240
+    },
+    {
+      "fork": "Berlin",
+      "format": "transaction_test",
+      "count": 37
+    },
+    {
+      "fork": "Byzantium",
+      "format": "blockchain_test",
+      "count": 2447
+    },
+    {
+      "fork": "Byzantium",
+      "format": "state_test",
+      "count": 2066
+    },
+    {
+      "fork": "Byzantium",
+      "format": "transaction_test",
+      "count": 37
+    },
+    {
+      "fork": "Cancun",
+      "format": "blockchain_test",
+      "count": 12819
+    },
+    {
+      "fork": "Cancun",
+      "format": "blockchain_test_engine",
+      "count": 12819
+    },
+    {
+      "fork": "Cancun",
+      "format": "blockchain_test_engine_x",
+      "count": 12819
+    },
+    {
+      "fork": "Cancun",
+      "format": "state_test",
+      "count": 11484
+    },
+    {
+      "fork": "Cancun",
+      "format": "transaction_test",
+      "count": 37
+    },
+    {
+      "fork": "CancunToPragueAtTime15k",
+      "format": "blockchain_test",
+      "count": 98
+    },
+    {
+      "fork": "CancunToPragueAtTime15k",
+      "format": "blockchain_test_engine",
+      "count": 98
+    },
+    {
+      "fork": "CancunToPragueAtTime15k",
+      "format": "blockchain_test_engine_x",
+      "count": 98
+    },
+    {
+      "fork": "ConstantinopleFix",
+      "format": "blockchain_test",
+      "count": 2586
+    },
+    {
+      "fork": "ConstantinopleFix",
+      "format": "state_test",
+      "count": 2201
+    },
+    {
+      "fork": "ConstantinopleFix",
+      "format": "transaction_test",
+      "count": 37
+    },
+    {
+      "fork": "Frontier",
+      "format": "blockchain_test",
+      "count": 771
+    },
+    {
+      "fork": "Frontier",
+      "format": "state_test",
+      "count": 725
+    },
+    {
+      "fork": "Frontier",
+      "format": "transaction_test",
+      "count": 37
+    },
+    {
+      "fork": "Homestead",
+      "format": "blockchain_test",
+      "count": 787
+    },
+    {
+      "fork": "Homestead",
+      "format": "state_test",
+      "count": 741
+    },
+    {
+      "fork": "Homestead",
+      "format": "transaction_test",
+      "count": 37
+    },
+    {
+      "fork": "Istanbul",
+      "format": "blockchain_test",
+      "count": 2742
+    },
+    {
+      "fork": "Istanbul",
+      "format": "state_test",
+      "count": 2324
+    },
+    {
+      "fork": "Istanbul",
+      "format": "transaction_test",
+      "count": 37
+    },
+    {
+      "fork": "London",
+      "format": "blockchain_test",
+      "count": 4001
+    },
+    {
+      "fork": "London",
+      "format": "state_test",
+      "count": 3518
+    },
+    {
+      "fork": "London",
+      "format": "transaction_test",
+      "count": 37
+    },
+    {
+      "fork": "Osaka",
+      "format": "blockchain_test",
+      "count": 17274
+    },
+    {
+      "fork": "Osaka",
+      "format": "blockchain_test_engine",
+      "count": 17293
+    },
+    {
+      "fork": "Osaka",
+      "format": "blockchain_test_engine_x",
+      "count": 17293
+    },
+    {
+      "fork": "Osaka",
+      "format": "blockchain_test_sync",
+      "count": 9
+    },
+    {
+      "fork": "Osaka",
+      "format": "state_test",
+      "count": 14446
+    },
+    {
+      "fork": "Osaka",
+      "format": "transaction_test",
+      "count": 92
+    },
+    {
+      "fork": "OsakaToBPO1AtTime15k",
+      "format": "blockchain_test",
+      "count": 24
+    },
+    {
+      "fork": "OsakaToBPO1AtTime15k",
+      "format": "blockchain_test_engine",
+      "count": 24
+    },
+    {
+      "fork": "OsakaToBPO1AtTime15k",
+      "format": "blockchain_test_engine_x",
+      "count": 24
+    },
+    {
+      "fork": "Paris",
+      "format": "blockchain_test",
+      "count": 4023
+    },
+    {
+      "fork": "Paris",
+      "format": "blockchain_test_engine",
+      "count": 4023
+    },
+    {
+      "fork": "Paris",
+      "format": "blockchain_test_engine_x",
+      "count": 4023
+    },
+    {
+      "fork": "Paris",
+      "format": "state_test",
+      "count": 3533
+    },
+    {
+      "fork": "Paris",
+      "format": "transaction_test",
+      "count": 37
+    },
+    {
+      "fork": "ParisToShanghaiAtTime15k",
+      "format": "blockchain_test",
+      "count": 40
+    },
+    {
+      "fork": "ParisToShanghaiAtTime15k",
+      "format": "blockchain_test_engine",
+      "count": 40
+    },
+    {
+      "fork": "ParisToShanghaiAtTime15k",
+      "format": "blockchain_test_engine_x",
+      "count": 40
+    },
+    {
+      "fork": "Prague",
+      "format": "blockchain_test",
+      "count": 16522
+    },
+    {
+      "fork": "Prague",
+      "format": "blockchain_test_engine",
+      "count": 16541
+    },
+    {
+      "fork": "Prague",
+      "format": "blockchain_test_engine_x",
+      "count": 16541
+    },
+    {
+      "fork": "Prague",
+      "format": "state_test",
+      "count": 13780
+    },
+    {
+      "fork": "Prague",
+      "format": "transaction_test",
+      "count": 92
+    },
+    {
+      "fork": "PragueToOsakaAtTime15k",
+      "format": "blockchain_test",
+      "count": 62
+    },
+    {
+      "fork": "PragueToOsakaAtTime15k",
+      "format": "blockchain_test_engine",
+      "count": 62
+    },
+    {
+      "fork": "PragueToOsakaAtTime15k",
+      "format": "blockchain_test_engine_x",
+      "count": 62
+    },
+    {
+      "fork": "Shanghai",
+      "format": "blockchain_test",
+      "count": 4268
+    },
+    {
+      "fork": "Shanghai",
+      "format": "blockchain_test_engine",
+      "count": 4268
+    },
+    {
+      "fork": "Shanghai",
+      "format": "blockchain_test_engine_x",
+      "count": 4268
+    },
+    {
+      "fork": "Shanghai",
+      "format": "state_test",
+      "count": 3732
+    },
+    {
+      "fork": "Shanghai",
+      "format": "transaction_test",
+      "count": 37
+    },
+    {
+      "fork": "ShanghaiToCancunAtTime15k",
+      "format": "blockchain_test",
+      "count": 60
+    },
+    {
+      "fork": "ShanghaiToCancunAtTime15k",
+      "format": "blockchain_test_engine",
+      "count": 60
+    },
+    {
+      "fork": "ShanghaiToCancunAtTime15k",
+      "format": "blockchain_test_engine_x",
+      "count": 60
+    },
+    {
+      "fork": "SpuriousDragon",
+      "format": "blockchain_test",
+      "count": 1002
+    },
+    {
+      "fork": "SpuriousDragon",
+      "format": "state_test",
+      "count": 753
+    },
+    {
+      "fork": "SpuriousDragon",
+      "format": "transaction_test",
+      "count": 37
+    },
+    {
+      "fork": "TangerineWhistle",
+      "format": "blockchain_test",
+      "count": 989
+    },
+    {
+      "fork": "TangerineWhistle",
+      "format": "state_test",
+      "count": 739
+    },
+    {
+      "fork": "TangerineWhistle",
+      "format": "transaction_test",
+      "count": 37
+    }
+  ],
+  "required_files": 5961,
+  "scope_note": "Engine API request/response and sync protocol format; separately inventoried, not an EVM interpreter API. Execution equivalents are covered by state/blockchain formats.",
+  "extracted_bytes": 2571141783,
+  "extraction_complete": true
+}

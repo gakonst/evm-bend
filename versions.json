@@ -1,0 +1,25 @@
+{
+  "bend_release": {
+    "ver": "2.0.5",
+    "url": "https://bend-lang.com/dl/2.0.5.tar.gz",
+    "sha256": "4db70e77ce1b1027f1d0e15dee025921fa794a9b415add4350ec7c64acf2775b",
+    "notice": ""
+  },
+  "bend_files_sha256": {
+    "bend.ts": "fe3c2b0b306fccbe44efec349d8f339b6efdaceb090b3d3049c74a1a6015c859",
+    "main.ts": "34a8a791b02ce92f247bda4cabcd3ff4eabe500002fedbec4867b5db77ee1feb",
+    "base.bend": "b2d53bbd83639c3ae27260b318efa09de9df6006a556ac6ef41c104ea164917a"
+  },
+  "evm2": "0a5314efb28cbef7dc1a83e38ac75860b974adcd",
+  "yellowpaper": "efc5f9a1f356cba376c978eedb63cb0363c2aa85",
+  "execution_specs": "a9792ab73b8195d5a8dc24b2ef6cca7687cd6b2b",
+  "fork": "Amsterdam",
+  "clang": "clang version 22.1.8",
+  "rustc": "rustc 1.96.0 (ac68faa20 2026-05-25)",
+  "legacy_subset_fork": "Shanghai",
+  "conformance": {
+    "release": "tests-glamsterdam-devnet@v8.1.4",
+    "commit": "7341820b5b394b1934dfe7bb6f621fcdab7baf7f",
+    "archive_sha256": "aed315489163dc67c4e5607d7bbb8902e8329afe939be58193b125f2e81a85d4"
+  }
+}

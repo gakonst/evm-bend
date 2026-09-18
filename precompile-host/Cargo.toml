@@ -1,0 +1,7 @@
+[package]
+name = "bend-evm-precompile-host"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+evm2 = { path = "../../evm2-reference/crates/evm2", default-features = false, features = ["std", "map-foldhash", "sha3-keccak", "no-tco", "blst", "c-kzg"] }
