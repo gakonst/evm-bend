@@ -17,3 +17,9 @@ python3 -u conformance/full_state_gate.py --backend js --workers 12 --timeout 36
 ```
 
 Audit caches, raw corpus, and binaries are excluded from publication. Summary: host-bridge-summary.json. Both complete runs retain exact fingerprints and every fixture ID.
+
+## Isolated transaction-helper audit
+
+The parent reported a read-only audit of the separate `evm-bend-transactions` workspace: `transaction-admission-js-rejected.json` contains 935 selected admission-only cases, with 875 passes, 54 failures and 6 errors. This partial result is not a clean conformance pass. The 54 mismatches were floor-specific actual exceptions versus generic intrinsic-gas expectations; main already handles that pinned alias in `rejection_mapping.py` and `EXCEPTION-MATCHING.md`. The parent independently found all 60 helper non-pass IDs passing in both historical `state-gate-complete` journals; that comparison is historical evidence, not a fresh execution claim. The parent also reported 20 focused unit passes per backend.
+
+No pinned state mapping gap was identified. The helper's shared `validate_word` refactor, unsupported-type reason and reordered blob checks were not merged. The helper follow-up's provider 400 `unsupported_parameter access_programs.cyber` was an infrastructure failure, separate from the admission results above. No implementation files changed for this note; the independently verified fresh main runs recorded in `state-conformance-host-hardened.json` remain 15,918/15,918 passing on each backend.
