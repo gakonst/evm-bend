@@ -4,6 +4,7 @@ import argparse,json,os,pathlib,subprocess,sys,tempfile
 ROOT=pathlib.Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import evm
 ORACLE=ROOT/'revm-adapter/target/debug/revm-adapter'
+ENVELOPE=ROOT/'envelope-host/target/debug/evm-bend-envelope'
 class Unsupported(Exception):pass
 
 def crypto(request):
@@ -25,7 +26,7 @@ def encode_accounts(pre):
   rows.append(evm.word(address)+evm.word(acc.get('balance',0))+evm.word(acc.get('nonce',0))+evm.blob(acc.get('code','0x'))+evm.slots(storage)+evm.slots(storage)+evm.slots({})+bytes([0,1,0])+evm.words([]))
  return evm.count(len(rows))+b''.join(rows)
 
-def encode_transaction(t):
+def encode_transaction(t, verified_authorities=None):
  if not t.get('sender'):raise Unsupported('sender_signature_recovery_not_yet_integrated')
  gas=evm.number(t['gasLimit'])
  if gas<0 or gas>=1<<48:raise Unsupported('gas_exceeds_current_Bend_Nat_representation')
@@ -37,7 +38,8 @@ def encode_transaction(t):
  accesses=t.get('accessList') or []
  access=evm.count(len(accesses))+b''.join(evm.word(a['address'])+evm.words(a.get('storageKeys',[])) for a in accesses)
  authorizations=t.get('authorizationList') or []
- recovered=crypto({'mode':'recover_authorizations','authorizations':authorizations})['authorities'] if authorizations else []
+ recovered=verified_authorities if verified_authorities is not None else (crypto({'mode':'recover_authorizations','authorizations':authorizations})['authorities'] if authorizations else [])
+ if len(recovered)!=len(authorizations):raise ValueError('authorization recovery count mismatch')
  auth=[]
  for a,authority in zip(authorizations,recovered):
   parity=evm.number(a.get('yParity',a.get('v',0)))
@@ -52,10 +54,21 @@ def encode_transaction(t):
 def execute(request,backend='native',timeout=120):
  if request.get('format')!='state_test':raise Unsupported('Bend_entrypoint_for_'+str(request.get('format'))+'_not_yet_integrated')
  if request.get('fork')!='Amsterdam':raise Unsupported('fork_not_Amsterdam')
- if 'txbytes' in request:raise Unsupported('signed_envelope_codec_not_yet_integrated')
+ transaction=request['transaction'];authorities=None
+ if 'txbytes' in request:
+  if not ENVELOPE.exists():raise Unsupported('signed_envelope_executable_not_built')
+  decoded=subprocess.run([str(ENVELOPE)],input=json.dumps(dict(mode='decode',txbytes=request['txbytes'])),capture_output=True,text=True,check=True,timeout=timeout)
+  envelope=json.loads(decoded.stdout)
+  if 'error' in envelope:
+   error=envelope['error']
+   if error.get('category') not in ('wire','crypto') or not error.get('exception'):raise ValueError('envelope host input error: '+str(error))
+   roots=crypto(dict(mode='commitment',alloc=request['pre'],logs=[]))
+   return dict(status='rejected',exception=error['exception'],state_root=roots['state_root'],logs_hash=roots['logs_hash'],post_state=request['pre'],output='0x',logs=[])
+  transaction=envelope['decoded']
+  authorities=[a.get('authority') for a in transaction.get('authorizationList',[])]
  env=request['env']
  if 'currentBeaconRoot' in env or 'previousHash' in env:raise Unsupported('pre_transaction_system_calls_not_yet_integrated')
- binary=encode_context(env)+encode_accounts(request['pre'])+encode_transaction(request['transaction'])
+ binary=encode_context(env)+encode_accounts(request['pre'])+encode_transaction(transaction,authorities)
  if len(binary)>=16*1024*1024:raise Unsupported('fixture_exceeds_current_16MiB_wire_limit')
  target=ROOT/('evm-transaction-native' if backend=='native' else 'evm-transaction.js')
  if not target.exists():raise Unsupported('transaction_executable_not_built')

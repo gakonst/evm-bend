@@ -1,0 +1,796 @@
+{
+  "native": {
+    "selected": [
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-blockchain_test_from_state_test-slot_one]",
+        "format": "blockchain_test",
+        "json_path": "blockchain_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0xb5e31b6569b0144e14ee6c4b81a31878f383c8bc735b706549f8de3cce32571e",
+        "backend": "native",
+        "status": "blocked",
+        "reason": "adapter_missing_blockchain_test",
+        "seconds": 3.141991328448057e-06
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-state_test-slot_one]",
+        "format": "state_test",
+        "json_path": "state_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0xb3bdfd20b51cab3e34fc6d4f4d5dfb78208fe82de62c53701d74c59bdee89c59",
+        "backend": "native",
+        "status": "pass",
+        "post_variants": 1,
+        "variants": [
+          {
+            "post_index": 0,
+            "status": "pass",
+            "failures": [],
+            "actual": {
+              "status": "executed",
+              "exception": null,
+              "state_root": "0x63b596bfc0a1f9a5063f078c922bc6c60b908b54a9ad451a62a39cb1a10dab21",
+              "logs_hash": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "post_state": {
+                "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba": {
+                  "nonce": 0,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000013da3",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0xf6c3a9edc1afa0ad5b720e4d42e1437c43d3b3ff": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000033b2e3c9fd0803ce7fbdd36",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0x51fd499265c5a1beeabef07f27d2602a6b127f85": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x4b600055",
+                  "storage": {
+                    "0x0000000000000000000000000000000000000000000000000000000000000000": "0x0000000000000000000000000000000000000000000000000000000000000001"
+                  }
+                },
+                "0x4e59b44847b379578588920ca78fbf26c0b4956c": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf3",
+                  "storage": {}
+                }
+              },
+              "output": "0x",
+              "logs": [],
+              "gas": {
+                "used": 27105,
+                "left": 119972895,
+                "execution": 27105,
+                "state": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "frame_status": "success"
+            }
+          }
+        ],
+        "seconds": 0.11778738201246597
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-blockchain_test_from_state_test-slot_4096]",
+        "format": "blockchain_test",
+        "json_path": "blockchain_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0x3d57c2b2a042ef5609773e6be4708370cdd8988f2c1ecdfd1b6ef0151b40a185",
+        "backend": "native",
+        "status": "blocked",
+        "reason": "adapter_missing_blockchain_test",
+        "seconds": 4.101006197743118e-06
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-state_test-slot_4096]",
+        "format": "state_test",
+        "json_path": "state_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0xbf4d8a3f3f7ff9118972b61e12a0d810b97fd9ccc0663a6e0831a65179f186b1",
+        "backend": "native",
+        "status": "pass",
+        "post_variants": 1,
+        "variants": [
+          {
+            "post_index": 0,
+            "status": "pass",
+            "failures": [],
+            "actual": {
+              "status": "executed",
+              "exception": null,
+              "state_root": "0x386295a4ad220f732b25ad0f254f8e7d73503006f450a3509ed0083622326e0b",
+              "logs_hash": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "post_state": {
+                "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba": {
+                  "nonce": 0,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000013da3",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0xf6c3a9edc1afa0ad5b720e4d42e1437c43d3b3ff": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000033b2e3c9fd0803ce7fbdd36",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0x51fd499265c5a1beeabef07f27d2602a6b127f85": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x4b600055",
+                  "storage": {
+                    "0x0000000000000000000000000000000000000000000000000000000000000000": "0x0000000000000000000000000000000000000000000000000000000000001000"
+                  }
+                },
+                "0x4e59b44847b379578588920ca78fbf26c0b4956c": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf3",
+                  "storage": {}
+                }
+              },
+              "output": "0x",
+              "logs": [],
+              "gas": {
+                "used": 27105,
+                "left": 119972895,
+                "execution": 27105,
+                "state": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "frame_status": "success"
+            }
+          }
+        ],
+        "seconds": 0.11315773600654211
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-blockchain_test_from_state_test-slot_max_u64]",
+        "format": "blockchain_test",
+        "json_path": "blockchain_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0xa1ab697f87bc5982f6aae8321ca99cf69275b56f9a985fe8f881f62962bf9b70",
+        "backend": "native",
+        "status": "blocked",
+        "reason": "adapter_missing_blockchain_test",
+        "seconds": 3.4460099413990974e-06
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-state_test-slot_max_u64]",
+        "format": "state_test",
+        "json_path": "state_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0xf776428a267112b9c0341457828be6fe91cde108a513fe5a8e968937c55a45aa",
+        "backend": "native",
+        "status": "pass",
+        "post_variants": 1,
+        "variants": [
+          {
+            "post_index": 0,
+            "status": "pass",
+            "failures": [],
+            "actual": {
+              "status": "executed",
+              "exception": null,
+              "state_root": "0x3820277d07ae44a78d80f6db4c29347b61284351a8867984f42b64752c107616",
+              "logs_hash": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "post_state": {
+                "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba": {
+                  "nonce": 0,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000013da3",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0xf6c3a9edc1afa0ad5b720e4d42e1437c43d3b3ff": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000033b2e3c9fd0803ce7fbdd36",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0x51fd499265c5a1beeabef07f27d2602a6b127f85": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x4b600055",
+                  "storage": {
+                    "0x0000000000000000000000000000000000000000000000000000000000000000": "0x000000000000000000000000000000000000000000000000ffffffffffffffff"
+                  }
+                },
+                "0x4e59b44847b379578588920ca78fbf26c0b4956c": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf3",
+                  "storage": {}
+                }
+              },
+              "output": "0x",
+              "logs": [],
+              "gas": {
+                "used": 27105,
+                "left": 119972895,
+                "execution": 27105,
+                "state": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "frame_status": "success"
+            }
+          }
+        ],
+        "seconds": 0.10622654300823342
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-blockchain_test_from_state_test-slot_zero]",
+        "format": "blockchain_test",
+        "json_path": "blockchain_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0x6c163b08164ca29109eaae5d69fb3c882fdb259d0dcf6f137c25d0faeaa0f743",
+        "backend": "native",
+        "status": "blocked",
+        "reason": "adapter_missing_blockchain_test",
+        "seconds": 2.75899947155267e-06
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-state_test-slot_zero]",
+        "format": "state_test",
+        "json_path": "state_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0x7745cc7d3f1da0d7372675c648c7705c08dd4791e281016190fc11578082ac12",
+        "backend": "native",
+        "status": "pass",
+        "post_variants": 1,
+        "variants": [
+          {
+            "post_index": 0,
+            "status": "pass",
+            "failures": [],
+            "actual": {
+              "status": "executed",
+              "exception": null,
+              "state_root": "0x67b89cfc59cd0d25225e304db8b5d0bf9ec2dad6aebd62374a37f4f14ea78d77",
+              "logs_hash": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "post_state": {
+                "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba": {
+                  "nonce": 0,
+                  "balance": "0x000000000000000000000000000000000000000000000000000000000000fe1c",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0xf6c3a9edc1afa0ad5b720e4d42e1437c43d3b3ff": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000033b2e3c9fd0803ce7fcb0f8",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0x51fd499265c5a1beeabef07f27d2602a6b127f85": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x4b600055",
+                  "storage": {}
+                },
+                "0x4e59b44847b379578588920ca78fbf26c0b4956c": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf3",
+                  "storage": {}
+                }
+              },
+              "output": "0x",
+              "logs": [],
+              "gas": {
+                "used": 21684,
+                "left": 119978316,
+                "execution": 27105,
+                "state": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "frame_status": "success"
+            }
+          }
+        ],
+        "seconds": 0.10755961900576949
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-blockchain_test_from_state_test-slot_large]",
+        "format": "blockchain_test",
+        "json_path": "blockchain_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0xe09aa93a2e0ce0f49a9da54be8d30f687ed2c85d89b83da6d4b6b2aa46969d77",
+        "backend": "native",
+        "status": "blocked",
+        "reason": "adapter_missing_blockchain_test",
+        "seconds": 3.1950039556249976e-06
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-state_test-slot_large]",
+        "format": "state_test",
+        "json_path": "state_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0x996ba054445a072824c22de3d5840206cb0e209ac6471027996e803f7ea4b180",
+        "backend": "native",
+        "status": "pass",
+        "post_variants": 1,
+        "variants": [
+          {
+            "post_index": 0,
+            "status": "pass",
+            "failures": [],
+            "actual": {
+              "status": "executed",
+              "exception": null,
+              "state_root": "0xaad9326a51c1d75bdf8f1acd2f757eb69942c811349ffcb40f138b56066d8041",
+              "logs_hash": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "post_state": {
+                "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba": {
+                  "nonce": 0,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000013da3",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0xf6c3a9edc1afa0ad5b720e4d42e1437c43d3b3ff": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000033b2e3c9fd0803ce7fbdd36",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0x51fd499265c5a1beeabef07f27d2602a6b127f85": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x4b600055",
+                  "storage": {
+                    "0x0000000000000000000000000000000000000000000000000000000000000000": "0x0000000000000000000000000000000000000000000000000000000100000000"
+                  }
+                },
+                "0x4e59b44847b379578588920ca78fbf26c0b4956c": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf3",
+                  "storage": {}
+                }
+              },
+              "output": "0x",
+              "logs": [],
+              "gas": {
+                "used": 27105,
+                "left": 119972895,
+                "execution": 27105,
+                "state": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "frame_status": "success"
+            }
+          }
+        ],
+        "seconds": 0.10660723900946323
+      }
+    ]
+  },
+  "js": {
+    "selected": [
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-blockchain_test_from_state_test-slot_one]",
+        "format": "blockchain_test",
+        "json_path": "blockchain_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0xb5e31b6569b0144e14ee6c4b81a31878f383c8bc735b706549f8de3cce32571e",
+        "backend": "js",
+        "status": "blocked",
+        "reason": "adapter_missing_blockchain_test",
+        "seconds": 2.5719928089529276e-06
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-state_test-slot_one]",
+        "format": "state_test",
+        "json_path": "state_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0xb3bdfd20b51cab3e34fc6d4f4d5dfb78208fe82de62c53701d74c59bdee89c59",
+        "backend": "js",
+        "status": "pass",
+        "post_variants": 1,
+        "variants": [
+          {
+            "post_index": 0,
+            "status": "pass",
+            "failures": [],
+            "actual": {
+              "status": "executed",
+              "exception": null,
+              "state_root": "0x63b596bfc0a1f9a5063f078c922bc6c60b908b54a9ad451a62a39cb1a10dab21",
+              "logs_hash": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "post_state": {
+                "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba": {
+                  "nonce": 0,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000013da3",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0xf6c3a9edc1afa0ad5b720e4d42e1437c43d3b3ff": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000033b2e3c9fd0803ce7fbdd36",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0x51fd499265c5a1beeabef07f27d2602a6b127f85": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x4b600055",
+                  "storage": {
+                    "0x0000000000000000000000000000000000000000000000000000000000000000": "0x0000000000000000000000000000000000000000000000000000000000000001"
+                  }
+                },
+                "0x4e59b44847b379578588920ca78fbf26c0b4956c": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf3",
+                  "storage": {}
+                }
+              },
+              "output": "0x",
+              "logs": [],
+              "gas": {
+                "used": 27105,
+                "left": 119972895,
+                "execution": 27105,
+                "state": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "frame_status": "success"
+            }
+          }
+        ],
+        "seconds": 0.23114200800773688
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-blockchain_test_from_state_test-slot_4096]",
+        "format": "blockchain_test",
+        "json_path": "blockchain_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0x3d57c2b2a042ef5609773e6be4708370cdd8988f2c1ecdfd1b6ef0151b40a185",
+        "backend": "js",
+        "status": "blocked",
+        "reason": "adapter_missing_blockchain_test",
+        "seconds": 3.731998731382191e-06
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-state_test-slot_4096]",
+        "format": "state_test",
+        "json_path": "state_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0xbf4d8a3f3f7ff9118972b61e12a0d810b97fd9ccc0663a6e0831a65179f186b1",
+        "backend": "js",
+        "status": "pass",
+        "post_variants": 1,
+        "variants": [
+          {
+            "post_index": 0,
+            "status": "pass",
+            "failures": [],
+            "actual": {
+              "status": "executed",
+              "exception": null,
+              "state_root": "0x386295a4ad220f732b25ad0f254f8e7d73503006f450a3509ed0083622326e0b",
+              "logs_hash": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "post_state": {
+                "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba": {
+                  "nonce": 0,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000013da3",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0xf6c3a9edc1afa0ad5b720e4d42e1437c43d3b3ff": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000033b2e3c9fd0803ce7fbdd36",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0x51fd499265c5a1beeabef07f27d2602a6b127f85": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x4b600055",
+                  "storage": {
+                    "0x0000000000000000000000000000000000000000000000000000000000000000": "0x0000000000000000000000000000000000000000000000000000000000001000"
+                  }
+                },
+                "0x4e59b44847b379578588920ca78fbf26c0b4956c": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf3",
+                  "storage": {}
+                }
+              },
+              "output": "0x",
+              "logs": [],
+              "gas": {
+                "used": 27105,
+                "left": 119972895,
+                "execution": 27105,
+                "state": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "frame_status": "success"
+            }
+          }
+        ],
+        "seconds": 0.215533091002726
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-blockchain_test_from_state_test-slot_max_u64]",
+        "format": "blockchain_test",
+        "json_path": "blockchain_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0xa1ab697f87bc5982f6aae8321ca99cf69275b56f9a985fe8f881f62962bf9b70",
+        "backend": "js",
+        "status": "blocked",
+        "reason": "adapter_missing_blockchain_test",
+        "seconds": 3.8660073187202215e-06
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-state_test-slot_max_u64]",
+        "format": "state_test",
+        "json_path": "state_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0xf776428a267112b9c0341457828be6fe91cde108a513fe5a8e968937c55a45aa",
+        "backend": "js",
+        "status": "pass",
+        "post_variants": 1,
+        "variants": [
+          {
+            "post_index": 0,
+            "status": "pass",
+            "failures": [],
+            "actual": {
+              "status": "executed",
+              "exception": null,
+              "state_root": "0x3820277d07ae44a78d80f6db4c29347b61284351a8867984f42b64752c107616",
+              "logs_hash": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "post_state": {
+                "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba": {
+                  "nonce": 0,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000013da3",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0xf6c3a9edc1afa0ad5b720e4d42e1437c43d3b3ff": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000033b2e3c9fd0803ce7fbdd36",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0x51fd499265c5a1beeabef07f27d2602a6b127f85": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x4b600055",
+                  "storage": {
+                    "0x0000000000000000000000000000000000000000000000000000000000000000": "0x000000000000000000000000000000000000000000000000ffffffffffffffff"
+                  }
+                },
+                "0x4e59b44847b379578588920ca78fbf26c0b4956c": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf3",
+                  "storage": {}
+                }
+              },
+              "output": "0x",
+              "logs": [],
+              "gas": {
+                "used": 27105,
+                "left": 119972895,
+                "execution": 27105,
+                "state": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "frame_status": "success"
+            }
+          }
+        ],
+        "seconds": 0.22173047000251245
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-blockchain_test_from_state_test-slot_zero]",
+        "format": "blockchain_test",
+        "json_path": "blockchain_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0x6c163b08164ca29109eaae5d69fb3c882fdb259d0dcf6f137c25d0faeaa0f743",
+        "backend": "js",
+        "status": "blocked",
+        "reason": "adapter_missing_blockchain_test",
+        "seconds": 3.955006832256913e-06
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-state_test-slot_zero]",
+        "format": "state_test",
+        "json_path": "state_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0x7745cc7d3f1da0d7372675c648c7705c08dd4791e281016190fc11578082ac12",
+        "backend": "js",
+        "status": "pass",
+        "post_variants": 1,
+        "variants": [
+          {
+            "post_index": 0,
+            "status": "pass",
+            "failures": [],
+            "actual": {
+              "status": "executed",
+              "exception": null,
+              "state_root": "0x67b89cfc59cd0d25225e304db8b5d0bf9ec2dad6aebd62374a37f4f14ea78d77",
+              "logs_hash": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "post_state": {
+                "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba": {
+                  "nonce": 0,
+                  "balance": "0x000000000000000000000000000000000000000000000000000000000000fe1c",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0xf6c3a9edc1afa0ad5b720e4d42e1437c43d3b3ff": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000033b2e3c9fd0803ce7fcb0f8",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0x51fd499265c5a1beeabef07f27d2602a6b127f85": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x4b600055",
+                  "storage": {}
+                },
+                "0x4e59b44847b379578588920ca78fbf26c0b4956c": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf3",
+                  "storage": {}
+                }
+              },
+              "output": "0x",
+              "logs": [],
+              "gas": {
+                "used": 21684,
+                "left": 119978316,
+                "execution": 27105,
+                "state": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "frame_status": "success"
+            }
+          }
+        ],
+        "seconds": 0.24662752498988993
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-blockchain_test_from_state_test-slot_large]",
+        "format": "blockchain_test",
+        "json_path": "blockchain_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0xe09aa93a2e0ce0f49a9da54be8d30f687ed2c85d89b83da6d4b6b2aa46969d77",
+        "backend": "js",
+        "status": "blocked",
+        "reason": "adapter_missing_blockchain_test",
+        "seconds": 3.6810088204219937e-06
+      },
+      {
+        "id": "tests/amsterdam/eip7843_slotnum/test_slotnum.py::test_slotnum_value[fork_Amsterdam-state_test-slot_large]",
+        "format": "state_test",
+        "json_path": "state_tests/for_amsterdam/amsterdam/eip7843_slotnum/slotnum/slotnum_value.json",
+        "fixture_hash": "0x996ba054445a072824c22de3d5840206cb0e209ac6471027996e803f7ea4b180",
+        "backend": "js",
+        "status": "pass",
+        "post_variants": 1,
+        "variants": [
+          {
+            "post_index": 0,
+            "status": "pass",
+            "failures": [],
+            "actual": {
+              "status": "executed",
+              "exception": null,
+              "state_root": "0xaad9326a51c1d75bdf8f1acd2f757eb69942c811349ffcb40f138b56066d8041",
+              "logs_hash": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "post_state": {
+                "0x2adc25665018aa1fe0e6bc666dac8fc2697ff9ba": {
+                  "nonce": 0,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000013da3",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0xf6c3a9edc1afa0ad5b720e4d42e1437c43d3b3ff": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000033b2e3c9fd0803ce7fbdd36",
+                  "code": "0x",
+                  "storage": {}
+                },
+                "0x51fd499265c5a1beeabef07f27d2602a6b127f85": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x4b600055",
+                  "storage": {
+                    "0x0000000000000000000000000000000000000000000000000000000000000000": "0x0000000000000000000000000000000000000000000000000000000100000000"
+                  }
+                },
+                "0x4e59b44847b379578588920ca78fbf26c0b4956c": {
+                  "nonce": 1,
+                  "balance": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "code": "0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf3",
+                  "storage": {}
+                }
+              },
+              "output": "0x",
+              "logs": [],
+              "gas": {
+                "used": 27105,
+                "left": 119972895,
+                "execution": 27105,
+                "state": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "frame_status": "success"
+            }
+          }
+        ],
+        "seconds": 0.24086069301120006
+      }
+    ]
+  }
+}

@@ -2,7 +2,7 @@
 
 The pinned release, archive digest and counts are in `corpus-manifest.json` and `../versions.json`. `corpus.py` verifies and extracts the official archive; `profile.py` summarizes input bounds. Large fixture archives, extracted fixtures and generated inventories are not committed.
 
-`runner.py` retains the full denominator and distinguishes pass, fail, blocked, error and not_run. No full-corpus pass is currently claimed. `bend_adapter.py` integrates the Bend transaction entrypoint; signed transaction envelopes are currently blocked pending integration. Blockchain and standalone transaction adapters remain unfinished. Host limits must not be reported as consensus rejection. Resume currently checks fixture identity only: use fresh output files after implementation changes.
+`runner.py` retains the full denominator and distinguishes pass, fail, blocked, error and not_run. No full-corpus pass is currently claimed. `bend_adapter.py` integrates the Bend transaction entrypoint; signed transaction envelopes now use the strict Rust wire/crypto decoder in `envelope-host`. Five official SLOTNUM state fixtures pass on each backend; the five matching blockchain fixtures remain blocked. Blockchain and standalone transaction adapters remain unfinished. Host limits must not be reported as consensus rejection. Resume currently checks fixture identity only: use fresh output files after implementation changes.
 
 `test_transaction_integration.py` compares 22 decoded-envelope synthetic transactions against revm, including complete state and logs commitments, output and gas. The committed native/JS reports each show 22 cases with zero failures. These are not official signed-transaction fixture results.
 

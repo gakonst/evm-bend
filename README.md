@@ -8,7 +8,7 @@ This is a correctness-first experimental implementation, **not an end-to-end pro
 
 **Goal: 100% of applicable Amsterdam EVM conformance tests passing in Bend. This goal has not been reached.**
 
-The pinned official corpus contains 40,911 required state, blockchain and transaction cases. It has been downloaded, verified and inventoried; no full-corpus passing result is claimed. Signed-envelope integration, exact rejection mapping and block execution remain in progress. Engine/sync API fixtures are separately inventoried in the corpus manifest.
+The pinned official corpus contains 40,911 required state, blockchain and transaction cases. It has been downloaded, verified and inventoried; no full-corpus passing result is claimed. Signed-envelope integration now passes five official SLOTNUM state fixtures on each backend. Exact semantic rejection mapping, block execution and broader conformance remain in progress. Engine/sync API fixtures are separately inventoried in the corpus manifest.
 
 The new `full/transaction-main.bend` adds transaction preparation and settlement in Bend. Its decoded-envelope integration suite passes 22 cases on each backend, comparing complete state roots, logs, output and gas against revm. These synthetic tests cover fees, refunds, creation, access lists, blob prices and large gas reservoirs; they are not signed-envelope conformance tests. The prepared-frame differential results below predate the latest transaction/world integration and require rerunning after those changes.
 

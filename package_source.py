@@ -3,7 +3,7 @@ import tarfile
 files=[]
 for p in Path('.').iterdir():
  if p.is_file() and p.suffix in ['.bend','.py','.sh','.md','.json','.patch'] and 'generated' not in p.name:files.append(p)
-for folder in ['full','examples','toolchain-debug','precompile-host','revm-adapter','evm2-adapter']:
+for folder in ['full','examples','toolchain-debug','precompile-host','envelope-host','revm-adapter','evm2-adapter']:
  for p in Path(folder).rglob('*'):
   if not p.is_file() or any(x in ('target','__pycache__') or x.startswith('.') for x in p.parts):continue
   if p.suffix in ['.bend','.py','.sh','.md','.json','.patch','.rs','.toml','.lock','.ts','.h','.c','.cu'] or folder=='toolchain-debug':files.append(p)
