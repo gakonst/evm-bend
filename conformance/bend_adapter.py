@@ -3,7 +3,7 @@
 import argparse,json,os,pathlib,subprocess,sys,tempfile
 ROOT=pathlib.Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import evm
-from rejection_mapping import rejection_exception
+from rejection_mapping import rejection_exception,rejection_aliases
 ORACLE=ROOT/'revm-adapter/target/debug/revm-adapter'
 ENVELOPE=ROOT/'envelope-host/target/debug/evm-bend-envelope'
 class Unsupported(Exception):pass
@@ -85,7 +85,7 @@ def execute(request,backend='native',timeout=120):
   try:exception=rejection_exception(raw['reason'])
   except KeyError:return dict(status='unsupported',reason='unmapped_Bend_rejection',bend_reason=raw['reason'])
   roots=crypto(dict(mode='commitment',alloc=request['pre'],logs=[]))
-  return dict(status='rejected',exception=exception,bend_reason=raw['reason'],state_root=roots['state_root'],logs_hash=roots['logs_hash'],post_state=request['pre'],output='0x',logs=[])
+  return dict(status='rejected',exception=exception,exception_aliases=rejection_aliases(raw['reason']),bend_reason=raw['reason'],state_root=roots['state_root'],logs_hash=roots['logs_hash'],post_state=request['pre'],output='0x',logs=[])
  if raw['status']!='executed':raise ValueError('unknown Bend transaction status')
  frame=evm.normalize(raw['frame']);alloc={}
  for a,x in frame['accounts'].items():

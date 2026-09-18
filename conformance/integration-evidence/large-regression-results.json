@@ -1,0 +1,36 @@
+[
+  {
+    "backend": "native",
+    "returncode": 0,
+    "seconds": 0.7055821679969085,
+    "checks": [
+      "PASS calldata view length and bounded padding",
+      "PASS persistent snapshot",
+      "PASS calldata snapshot survives parent write",
+      "PASS 48-bit sparse index",
+      "PASS high sparse clear preserves other branch",
+      "PASS overflow-safe ceil",
+      "PASS 128KiB codec length and trailing reader"
+    ],
+    "exact_128KiB_parse_take_render": true,
+    "exact_64KiB_overlap_copy": true,
+    "pass_all": true
+  },
+  {
+    "backend": "js",
+    "returncode": 0,
+    "seconds": 4.96643943899835,
+    "checks": [
+      "PASS calldata view length and bounded padding",
+      "PASS persistent snapshot",
+      "PASS calldata snapshot survives parent write",
+      "PASS 48-bit sparse index",
+      "PASS high sparse clear preserves other branch",
+      "PASS overflow-safe ceil",
+      "PASS 128KiB codec length and trailing reader"
+    ],
+    "exact_128KiB_parse_take_render": true,
+    "exact_64KiB_overlap_copy": true,
+    "pass_all": true
+  }
+]

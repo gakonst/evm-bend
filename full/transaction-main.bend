@@ -13,17 +13,17 @@ import ./transaction-codec.bend as Codec
 def render_gas(gas: Tx.Settlement) -> String:
   match gas:
     case Tx.Gas{used,left,execution,state}:
-      "{\"used\":" ++ R.word(used) ++ ",\"left\":" ++ R.word(left) ++ ",\"execution\":" ++ R.word(execution) ++ ",\"state\":" ++ R.word(state) ++ "}"
+      R.append("{\"used\":", R.append(R.word(used), R.append(",\"left\":", R.append(R.word(left), R.append(",\"execution\":", R.append(R.word(execution), R.append(",\"state\":", R.append(R.word(state), "}"))))))))
 
 def completed(result: Tx.Completion) -> IO(Unit):
   match result:
     case Tx.Incomplete{}: IO.print("{\"status\":\"host_error\",\"reason\":\"incomplete_execution\"}")
     case Tx.Completed{engine,gas,reservoir}:
-      IO.print("{\"status\":\"executed\",\"frame\":" ++ R.engine(engine) ++ ",\"transaction_gas\":" ++ render_gas(gas) ++ "}")
+      IO.print(R.append("{\"status\":\"executed\",\"frame\":", R.append(R.engine(engine), R.append(",\"transaction_gas\":", R.append(render_gas(gas), "}")))))
 
 def prepared(result: Tx.Preparation) -> IO(Unit):
   match result:
-    case Tx.Rejected{reason}: IO.print("{\"status\":\"rejected\",\"reason\":" ++ U32.show(reason) ++ "}")
+    case Tx.Rejected{reason}: IO.print(R.append("{\"status\":\"rejected\",\"reason\":", R.append(U32.show(reason), "}")))
     case Tx.Prepared{engine,metadata,gas,+escrow}:
       do IO<Unit>:
         terminal : M.Engine <- Tx.execute(engine,escrow)

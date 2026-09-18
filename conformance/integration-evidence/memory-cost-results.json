@@ -1,0 +1,62 @@
+[
+  {
+    "backend": "native",
+    "exact_match": true,
+    "costs": [
+      0,
+      3,
+      3,
+      3,
+      6,
+      34372321280,
+      34372321280,
+      34372337667,
+      2305843112292909056
+    ],
+    "expected": [
+      0,
+      3,
+      3,
+      3,
+      6,
+      34372321280,
+      34372321280,
+      34372337667,
+      2305843112292909056
+    ],
+    "checks": [
+      "PASS non-growing access preserves zero gas",
+      "PASS failed expansion faults before memory growth"
+    ]
+  },
+  {
+    "backend": "js",
+    "exact_match": true,
+    "costs": [
+      0,
+      3,
+      3,
+      3,
+      6,
+      34372321280,
+      34372321280,
+      34372337667,
+      2305843112292909056
+    ],
+    "expected": [
+      0,
+      3,
+      3,
+      3,
+      6,
+      34372321280,
+      34372321280,
+      34372337667,
+      2305843112292909056
+    ],
+    "checks": [
+      "PASS non-growing access preserves zero gas",
+      "PASS failed expansion faults before memory growth"
+    ]
+  }
+]

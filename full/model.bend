@@ -1,6 +1,7 @@
 import Base
 import ../evmword.bend as W
 import ./memory.bend as Mem
+import ./input.bend as I
 
 type Slot is Data:
   Slot{key: W.Word, value: W.Word}
@@ -314,7 +315,7 @@ def World.set_selfdestructs(x: World, new: +List<W.Word>) -> World:
       World{accounts, logs, refund, new}
 
 type Frame is Data:
-  Frame{gas: Nat, pc: Nat, stack: +List<W.Word>, memory: Mem.Mem, code: +List<U32>, input: +List<U32>, ret: +List<U32>, address: W.Word, caller: W.Word, value: W.Word, is_static: Bool, depth: Nat, action: Action, output: +List<U32>}
+  Frame{gas: Nat, pc: Nat, stack: +List<W.Word>, memory: Mem.Mem, code: +List<U32>, input: I.View, ret: +List<U32>, address: W.Word, caller: W.Word, value: W.Word, is_static: Bool, depth: Nat, action: Action, output: +List<U32>}
 
 def Frame.gas(x: Frame) -> Nat:
   match x:
@@ -366,15 +367,30 @@ def Frame.set_code(x: Frame, new: +List<U32>) -> Frame:
     case Frame{gas, pc, stack, memory, code, input, ret, address, caller, value, is_static, depth, action, output}:
       Frame{gas, pc, stack, memory, new, input, ret, address, caller, value, is_static, depth, action, output}
 
-def Frame.input(x: Frame) -> +List<U32>:
+def Frame.input_view(x: Frame) -> I.View:
   match x:
     case Frame{gas, pc, stack, memory, code, input, ret, address, caller, value, is_static, depth, action, output}:
       input
 
+def Frame.input(x: Frame) -> +List<U32>:
+  I.all(Frame.input_view(x))
+
+def Frame.input_len(x: Frame) -> Nat:
+  I.len(Frame.input_view(x))
+
+def Frame.input_read(x: Frame, offset: Nat, count: Nat) -> +List<U32>:
+  I.read(Frame.input_view(x),offset,count)
+
+def memory_input(memory: Mem.Mem, offset: Nat, length: Nat) -> I.View:
+  I.Slice{memory,offset,length}
+
+def empty_input() -> I.View:
+  I.Bytes{0n,Nil{}}
+
 def Frame.set_input(x: Frame, new: +List<U32>) -> Frame:
   match x:
     case Frame{gas, pc, stack, memory, code, input, ret, address, caller, value, is_static, depth, action, output}:
-      Frame{gas, pc, stack, memory, code, new, ret, address, caller, value, is_static, depth, action, output}
+      Frame{gas, pc, stack, memory, code, I.bytes(new), ret, address, caller, value, is_static, depth, action, output}
 
 def Frame.ret(x: Frame) -> +List<U32>:
   match x:
@@ -635,7 +651,7 @@ def empty_account(address: W.Word) -> Account:
   Account{address, W.zero(), W.zero(), Nil{}, Nil{}, Nil{}, Nil{}, False{}, False{}, False{}, Nil{}}
 
 def initial_frame(code: +List<U32>, gas: Nat, input: +List<U32>, address: W.Word, caller: W.Word, value: W.Word) -> Frame:
-  Frame{gas, 0n, Nil{}, Mem.empty(), code, input, Nil{}, address, caller, value, False{}, 0n, Running{}, Nil{}}
+  Frame{gas, 0n, Nil{}, Mem.empty(), code, I.bytes(input), Nil{}, address, caller, value, False{}, 0n, Running{}, Nil{}}
 
 # Fault codes: 1 OOG, 2 stack underflow, 3 overflow, 4 invalid opcode,
 # 5 invalid jump, 6 static violation, 7 return-data bounds, 8 invalid immediate.

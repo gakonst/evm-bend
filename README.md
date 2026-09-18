@@ -1,6 +1,6 @@
 # EVM in Bend — Amsterdam
 
-A working EVM frame interpreter written in Bend 2.0.5, targeting the pinned Amsterdam execution fork of Glamsterdam. Opcode execution, 256-bit arithmetic, Keccak, memory, account/storage journals, nested calls, creation and gas accounting are Bend. Standard cryptographic precompiles use an explicit Rust host adapter backed by evm2. Python only serializes JSON/binary inputs and normalizes output.
+An EVM transaction and frame interpreter written in Bend 2.0.5, targeting the pinned Amsterdam execution fork of Glamsterdam. Opcode execution, 256-bit arithmetic, Keccak, memory, account/storage journals, nested calls, creation and gas accounting are Bend. Standard cryptographic precompiles use an explicit Rust host adapter backed by evm2. Python only serializes JSON/binary inputs and normalizes output.
 
 This is a correctness-first experimental implementation, **not an end-to-end proved EVM or a production client**. The earlier Shanghai subset and its laws remain regression material; `full/main.bend` is the current interpreter.
 
@@ -8,9 +8,9 @@ This is a correctness-first experimental implementation, **not an end-to-end pro
 
 **Goal: 100% of applicable Amsterdam EVM conformance tests passing in Bend. This goal has not been reached.**
 
-The pinned official corpus contains 40,911 required state, blockchain and transaction cases. It has been downloaded, verified and inventoried; no full-corpus passing result is claimed. Signed-envelope integration now passes five official SLOTNUM state fixtures on each backend. Exact semantic rejection mapping, block execution and broader conformance remain in progress. Engine/sync API fixtures are separately inventoried in the corpus manifest.
+The pinned official corpus contains 40,911 required state, blockchain and transaction cases. The current integration gate targets all **15,918 state fixtures on native and JavaScript**, without skipped cases or host errors counted as passes. Full native and JavaScript results are tracked in [conformance/STATE-PROGRESS.md](conformance/STATE-PROGRESS.md); native passed all 15,918 cases and the full JavaScript gate is running. Blockchain and standalone transaction execution remain unfinished. Engine/sync API fixtures are separately inventoried.
 
-The new `full/transaction-main.bend` adds transaction preparation and settlement in Bend. Its decoded-envelope integration suite passes 22 cases on each backend, comparing complete state roots, logs, output and gas against revm. These synthetic tests cover fees, refunds, creation, access lists, blob prices and large gas reservoirs; they are not signed-envelope conformance tests. The prepared-frame differential results below predate the latest transaction/world integration and require rerunning after those changes.
+`full/transaction-main.bend` performs transaction preparation and settlement in Bend. Signed envelopes are decoded and cryptographically verified by the strict Rust wire/crypto helper; transaction semantics remain in Bend. Total gas is a 256-bit Word, including accepted values beyond the runtime Nat range. Expected rejections use the pinned EEST exception-matching contract. Supplementary decoded-envelope and prepared-frame regressions are rerun against the integrated source; they do not replace the official state gate.
 
 See [GOAL.md](GOAL.md), [VALIDATION.md](VALIDATION.md) and [conformance/README.md](conformance/README.md) for scope and limitations.
 

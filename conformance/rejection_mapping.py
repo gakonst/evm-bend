@@ -34,3 +34,13 @@ REJECTION_EXCEPTIONS = {
 def rejection_exception(reason: int) -> str:
     """Return the exact exception; raise KeyError for an unmapped reason."""
     return REJECTION_EXCEPTIONS[reason]
+
+
+def rejection_aliases(reason: int) -> list[str]:
+    """Pinned EEST client mapping overlap; independent of expected fixtures.
+
+    Geth/Reth map a floor-gas error to both the specific and generic intrinsic
+    exception. See EXCEPTION-MATCHING.md for immutable source references.
+    """
+    primary = rejection_exception(reason)
+    return [primary, REJECTION_EXCEPTIONS[8]] if reason == 20 else [primary]

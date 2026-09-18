@@ -2,17 +2,20 @@ import Base
 import ../evmword.bend as W
 import ./bytes.bend as B
 
-# Pure sparse byte memory. Only nonzero cells are stored; each index is unique.
+# Pure sparse byte memory indexed by a persistent 48-bit radix tree.
+# Access visits at most 48 branches regardless of the number of stored bytes.
 # The caller validates Nat offsets and gas before memory access. Reading does
 # not expand memory; writes and explicit expansion round active size to 32 bytes.
-type Cell is Data:
-  C{index: Nat, byte: U32}
+type Cells is Data:
+  Empty{}
+  Byte{value: U32}
+  Branch{left: Cells, right: Cells}
 
 type Mem is Data:
-  M{active: Nat, cells: +List<Cell>}
+  M{active: Nat, cells: Cells}
 
 def empty() -> Mem:
-  M{0n, Nil{}}
+  M{0n, Empty{}}
 
 def size(mem: Mem) -> Nat:
   match mem:
@@ -45,64 +48,90 @@ def expand(mem: Mem, new_size: Nat) -> Mem:
     case M{active, cells}:
       M{maximum(active, rounded(new_size)), cells}
 
-def found(same: Bool, value: U32, fallback: U32) -> U32:
-  match same:
-    case True{}:
-      value
+def child(high: Bool, cells: Cells) -> Cells:
+  match high:
     case False{}:
-      fallback
+      match cells:
+        case Branch{left, right}: left
+        case other: Empty{}
+    case True{}:
+      match cells:
+        case Branch{left, right}: right
+        case other: Empty{}
 
-def lookup(cells: +List<Cell>, +index: Nat) -> U32:
+def branch(left: Cells, right: Cells) -> Cells:
+  match left right:
+    case Empty{} Empty{}: Empty{}
+    case l r: Branch{l, r}
+
+def replace(high: Bool, cells: Cells, value: Cells) -> Cells:
+  match high:
+    case False{}: branch(value, child(True{}, cells))
+    case True{}: branch(child(False{}, cells), value)
+
+def leaf(nonzero: Bool, byte: U32) -> Cells:
+  match nonzero:
+    case False{}: Empty{}
+    case True{}: Byte{byte}
+
+def leaf_value(cells: Cells) -> U32:
   match cells:
-    case Nil{}:
-      0
-    case Con{C{at, byte}, rest}:
-      found(Nat.is_eq(at, index), byte, lookup(rest, index))
+    case Byte{value}: value
+    case other: 0
+
+def lookup(depth: Nat, cells: Cells, +index: Nat, +divisor: Nat) -> U32:
+  match depth:
+    case 0n: leaf_value(cells)
+    case 1n+p:
+      match cells:
+        case Empty{}: 0
+        case other:
+          lookup(p, child(Nat.is_ge(index, divisor), other), Nat.mod(index, divisor), Nat.div(divisor, 2n))
+
+def store(depth: Nat, +cells: Cells, +index: Nat, +divisor: Nat, byte: U32) -> Cells:
+  match depth:
+    case 0n:
+      +byte = U32.and(byte, 255)
+      leaf(U32.is_ne(byte, 0), byte)
+    case 1n+p:
+      +high = Nat.is_ge(index, divisor)
+      value = store(p, child(high, cells), Nat.mod(index, divisor), Nat.div(divisor, 2n), byte)
+      replace(high, cells, value)
+
+# Clearing an absent sparse branch is constant work, including all-zero words.
+def clear(depth: Nat, +cells: Cells, +index: Nat, +divisor: Nat) -> Cells:
+  match depth:
+    case 0n: Empty{}
+    case 1n+p:
+      match cells:
+        case Empty{}: Empty{}
+        case other:
+          +high = Nat.is_ge(index,divisor)
+          value = clear(p,child(high,other),Nat.mod(index,divisor),Nat.div(divisor,2n))
+          replace(high,other,value)
+
+def write_cells(nonzero: Bool,cells: Cells,index: Nat,byte: U32) -> Cells:
+  match nonzero:
+    case False{}: clear(48n,cells,index,Nat.mul(U32.to_nat(2147483648),U32.to_nat(65536)))
+    case True{}: store(48n,cells,index,Nat.mul(U32.to_nat(2147483648),U32.to_nat(65536)),byte)
 
 def read_byte(mem: Mem, index: Nat) -> U32:
   match mem:
-    case M{active, cells}:
-      lookup(cells, index)
+    case M{active, cells}: lookup(48n, cells, index, Nat.mul(U32.to_nat(2147483648), U32.to_nat(65536)))
 
-def keep(different: Bool, cell: Cell, rest: +List<Cell>) -> +List<Cell>:
-  match different:
-    case True{}:
-      cell <> rest
-    case False{}:
-      rest
-
-def erase(cells: +List<Cell>, +index: Nat) -> +List<Cell>:
-  match cells:
-    case Nil{}:
-      Nil{}
-    case Con{C{+at, byte}, rest}:
-      keep(Nat.is_ne(at, index), C{at, byte}, erase(rest, index))
-
-def insert(nonzero: Bool, index: Nat, byte: U32, cells: +List<Cell>) -> +List<Cell>:
-  match nonzero:
-    case True{}:
-      C{index, byte} <> cells
-    case False{}:
-      cells
-
-def store_cell(+index: Nat, value: U32, cells: +List<Cell>) -> +List<Cell>:
-  +byte = U32.and(value, 255)
-  insert(U32.is_ne(byte, 0), index, byte, erase(cells, index))
-
-def write_byte(mem: Mem, +index: Nat, value: U32) -> Mem:
+def write_byte(mem: Mem, +index: Nat, +value: U32) -> Mem:
   match mem:
     case M{active, cells}:
-      M{maximum(active, rounded(1n+index)), store_cell(index, value, cells)}
+      M{maximum(active, rounded(1n+index)), write_cells(U32.is_ne(U32.and(value,255),0),cells,index,value)}
 
-def read_loop(count: Nat, +mem: Mem, +offset: Nat) -> +List<U32>:
+def read_loop(count: Nat, +mem: Mem, +offset: Nat, acc: +List<U32>) -> +List<U32>:
   match count:
-    case 0n:
-      Nil{}
+    case 0n: B.reverse(acc, Nil{})
     case 1n+p:
-      read_byte(mem, offset) <> read_loop(p, mem, 1n+offset)
+      read_loop(p, mem, 1n+offset, read_byte(mem, offset) <> acc)
 
 def read(mem: Mem, offset: Nat, len: Nat) -> +List<U32>:
-  read_loop(len, mem, offset)
+  read_loop(len, mem, offset, Nil{})
 
 def write_loop(bytes: +List<U32>, mem: Mem, +offset: Nat) -> Mem:
   match bytes:

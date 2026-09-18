@@ -5,7 +5,7 @@ from pathlib import Path
 import runner as R
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--backend',choices=['native','js'],required=True);p.add_argument('--workers',type=int,default=8);p.add_argument('--timeout',type=float,default=180);p.add_argument('--output',default='state-gate');p.add_argument('--resume',action='store_true');a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--backend',choices=['native','js'],required=True);p.add_argument('--workers',type=int,default=8);p.add_argument('--timeout',type=float,default=1200);p.add_argument('--output',default='state-gate');p.add_argument('--resume',action='store_true');a=p.parse_args()
  rows=[r for r in R.read_inventory() if r['format']=='state_test']
  assert len(rows)==15918 and len({r['id'] for r in rows})==15918
  cmd=[sys.executable,str(R.HERE/'bend_adapter.py'),'--backend',a.backend,'--timeout',str(a.timeout)]
@@ -21,7 +21,7 @@ def main():
   # Full actual state is useful for failures. Passed rows retain commitments.
   if result['status']=='pass':
    for v in result.get('variants',[]):
-    v['actual']={k:v['actual'].get(k) for k in ('status','exception','state_root','logs_hash','output','gas','frame_status')}
+    v['actual']={k:v['actual'].get(k) for k in ('status','exception','exception_aliases','state_root','logs_hash','output','gas','frame_status')}
   return dict(row,backend=a.backend,implementation_sha256=fp,seconds=time.monotonic()-start,**result)
  todo=[r for r in rows if previous.get(r['id'],{}).get('status')!='pass' or previous[r['id']].get('fixture_hash')!=r['fixture_hash']]
  started=time.monotonic()

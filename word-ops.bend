@@ -46,8 +46,15 @@ def sub(a: L.Word,b: L.Word) -> L.Word:
 def mul(a: L.Word,b: L.Word) -> L.Word:
   of_bits(Word.mul(256n,bits(a),bits(b)))
 
+# Unsigned lexicographic comparison of the eight native 32-bit limbs.
+# The most significant unequal limb decides; no 256-node bitvector is built.
+def lt_limb(+a: U32,+b: U32,lower: Bool) -> Bool:
+  Bool.or(U32.is_lt(a,b),Bool.and(U32.is_eq(a,b),lower))
+
 def lt(a: L.Word,b: L.Word) -> Bool:
-  Cmp.is_lt(Word.cmp(256n,bits(a),bits(b)))
+  match a b:
+    case L.W{a,b,c,d,e,f,g,h} L.W{i,j,k,l,m,n,o,p}:
+      lt_limb(h,p,lt_limb(g,o,lt_limb(f,n,lt_limb(e,m,lt_limb(d,l,lt_limb(c,k,lt_limb(b,j,U32.is_lt(a,i))))))))
 
 def gt(a: L.Word,b: L.Word) -> Bool:
   lt(b,a)

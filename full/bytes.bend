@@ -35,26 +35,27 @@ def drop(count: Nat, bytes: +List<U32>) -> +List<U32>:
 def get(index: Nat, bytes: +List<U32>) -> U32:
   head(drop(index, bytes))
 
-def take(count: Nat, bytes: +List<U32>) -> +List<U32>:
+def reverse(bytes: +List<U32>, acc: +List<U32>) -> +List<U32>:
+  match bytes:
+    case Nil{}: acc
+    case Con{b, rest}: reverse(rest, U32.and(b, 255) <> acc)
+
+def take_acc(count: Nat, bytes: +List<U32>, acc: +List<U32>) -> +List<U32>:
   match count:
-    case 0n:
-      Nil{}
+    case 0n: reverse(acc, Nil{})
     case 1n+p:
       match bytes:
-        case Nil{}:
-          0 <> take(p, Nil{})
-        case Con{b, rest}:
-          U32.and(b, 255) <> take(p, rest)
+        case Nil{}: take_acc(p, Nil{}, 0 <> acc)
+        case Con{b, rest}: take_acc(p, rest, U32.and(b, 255) <> acc)
+
+def take(count: Nat, bytes: +List<U32>) -> +List<U32>:
+  take_acc(count, bytes, Nil{})
 
 def slice(offset: Nat, count: Nat, bytes: +List<U32>) -> +List<U32>:
   take(count, drop(offset, bytes))
 
 def concat(a: +List<U32>, b: +List<U32>) -> +List<U32>:
-  match a:
-    case Nil{}:
-      b
-    case Con{x, rest}:
-      U32.and(x, 255) <> concat(rest, b)
+  reverse(reverse(a, Nil{}), b)
 
 # Exactly 32 bytes are folded big-endian; a short vector has trailing zero bytes.
 # Bytes beyond the first 32 are ignored.

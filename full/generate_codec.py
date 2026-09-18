@@ -53,14 +53,20 @@ def read_word(n: Nat, r: Reader, acc: W.Word) -> WordRead:
 def word(r: Reader) -> WordRead:
   read_word(32n, r, W.zero())
 
-def read_bytes(n: Nat, r: Reader) -> BytesRead:
+def reverse_bytes(xs: +List<U32>, acc: +List<U32>) -> +List<U32>:
+  match xs:
+    case Nil{}: acc
+    case Con{x, rest}: reverse_bytes(rest, x <> acc)
+
+def read_bytes_acc(n: Nat, r: Reader, acc: +List<U32>) -> BytesRead:
   match n:
-    case 0n:
-      BS{Nil{}, r}
+    case 0n: BS{reverse_bytes(acc, Nil{}), r}
     case 1n+p:
       +b = read_byte(r)
-      +rest = read_bytes(p, ByteRead.reader(b))
-      BS{ByteRead.value(b) <> BytesRead.value(rest), BytesRead.reader(rest)}
+      read_bytes_acc(p, ByteRead.reader(b), ByteRead.value(b) <> acc)
+
+def read_bytes(n: Nat, r: Reader) -> BytesRead:
+  read_bytes_acc(n, r, Nil{})
 
 def blob(r: Reader) -> BytesRead:
   +n = number(r)

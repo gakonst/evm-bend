@@ -20,7 +20,7 @@ def finish(bad: Bool,op: U32,+f: M.Frame,+a: W.Word,+b: W.Word,+n: W.Word) -> M.
         case 94: M.Frame.set_memory(H.pop(f,3n),Mem.copy(M.Frame.memory(f),O.to_nat(a),O.to_nat(b),O.to_nat(n)))
         case 243: M.Frame.set_action(M.Frame.set_output(H.pop(f,2n),Mem.read(M.Frame.memory(f),O.to_nat(a),O.to_nat(b))),M.Returned{})
         case 253: M.Frame.set_action(M.Frame.set_output(H.pop(f,2n),Mem.read(M.Frame.memory(f),O.to_nat(a),O.to_nat(b))),M.Reverted{})
-        case 55: M.Frame.set_memory(H.pop(f,3n),Mem.write(M.Frame.memory(f),O.to_nat(a),H.slice(b,O.to_nat(n),M.Frame.input(f))))
+        case 55: M.Frame.set_memory(H.pop(f,3n),Mem.write(M.Frame.memory(f),O.to_nat(a),H.input(f,b,O.to_nat(n))))
         case 57: M.Frame.set_memory(H.pop(f,3n),Mem.write(M.Frame.memory(f),O.to_nat(a),H.slice(b,O.to_nat(n),M.Frame.code(f))))
         case other: M.Frame.set_memory(H.pop(f,3n),Mem.write(M.Frame.memory(f),O.to_nat(a),H.slice(b,O.to_nat(n),M.Frame.ret(f))))
 

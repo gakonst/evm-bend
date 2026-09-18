@@ -1,0 +1,7 @@
+{
+  "cases_per_backend": 1316,
+  "native_passed": 1316,
+  "js_passed": 1316,
+  "seed": 256,
+  "word_ops_sha256": "7af1742deefd14339996bb33be0521b6786f64a47e2a5a2df44b5f60d9798b1e"
+}

@@ -39,7 +39,7 @@ def state_ready(bad: Bool, +e: M.Engine, parents: +List<M.Parent>, kind: U32, va
       +gas = C.cap(M.Frame.gas(f))
       +parent_frame = M.Frame.set_gas(M.Frame.set_action(M.Frame.set_ret(f,Nil{}),M.Running{}),Nat.sub(M.Frame.gas(f),gas))
       +parent = {M.Parent{parent_frame,world,U32.add(kind,U32.from_nat(C.nat(charged,U32.to_nat(256),0n))),0n,0n,target,M.Engine.state_used(e),M.Engine.state_spilled(e)} : M.Parent}
-      child = {M.Frame{gas,0n,Nil{},Mem.empty(),code,Nil{},Nil{},target,M.Frame.address(f),value,False{},1n+M.Frame.depth(f),M.Running{},Nil{}} : M.Frame}
+      child = {M.Frame{gas,0n,Nil{},Mem.empty(),code,M.empty_input(),Nil{},target,M.Frame.address(f),value,False{},1n+M.Frame.depth(f),M.Running{},Nil{}} : M.Frame}
       collide(collision(World.account(world,target)),M.Engine.set_world(e,world),parents,parent,child,target)
 
 def destination(+e: M.Engine, parents: +List<M.Parent>, kind: U32, value: W.Word, code: +List<U32>, +target: W.Word) -> M.Machine:

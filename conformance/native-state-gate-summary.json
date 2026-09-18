@@ -1,0 +1,25 @@
+{
+  "backend": "native",
+  "required": 15918,
+  "recorded": 15918,
+  "status_counts": {
+    "pass": 15918,
+    "not_run": 0
+  },
+  "implementation_sha256": "5de13633ee415440fdff56b8ba8bc0f15d685b46477f6d8a47e1c82086025edd",
+  "implementation_unchanged": true,
+  "complete_pass": true,
+  "release": "tests-glamsterdam-devnet@v8.1.4",
+  "archive_sha256": "aed315489163dc67c4e5607d7bbb8902e8329afe939be58193b125f2e81a85d4",
+  "command": [
+    "/usr/bin/python3",
+    "/srv/nanocodex/workspace/evm-bend/conformance/bend_adapter.py",
+    "--backend",
+    "native",
+    "--timeout",
+    "1200.0"
+  ],
+  "seconds": 902.1016490609909,
+  "journal_sha256": "7725f4afb50874ba014fe261e1ade2c2a6a022f2202b0e39f590664824f91014",
+  "transaction_binary_sha256": "58a65f4745d9d33035ab3dd7f8a9d0be13d1063ffd1c4dd80f2cc7367ad402a1"
+}

@@ -45,9 +45,20 @@ def exceptions(value):
  if isinstance(value,list):return set(value)
  return set(value.split('|'))
 
+def state_exception_matches(expected,actual):
+ # EEST maps an actual client error to all matching named exceptions. A precise
+ # floor error has a documented generic alias; success has no exception set.
+ got=actual.get('exception')
+ if actual.get('status')=='rejected' and got is None:return False
+ if actual.get('status')=='executed' and got is not None:return False
+ if got is None:return None in exceptions(expected) and not actual.get('exception_aliases')
+ names=set(actual.get('exception_aliases') or [got])
+ if got not in names or None in names:return False
+ return bool(exceptions(expected)&names)
+
 def compare_state(unit,post,actual):
  errors=[]
- if actual.get('exception') not in exceptions(post.get('expectException')):errors.append(dict(field='exception',expected=post.get('expectException'),actual=actual.get('exception')))
+ if not state_exception_matches(post.get('expectException'),actual):errors.append(dict(field='exception',expected=post.get('expectException'),actual=actual.get('exception')))
  for src,dst in [('hash','state_root'),('logs','logs_hash')]:
   if actual.get(dst)!=post[src]:errors.append(dict(field=dst,expected=post[src],actual=actual.get(dst)))
  if 'out' in unit and actual.get('output')!=unit['out']:errors.append(dict(field='output',expected=unit['out'],actual=actual.get('output')))

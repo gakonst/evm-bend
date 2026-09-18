@@ -59,9 +59,16 @@ def next(+f: M.Frame,n: Nat) -> M.Frame:
 def result(f: M.Frame,n: Nat,x: W.Word) -> M.Frame:
   push(pop(f,n),x)
 
+def memory_cost_choice(small: Bool,+bytes: Nat) -> W.Word:
+  match small:
+    # At most 2^22 words: the square and total cost fit the 48-bit Nat.
+    case True{}: O.from_nat(Mem.memory_cost(bytes))
+    case False{}:
+      +words = O.from_nat(Mem.words(bytes))
+      W.add(O.mul(W.from_u32(3),words),O.div(O.mul(words,words),W.from_u32(512)))
+
 def memory_cost(+bytes: Nat) -> W.Word:
-  +words = O.from_nat(Mem.words(bytes))
-  W.add(O.mul(W.from_u32(3),words),O.div(O.mul(words,words),W.from_u32(512)))
+  memory_cost_choice(Nat.is_le(bytes,U32.to_nat(134217728)),bytes)
 
 def expanded(bad: Bool,+f: M.Frame,size: Nat) -> M.Frame:
   match bad:
@@ -75,12 +82,18 @@ def paymem(cost: Maybe<&2,Nat>,f: M.Frame,+size: Nat) -> M.Frame:
       +paid = G.charge(f,cost)
       expanded(G.failed(M.Frame.action(paid)),paid,size)
 
+def grow_memory(grows: Bool,+f: M.Frame,+size: Nat) -> M.Frame:
+  match grows:
+    case False{}: f
+    case True{}:
+      paymem(O.checked_to_nat(O.sub(memory_cost(size),memory_cost(Mem.size(M.Frame.memory(f))))),f,size)
+
 def rangefit(ok: Bool,+f: M.Frame,end: W.Word) -> M.Frame:
   match ok:
     case False{}: M.fault(f,1)
     case True{}:
-      +size = Mem.maximum(Mem.size(M.Frame.memory(f)),O.to_nat(end))
-      paymem(O.checked_to_nat(O.sub(memory_cost(size),memory_cost(Mem.size(M.Frame.memory(f))))),f,size)
+      +size = O.to_nat(end)
+      grow_memory(Nat.is_gt(size,Mem.size(M.Frame.memory(f))),f,size)
 
 def rangezero(z: Bool,f: M.Frame,+offset: W.Word,+size: W.Word) -> M.Frame:
   match z:
@@ -123,3 +136,12 @@ def jump(take: Bool,+f: M.Frame,+target: W.Word) -> M.Frame:
   match take:
     case False{}: f
     case True{}: jumpok(Bool.and(O.lt(target,O.from_nat(B.len(M.Frame.code(f)))),jump_scan(M.Frame.code(f),O.to_nat(target),0n,0n)),f,target)
+
+# Compare Word offsets before Nat conversion; out-of-range calldata reads pad.
+def input_ok(ok: Bool,f: M.Frame,offset: W.Word,count: Nat) -> +List<U32>:
+  match ok:
+    case False{}: B.take(count,Nil{})
+    case True{}: M.Frame.input_read(f,O.to_nat(offset),count)
+
+def input(+f: M.Frame,+offset: W.Word,count: Nat) -> +List<U32>:
+  input_ok(O.lt(offset,O.from_nat(M.Frame.input_len(f))),f,offset,count)

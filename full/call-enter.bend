@@ -57,7 +57,7 @@ def enter_ready(bad: Bool, +e: M.Engine, parents: +List<M.Parent>, r: Request, +
           +address = C.word(Bool.or(U32.is_eq(kind,242),U32.is_eq(kind,244)),M.Frame.address(f),target)
           +caller = C.word(U32.is_eq(kind,244),M.Frame.caller(f),M.Frame.address(f))
           +callvalue = C.word(U32.is_eq(kind,244),M.Frame.value(f),value)
-          +child = {M.Frame{child_gas,0n,Nil{},Mem.empty(),code,Mem.read(M.Frame.memory(f),O.to_nat(in_offset),O.to_nat(in_size)),Nil{},address,caller,callvalue,Bool.or(M.Frame.is_static(f),U32.is_eq(kind,250)),1n+M.Frame.depth(f),child_action(disabled,target),Nil{}} : M.Frame}
+          +child = {M.Frame{child_gas,0n,Nil{},Mem.empty(),code,M.memory_input(M.Frame.memory(f),O.to_nat(in_offset),O.to_nat(in_size)),Nil{},address,caller,callvalue,Bool.or(M.Frame.is_static(f),U32.is_eq(kind,250)),1n+M.Frame.depth(f),child_action(disabled,target),Nil{}} : M.Frame}
           +checkpoint = M.Engine.world(e)
           +parent = {M.Parent{parent_frame,checkpoint,U32.add(kind,U32.from_nat(C.nat(charged,U32.to_nat(256),0n))),O.to_nat(out_offset),O.to_nat(out_size),W.zero(),M.Engine.state_used(e),M.Engine.state_spilled(e)} : M.Parent}
           enter_balance(Bool.or(Nat.is_ge(M.Frame.depth(f),U32.to_nat(1024)),Bool.and(Bool.or(U32.is_eq(kind,241),U32.is_eq(kind,242)),O.lt(M.Account.balance(World.account(checkpoint,M.Frame.address(f))),value))),e,parents,parent,child,kind,charged)

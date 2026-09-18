@@ -35,8 +35,14 @@ def put(+world: M.World,+a: M.Account) -> M.World:
   +addr = normalize_address(M.Account.address(a))
   M.World.set_accounts(world,M.Account.set_address(a,addr) <> erase(M.World.accounts(world),addr))
 
+# Emptiness needs only the first constructor, not a recursive code length.
+def code_empty(code: +List<U32>) -> Bool:
+  match code:
+    case Nil{}: True{}
+    case Con{byte,rest}: False{}
+
 def is_empty(+a: M.Account) -> Bool:
-  Bool.and(W.is_zero(M.Account.balance(a)),Bool.and(W.is_zero(M.Account.nonce(a)),Nat.is_eq(List.length(&2,U32,M.Account.code(a)),0n)))
+  Bool.and(W.is_zero(M.Account.balance(a)),Bool.and(W.is_zero(M.Account.nonce(a)),code_empty(M.Account.code(a))))
 
 # EELS modify_state deletes an empty modified leaf immediately. Keep transaction
 # metadata in an absent-account tombstone: reads/warmth are not account existence.
@@ -95,14 +101,25 @@ def erase_slot(slots: +List<M.Slot>,+key: W.Word) -> +List<M.Slot>:
 def set(slots: +List<M.Slot>,+key: W.Word,value: W.Word) -> +List<M.Slot>:
   M.Slot{key,value} <> erase_slot(slots,key)
 
-def contains(keys: +List<W.Word>,+key: W.Word) -> Bool:
-  match keys:
-    case Nil{}: False{}
-    case Con{at,rest}: Bool.or(W.eq(at,key),contains(rest,key))
+# Warm keys are a set. Repeated accesses must not grow a duplicate list;
+# otherwise a loop touching one slot makes membership checks quadratic.
+def contains_go(keys: +List<W.Word>,+key: W.Word,found: Bool) -> Bool:
+  match keys found:
+    case Nil{} seen: seen
+    case Con{at,rest} True{}: True{}
+    case Con{at,rest} False{}: contains_go(rest,key,W.eq(at,key))
 
-def warm_storage(+world: M.World,address: W.Word,key: W.Word) -> M.World:
+def contains(keys: +List<W.Word>,key: W.Word) -> Bool:
+  contains_go(keys,key,False{})
+
+def warm_storage_if(warm: Bool,world: M.World,+a: M.Account,key: W.Word) -> M.World:
+  match warm:
+    case True{}: world
+    case False{}: put(world,M.Account.set_storage_warm(a,key <> M.Account.storage_warm(a)))
+
+def warm_storage(+world: M.World,address: W.Word,+key: W.Word) -> M.World:
   +a = account(world,address)
-  put(world,M.Account.set_storage_warm(a,key <> M.Account.storage_warm(a)))
+  warm_storage_if(contains(M.Account.storage_warm(a),key),world,a,key)
 
 # original is the transaction-start snapshot; this operation never changes it.
 def set_storage(+world: M.World,address: W.Word,key: W.Word,value: W.Word) -> M.World:

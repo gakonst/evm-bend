@@ -39,4 +39,15 @@ class GateTests(unittest.TestCase):
   unit={'post':{'Amsterdam':[{'hash':'h','logs':'l','indexes':{}}]}}
   with patch.object(R,'fixture',return_value=unit),patch.object(R,'state_input',return_value={}),patch.object(R,'adapter_call',return_value={'status':'unknown','state_root':'h','logs_hash':'l'}):
    with self.assertRaises(ValueError):R.execute({'format':'state_test'},['adapter'],{'state_test'},1)
+ def test_specific_floor_error_has_pinned_generic_alias(self):
+  from rejection_mapping import rejection_exception,rejection_aliases
+  actual=dict(status='rejected',exception=rejection_exception(20),exception_aliases=rejection_aliases(20))
+  self.assertTrue(R.state_exception_matches('TransactionException.INTRINSIC_GAS_TOO_LOW',actual))
+  self.assertTrue(R.state_exception_matches('TransactionException.INTRINSIC_GAS_BELOW_FLOOR_GAS_COST',actual))
+  self.assertFalse(R.state_exception_matches('TransactionException.NONCE_IS_MAX',actual))
+  self.assertFalse(R.state_exception_matches(None,actual))
+  self.assertFalse(R.state_exception_matches(None,dict(status='rejected',exception=None)))
+  self.assertFalse(R.state_exception_matches('TransactionException.INTRINSIC_GAS_TOO_LOW',dict(status='executed',exception=rejection_exception(8))))
+  generic=dict(exception=rejection_exception(8),exception_aliases=rejection_aliases(8))
+  self.assertFalse(R.state_exception_matches('TransactionException.INTRINSIC_GAS_BELOW_FLOOR_GAS_COST',generic))
 if __name__=='__main__':unittest.main()

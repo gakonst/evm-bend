@@ -1,21 +1,13 @@
-# State conformance integration — incomplete
+# Pinned Amsterdam state gate
 
-Target: all 15,918 pinned Amsterdam state fixtures on actual Bend native and JS.
-Pin: `7341820b5b394b1934dfe7bb6f621fcdab7baf7f` (`tests-glamsterdam-devnet@v8.1.4`).
+Native: **15,918 / 15,918 passed**, zero failed, blocked, skipped, or host-error cases. The fresh run completed in 902 seconds and verified its implementation fingerprint was unchanged. The full JavaScript gate is running; no complete JavaScript pass is claimed yet.
 
-The transaction entrypoint now uses full Word gas, with a bounded active state-gas window and full-width escrow/settlement in Bend. The host only serializes inputs, performs wire/cryptographic operations, and computes commitments. Native verification passes both signed fixtures above 2^48 gas and all 22 decoded transaction integration cases.
+The immediate scope is the 15,918 state fixtures in `tests-glamsterdam-devnet@v8.1.4`, pinned to execution-specs `7341820b5b394b1934dfe7bb6f621fcdab7baf7f`. The broader inventory contains 40,911 required state, blockchain, and transaction fixtures; the additional formats remain unfinished. Passing tests is not a formal correctness proof.
 
-The integrated native build passes 24 previously failing memory-overflow and EIP-8024 state fixtures, comparing exact state/log roots and exception outcome. EIP-8024 missing immediate bytes read as zero; legacy jump-destination scanning skips PUSH data only. LOG and EXTCODECOPY charge memory with checked arithmetic before accessing memory.
+See [native-state-gate-summary.json](native-state-gate-summary.json) for the exact count, command, implementation fingerprint, binary hash, and journal hash, and [integrated-build-provenance.json](integrated-build-provenance.json) for source and compiler hashes.
 
-Of 933 fixtures expecting rejection, 878 pass exact exception and state/log commitment checks. The remaining 55 are rejected with correct commitments but differ between generic intrinsic-gas and floor-specific exception names. Their pinned matching rules remain under audit; they are failures, not passes. Large-code host timeouts and the complete native/JS gate remain outstanding. Earlier arithmetic/frame regression results predate these changes and are not fresh validation of this snapshot.
+Execution and transaction semantics remain in Bend. The integrated repairs cover full-Word transaction gas, precise rejection facets and pinned EEST aliases, checked memory charging, missing EIP-8024 immediates and jump destinations, persistent sparse memory, immutable calldata views, stack-safe large byte processing, storage warmth as a set, constant-time code emptiness, and exact limb comparisons. The host supplies only the established crypto/wire/commitment boundaries.
 
-Build transaction executables: `conformance/build_transactions.sh` (crypto hosts must already be built as documented in the main README).
+Supplementary checks on the integrated binaries passed 624 prepared-frame differentials and 22 transaction integrations per backend. The comparison change passed 1,316 independent vectors per backend. Large byte/view/memory-cost regressions pass on both backends. The previously slow static-call fixture passes on JavaScript with exact roots and logs in 126 seconds; its earlier 120-second timeout is not counted as a pass. The full JavaScript gate uses a 3,600-second host deadline.
 
-Run the complete gate:
-
-```sh
-python3 conformance/full_state_gate.py --backend native --workers 8
-python3 conformance/full_state_gate.py --backend js --workers 8
-```
-
-`--resume` reuses only passing rows with the exact implementation fingerprint. Host errors, unsupported results, unknown statuses, timeouts, and unrun cases cannot pass. Full-suite success is not a formal correctness proof.
+The mandatory core proof, mutation, and differential checks also pass. These supplemental suites do not replace the full state gate.

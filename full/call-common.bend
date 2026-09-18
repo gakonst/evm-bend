@@ -4,6 +4,7 @@ import ../word-ops.bend as O
 import ./model.bend as M
 import ./gas.bend as G
 import ./memory.bend as Mem
+import ./opcode-common.bend as H
 import ./bytes.bend as B
 import ./world.bend as World
 
@@ -34,9 +35,8 @@ def memory_paid(bad: Bool, +f: M.Frame, size: Nat) -> M.Frame:
     case True{}: f
     case False{}: M.Frame.set_memory(f, Mem.expand(M.Frame.memory(f), size))
 
-def memory_cost(+bytes: Nat) -> W.Word:
-  +words = O.from_nat(Mem.words(bytes))
-  W.add(O.mul(W.from_u32(3), words), O.div(O.mul(words, words), W.from_u32(512)))
+def memory_cost(bytes: Nat) -> W.Word:
+  H.memory_cost(bytes)
 
 def memory_charge(cost: Maybe<&2,Nat>, +f: M.Frame, size: Nat) -> M.Frame:
   match cost:
@@ -45,12 +45,8 @@ def memory_charge(cost: Maybe<&2,Nat>, +f: M.Frame, size: Nat) -> M.Frame:
       +paid = G.charge(f, cost)
       memory_paid(G.failed(M.Frame.action(paid)), paid, size)
 
-def memory_range_fit(fits: Bool, +f: M.Frame, end: W.Word) -> M.Frame:
-  match fits:
-    case False{}: M.fault(f, 1)
-    case True{}:
-      +size = Mem.maximum(Mem.size(M.Frame.memory(f)), O.to_nat(end))
-      memory_charge(O.checked_to_nat(O.sub(memory_cost(size), memory_cost(Mem.size(M.Frame.memory(f))))), f, size)
+def memory_range_fit(fits: Bool,f: M.Frame,end: W.Word) -> M.Frame:
+  H.rangefit(fits,f,end)
 
 def memory_nonzero(zero: Bool, +f: M.Frame, +offset: W.Word, +size: W.Word) -> M.Frame:
   match zero:
