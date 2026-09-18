@@ -1,0 +1,24 @@
+[
+  {
+    "id": "tests/ported_static/stCallCreateCallCodeTest/test_callcode_lose_gas_oog.py::test_callcode_lose_gas_oog[fork_Amsterdam-state_test--g2]",
+    "status": "executed",
+    "failures": [],
+    "gas": {
+      "used": 343611,
+      "left": 9223372036854432196,
+      "execution": 147771,
+      "state": 195840
+    }
+  },
+  {
+    "id": "tests/ported_static/stPreCompiledContracts2/test_ecrecover_short_buff.py::test_ecrecover_short_buff[fork_Amsterdam-state_test]",
+    "status": "executed",
+    "failures": [],
+    "gas": {
+      "used": 8177924,
+      "left": 71794957639715938,
+      "execution": 4445124,
+      "state": 5777280
+    }
+  }
+]

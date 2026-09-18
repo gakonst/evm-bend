@@ -1,6 +1,6 @@
 from pathlib import Path
-s=['import Base','import ../evmword.bend as W','import ./model.bend as M','import ./codec.bend as C','import ./transaction-types.bend as T','']
-records={'MaybeRead':('MR',[('value','+Maybe<W.Word>'),('reader','C.Reader')]),'AccessRead':('AR',[('value','T.Access'),('reader','C.Reader')]),'AccessesRead':('AS',[('value','+List<T.Access>'),('reader','C.Reader')]),'AuthRead':('UR',[('value','T.Authorization'),('reader','C.Reader')]),'AuthsRead':('US',[('value','+List<T.Authorization>'),('reader','C.Reader')]),'TxRead':('TR',[('value','T.Transaction'),('reader','C.Reader')])}
+s=['import Base','import ../evmword.bend as W','import ./model.bend as M','import ./codec.bend as C','import ./transaction-types.bend as T','import ./transaction-wide.bend as Wide','']
+records={'MaybeRead':('MR',[('value','+Maybe<W.Word>'),('reader','C.Reader')]),'AccessRead':('AR',[('value','T.Access'),('reader','C.Reader')]),'AccessesRead':('AS',[('value','+List<T.Access>'),('reader','C.Reader')]),'AuthRead':('UR',[('value','T.Authorization'),('reader','C.Reader')]),'AuthsRead':('US',[('value','+List<T.Authorization>'),('reader','C.Reader')]),'TxRead':('TR',[('value','Wide.Transaction'),('reader','C.Reader')])}
 for typ,(cons,fields) in records.items():
  s+=['type '+typ+' is Data:','  '+cons+'{'+', '.join(n+': '+t for n,t in fields)+'}','']
  for name,ty in fields:s+=['def '+typ+'.'+name+'(x: '+typ+') -> '+ty+':','  match x:','    case '+cons+'{'+', '.join(n for n,t in fields)+'}: '+name,'']
@@ -55,13 +55,13 @@ def auth_list(r: C.Reader) -> AuthsRead:
   +n = C.number(r)
   auths(C.NumRead.value(n),C.NumRead.reader(n))
 ''']
-fields=[('kind','C.read_byte','C.ByteRead'),('sender','C.word','C.WordRead'),('nonce','C.word','C.WordRead'),('gas','gas_number','C.NumRead'),('to','optional','MaybeRead'),('value','C.word','C.WordRead'),('data','C.blob','C.BytesRead'),('chainid','optional','MaybeRead'),('fee_cap','C.word','C.WordRead'),('tip','C.word','C.WordRead'),('blob_fee_cap','C.word','C.WordRead'),('blobhashes','C.words','C.WordsRead'),('access_list','access_list','AccessesRead'),('authorizations','auth_list','AuthsRead')]
+fields=[('kind','C.read_byte','C.ByteRead'),('sender','C.word','C.WordRead'),('nonce','C.word','C.WordRead'),('gas','C.word','C.WordRead'),('to','optional','MaybeRead'),('value','C.word','C.WordRead'),('data','C.blob','C.BytesRead'),('chainid','optional','MaybeRead'),('fee_cap','C.word','C.WordRead'),('tip','C.word','C.WordRead'),('blob_fee_cap','C.word','C.WordRead'),('blobhashes','C.words','C.WordsRead'),('access_list','access_list','AccessesRead'),('authorizations','auth_list','AuthsRead')]
 s+=['def gas_number(r: C.Reader) -> C.NumRead:','  C.read_num(6n,r,0n)','', 'def transaction(r: C.Reader) -> TxRead:']
 r='r'
 for name,fn,typ in fields:s+=['  +'+name+' = '+fn+'('+r+')'];r=typ+'.reader('+name+')'
-s+=['  TR{T.Tx{'+','.join(typ+'.value('+name+')' for name,fn,typ in fields)+'},'+r+'}','']
+s+=['  TR{Wide.WideTx{T.Tx{'+','.join('0n' if name=='gas' else typ+'.value('+name+')' for name,fn,typ in fields)+'},C.WordRead.value(gas)},'+r+'}','']
 s+=['''type Input is Data:
-  Input{tx: T.Transaction,world: M.World,context: M.Context,excess: W.Word,valid: Bool}
+  Input{tx: Wide.Transaction,world: M.World,context: M.Context,excess: W.Word,valid: Bool}
 
 def decode(data: +List<U32>) -> Input:
   +ctx = C.context(C.R{data,True{}})

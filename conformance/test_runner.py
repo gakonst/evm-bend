@@ -1,4 +1,6 @@
-import unittest
+import unittest,tempfile
+from pathlib import Path
+from unittest.mock import patch
 import runner as R
 class GateTests(unittest.TestCase):
  def test_absent_adapter_is_not_pass(self):
@@ -23,4 +25,18 @@ class GateTests(unittest.TestCase):
   self.assertEqual(R.canonical_alloc(a),R.canonical_alloc(b))
  def test_missing_account_not_equal_empty_account(self):
   self.assertNotEqual(R.canonical_alloc({}),R.canonical_alloc({'0x1':{'nonce':0,'balance':0,'code':'','storage':{}}}))
+ def test_fingerprint_ignores_logs_but_tracks_source(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);here=root/'conformance';here.mkdir();full=root/'full';full.mkdir()
+   source=full/'vm.bend';source.write_text('original')
+   with patch.object(R,'HERE',here):
+    first=R.implementation_fingerprint(['adapter'],'native')
+    (full/'build.log').write_text('volatile output')
+    self.assertEqual(first,R.implementation_fingerprint(['adapter'],'native'))
+    source.write_text('changed semantics')
+    self.assertNotEqual(first,R.implementation_fingerprint(['adapter'],'native'))
+ def test_unknown_adapter_status_cannot_pass(self):
+  unit={'post':{'Amsterdam':[{'hash':'h','logs':'l','indexes':{}}]}}
+  with patch.object(R,'fixture',return_value=unit),patch.object(R,'state_input',return_value={}),patch.object(R,'adapter_call',return_value={'status':'unknown','state_root':'h','logs_hash':'l'}):
+   with self.assertRaises(ValueError):R.execute({'format':'state_test'},['adapter'],{'state_test'},1)
 if __name__=='__main__':unittest.main()

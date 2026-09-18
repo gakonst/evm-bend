@@ -3,8 +3,16 @@ import ../evmword.bend as W
 
 # Byte vectors use reusable lists of U32 values in [0,255]. Word conversion
 # and element reads mask to eight bits. take/slice zero-pad; drop never pads.
+# Tail recursion keeps valid 64/128 KiB code lengths safe on the JS backend.
+def len_acc(bytes: +List<U32>, count: Nat) -> Nat:
+  match bytes:
+    case Nil{}:
+      count
+    case Con{byte, rest}:
+      len_acc(rest, Nat.add(count, 1n))
+
 def len(bytes: +List<U32>) -> Nat:
-  List.length(&2, U32, bytes)
+  len_acc(bytes, 0n)
 
 def head(bytes: +List<U32>) -> U32:
   match bytes:

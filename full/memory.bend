@@ -19,8 +19,9 @@ def size(mem: Mem) -> Nat:
     case M{active, cells}:
       active
 
-def words(bytes: Nat) -> Nat:
-  Nat.div(Nat.add(bytes, 31n), 32n)
+# ceil(bytes / 32), without an overflowing bytes + 31 intermediate.
+def words(+bytes: Nat) -> Nat:
+  Nat.add(Nat.div(bytes,32n),Nat.div(Nat.add(Nat.mod(bytes,32n),31n),32n))
 
 def rounded(bytes: Nat) -> Nat:
   Nat.mul(words(bytes), 32n)

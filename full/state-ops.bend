@@ -7,6 +7,7 @@ import ./gas.bend as G
 import ./bytes.bend as B
 import ./memory.bend as Mem
 import ./keccak.bend as K
+import ./opcode-common.bend as H
 
 def choose(b: Bool,a: Nat,c: Nat) -> Nat:
   match b:
@@ -36,12 +37,13 @@ def extent(offset: Nat,size: Nat) -> Nat:
 def commit(+old: M.Engine,new: M.Engine) -> M.Engine:
   commit_if(G.failed(M.Frame.action(M.Engine.frame(old))),old,new)
 
-def memory(+e: M.Engine,offset: Nat,size: Nat,cost: Nat) -> M.Engine:
-  +f = M.Engine.frame(e)
-  +mem = M.Frame.memory(f)
-  +end = Mem.maximum(Mem.size(mem),extent(offset,size))
-  +paid = charge(e,Nat.add(cost,Nat.sub(Mem.memory_cost(end),Mem.memory_cost(Mem.size(mem)))))
-  commit(paid,M.Engine.set_frame(paid,M.Frame.set_memory(M.Engine.frame(paid),Mem.expand(mem,end))))
+# Charge ranges using Word arithmetic before converting to bounded Nat. The
+# shared checker rejects wrapped/oversized endpoints before any memory access.
+def memory(+e: M.Engine,offset: Nat,size: Nat,cost: Maybe<&2,Nat>) -> M.Engine:
+  match cost:
+    case None{}: fault(e,1)
+    case Some{cost}:
+      charge(M.Engine.set_frame(e,H.memory(M.Engine.frame(e),O.from_nat(offset),O.from_nat(size))),cost)
 
 def access(a: M.Account) -> Nat:
   choose(M.Account.warm(a),U32.to_nat(100),U32.to_nat(3000))
@@ -73,15 +75,21 @@ def ext_source(fits: Bool,src: W.Word,n: Nat,code: +List<U32>) -> +List<U32>:
     case True{}: B.slice(O.to_nat(src),n,code)
     case False{}: B.take(n,Nil{})
 
+def extcopy_finish(bad: Bool,+paid: M.Engine,+a: M.Account,offset: Nat,+src: W.Word,n: Nat,rest: +List<W.Word>) -> M.Engine:
+  match bad:
+    case True{}: paid
+    case False{}:
+      +f = M.Engine.frame(paid)
+      finish(M.Engine.set_world(M.Engine.set_frame(paid,M.Frame.set_memory(f,Mem.write(M.Frame.memory(f),offset,ext_source(O.fits_nat(src),src,n,M.Account.code(a))))),World.warm_account(M.Engine.world(paid),M.Account.address(a))),rest)
+
 def extcopy_raw(+e: M.Engine,stack: +List<W.Word>) -> M.Engine:
   match stack:
     case Con{+addr,Con{off,Con{+src,Con{size,rest}}}}:
       +a = World.account(M.Engine.world(e),addr)
       +n = O.to_nat(size)
       +offset = O.to_nat(off)
-      +paid = memory(e,offset,n,Nat.add(Nat.add(access(a),U32.to_nat(100)),Nat.mul(3n,Mem.words(n))))
-      +f = M.Engine.frame(paid)
-      commit(paid,finish(M.Engine.set_world(M.Engine.set_frame(paid,M.Frame.set_memory(f,Mem.write(M.Frame.memory(f),offset,ext_source(O.fits_nat(src),src,n,M.Account.code(a))))),World.warm_account(M.Engine.world(paid),addr)),rest))
+      +paid = memory(e,offset,n,Some{Nat.add(Nat.add(access(a),U32.to_nat(100)),Nat.mul(3n,Mem.words(n)))})
+      extcopy_finish(G.failed(M.Frame.action(M.Engine.frame(paid))),paid,a,offset,src,n,rest)
     case other: fault(e,2)
 
 def load_slot(transient: Bool,+e: M.Engine,+addr: W.Word,+a: M.Account,+key: W.Word,rest: +List<W.Word>) -> M.Engine:
@@ -174,16 +182,23 @@ def drop(n: Nat,stack: +List<W.Word>) -> +List<W.Word>:
         case Nil{}: Nil{}
         case Con{h,t}: drop(p,t)
 
+def emit_finish(bad: Bool,+n: Nat,+paid: M.Engine,offset: Nat,len: Nat,+rest: +List<W.Word>) -> M.Engine:
+  match bad:
+    case True{}: paid
+    case False{}:
+      +f = M.Engine.frame(paid)
+      event = {M.Log{M.Frame.address(f),topics(n,rest),Mem.read(M.Frame.memory(f),offset,len)} : M.Log}
+      finish(M.Engine.set_world(paid,World.log(M.Engine.world(paid),event)),drop(n,rest))
+
 def emit_paid_raw(short: Bool,+n: Nat,+e: M.Engine,off: W.Word,size: W.Word,+rest: +List<W.Word>) -> M.Engine:
   match short:
     case True{}: fault(e,2)
     case False{}:
       +offset = O.to_nat(off)
       +len = O.to_nat(size)
-      +paid = memory(e,offset,len,Nat.add(Nat.mul(U32.to_nat(375),1n+n),Nat.mul(8n,len)))
-      +f = M.Engine.frame(paid)
-      event = {M.Log{M.Frame.address(f),topics(n,rest),Mem.read(M.Frame.memory(f),offset,len)} : M.Log}
-      commit(paid,finish(M.Engine.set_world(paid,World.log(M.Engine.world(paid),event)),drop(n,rest)))
+      cost = O.checked_to_nat(W.add(O.from_nat(Nat.mul(U32.to_nat(375),1n+n)),O.mul(W.from_u32(8),O.from_nat(len))))
+      +paid = memory(e,offset,len,cost)
+      emit_finish(G.failed(M.Frame.action(M.Engine.frame(paid))),n,paid,offset,len,rest)
 
 def emit_valid(valid: Bool,short: Bool,n: Nat,e: M.Engine,off: W.Word,size: W.Word,rest: +List<W.Word>) -> M.Engine:
   match valid:

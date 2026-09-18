@@ -45,4 +45,5 @@ def decoded(ok: Bool,op: U32,f: M.Frame,+imm: U32) -> M.Frame:
 
 def immediate(+op: U32,+f: M.Frame) -> M.Frame:
   +imm = B.get(M.Frame.pc(f),M.Frame.code(f))
-  decoded(Bool.and(Nat.is_lt(M.Frame.pc(f),B.len(M.Frame.code(f))),Bool.or(U32.is_ge(imm,128),U32.is_le(imm,U32.from_nat(H.choose(U32.is_eq(op,232),81n,90n))))),op,H.next(f,1n),imm)
+  # Code reads are zero-padded, including a missing trailing immediate.
+  decoded(Bool.or(U32.is_ge(imm,128),U32.is_le(imm,U32.from_nat(H.choose(U32.is_eq(op,232),81n,90n)))),op,H.next(f,1n),imm)

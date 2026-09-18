@@ -3,6 +3,7 @@ import ../evmword.bend as W
 import ./model.bend as M
 import ./codec.bend as C
 import ./transaction-types.bend as T
+import ./transaction-wide.bend as Wide
 
 type MaybeRead is Data:
   MR{value: +Maybe<W.Word>, reader: C.Reader}
@@ -60,9 +61,9 @@ def AuthsRead.reader(x: AuthsRead) -> C.Reader:
     case US{value, reader}: reader
 
 type TxRead is Data:
-  TR{value: T.Transaction, reader: C.Reader}
+  TR{value: Wide.Transaction, reader: C.Reader}
 
-def TxRead.value(x: TxRead) -> T.Transaction:
+def TxRead.value(x: TxRead) -> Wide.Transaction:
   match x:
     case TR{value, reader}: value
 
@@ -128,8 +129,8 @@ def transaction(r: C.Reader) -> TxRead:
   +kind = C.read_byte(r)
   +sender = C.word(C.ByteRead.reader(kind))
   +nonce = C.word(C.WordRead.reader(sender))
-  +gas = gas_number(C.WordRead.reader(nonce))
-  +to = optional(C.NumRead.reader(gas))
+  +gas = C.word(C.WordRead.reader(nonce))
+  +to = optional(C.WordRead.reader(gas))
   +value = C.word(MaybeRead.reader(to))
   +data = C.blob(C.WordRead.reader(value))
   +chainid = optional(C.BytesRead.reader(data))
@@ -139,10 +140,10 @@ def transaction(r: C.Reader) -> TxRead:
   +blobhashes = C.words(C.WordRead.reader(blob_fee_cap))
   +access_list = access_list(C.WordsRead.reader(blobhashes))
   +authorizations = auth_list(AccessesRead.reader(access_list))
-  TR{T.Tx{C.ByteRead.value(kind),C.WordRead.value(sender),C.WordRead.value(nonce),C.NumRead.value(gas),MaybeRead.value(to),C.WordRead.value(value),C.BytesRead.value(data),MaybeRead.value(chainid),C.WordRead.value(fee_cap),C.WordRead.value(tip),C.WordRead.value(blob_fee_cap),C.WordsRead.value(blobhashes),AccessesRead.value(access_list),AuthsRead.value(authorizations)},AuthsRead.reader(authorizations)}
+  TR{Wide.WideTx{T.Tx{C.ByteRead.value(kind),C.WordRead.value(sender),C.WordRead.value(nonce),0n,MaybeRead.value(to),C.WordRead.value(value),C.BytesRead.value(data),MaybeRead.value(chainid),C.WordRead.value(fee_cap),C.WordRead.value(tip),C.WordRead.value(blob_fee_cap),C.WordsRead.value(blobhashes),AccessesRead.value(access_list),AuthsRead.value(authorizations)},C.WordRead.value(gas)},AuthsRead.reader(authorizations)}
 
 type Input is Data:
-  Input{tx: T.Transaction,world: M.World,context: M.Context,excess: W.Word,valid: Bool}
+  Input{tx: Wide.Transaction,world: M.World,context: M.Context,excess: W.Word,valid: Bool}
 
 def decode(data: +List<U32>) -> Input:
   +ctx = C.context(C.R{data,True{}})

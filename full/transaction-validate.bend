@@ -113,10 +113,16 @@ def intrinsic_bad(+tx: T.Transaction) -> Bool:
   +floor = I.Intrinsic.floor(cost)
   Nat.is_gt(execution,T.Transaction.gas(tx)) || Nat.is_gt(floor,T.Transaction.gas(tx)) || Nat.is_gt(execution,U32.to_nat(16777216)) || Nat.is_gt(floor,U32.to_nat(16777216))
 
-# 1 malformed decoded envelope, 2 chain id, 3 nonce range, 4 initcode,
-# 5 fee caps, 6 blob envelope, 7 type4 envelope, 8 intrinsic gas,
-# 9 whole block gas limit, 10 base fee, 11 blob base fee, 12 nonce mismatch,
-# 13 mathematical maximum cost overflow, 14 balance, 15 sender code.
+# Exact rejection facets are serialized by conformance/rejection_mapping.py.
+# 1 malformed decoded envelope and 100 host bound have no EEST translation.
+# Original codes retain their first facet; 16..24 distinguish grouped failures.
+def intrinsic_reason(+tx: T.Transaction) -> U32:
+  +cost = I.compute(tx)
+  +execution = I.Intrinsic.execution(cost)
+  +floor = I.Intrinsic.floor(cost)
+  reject(Nat.is_gt(execution,T.Transaction.gas(tx)),8,
+    reject(Nat.is_gt(floor,T.Transaction.gas(tx)),20,
+    reject(Nat.is_gt(execution,U32.to_nat(16777216)) || Nat.is_gt(floor,U32.to_nat(16777216)),8,0)))
 def validate(+tx: T.Transaction, world: M.World, +context: M.Context) -> U32:
   +kind = T.Transaction.kind(tx)
   +gas = T.Transaction.gas(tx)
@@ -137,16 +143,23 @@ def validate(+tx: T.Transaction, world: M.World, +context: M.Context) -> U32:
   reject(Nat.is_gt(gas,Nat.add(Nat.mul(U32.to_nat(65535),O.radix32()),U32.to_nat(4294967295))),100,
     reject(U32.is_gt(kind,4) || Bool.not(canonical_address(T.Transaction.sender(tx)) && destination(T.Transaction.to(tx)) && bytes_valid(T.Transaction.data(tx)) && access_valid(T.Transaction.access_list(tx))) || (U32.is_eq(kind,0) && Bool.not(access_empty(T.Transaction.access_list(tx)))) || (plain && Bool.not(W.eq(cap,T.Transaction.tip(tx)))) || (Bool.not(blob) && (Nat.is_ne(nblobs,0n) || Bool.not(W.is_zero(blobcap)))) || (Bool.not(auth) && Bool.not(auth_empty(T.Transaction.authorizations(tx)))),1,
     reject(Bool.not(chain_valid(T.Transaction.chainid(tx),kind,M.Context.chainid(context))),2,
-    reject(Bool.not(O.lt(T.Transaction.nonce(tx),W.W{4294967295,4294967295,0,0,0,0,0,0})),3,
+    reject(O.gt(T.Transaction.nonce(tx),W.W{4294967295,4294967295,0,0,0,0,0,0}),22,
+    reject(W.eq(T.Transaction.nonce(tx),W.W{4294967295,4294967295,0,0,0,0,0,0}),3,
     reject(create && Nat.is_gt(B.len(T.Transaction.data(tx)),U32.to_nat(131072)),4,
     reject(O.gt(T.Transaction.tip(tx),cap),5,
-    reject(blob && (create || Nat.is_eq(nblobs,0n) || Nat.is_gt(nblobs,6n) || Bool.not(blobs_valid(T.Transaction.blobhashes(tx)))),6,
-    reject(auth && (create || auth_empty(T.Transaction.authorizations(tx))),7,
-    reject(intrinsic_bad(tx),8,
+    reject(blob && create,6,
+    reject(blob && Nat.is_eq(nblobs,0n),16,
+    reject(blob && Nat.is_gt(nblobs,6n),17,
+    reject(blob && Bool.not(blobs_valid(T.Transaction.blobhashes(tx))),18,
+    reject(auth && create,7,
+    reject(auth && auth_empty(T.Transaction.authorizations(tx)),19,
+    reject(U32.is_ne(intrinsic_reason(tx),0),intrinsic_reason(tx),
     reject(O.gt(gasword,M.Context.gaslimit(context)),9,
     reject(O.lt(cap,M.Context.basefee(context)),10,
     reject(blob && O.lt(blobcap,M.Context.blobbasefee(context)),11,
-    reject(Bool.not(W.eq(T.Transaction.nonce(tx),M.Account.nonce(account))),12,
-    reject(mul_overflow(gasword,cap) || mul_overflow(bg,blobcap) || add_overflow(fee,blobfee) || add_overflow(fees,value),13,
+    reject(O.lt(T.Transaction.nonce(tx),M.Account.nonce(account)),12,
+    reject(O.gt(T.Transaction.nonce(tx),M.Account.nonce(account)),21,
+    reject(mul_overflow(gasword,cap),13,
+    reject(mul_overflow(bg,blobcap) || add_overflow(fee,blobfee) || add_overflow(fees,value),24,
     reject(O.gt(W.add(fees,value),M.Account.balance(account)),14,
-    reject(Bool.not(sender_code(M.Account.code(account))),15,0))))))))))))))))
+    reject(Bool.not(sender_code(M.Account.code(account))),15,0)))))))))))))))))))))))

@@ -100,8 +100,10 @@ def sliceok(ok: Bool,offset: W.Word,count: Nat,bytes: +List<U32>) -> +List<U32>:
 def slice(+offset: W.Word,count: Nat,+bytes: +List<U32>) -> +List<U32>:
   sliceok(O.lt(offset,O.from_nat(B.len(bytes))),offset,count,bytes)
 
+# Legacy jump-destination analysis skips PUSH data only. EIP-8024
+# immediate bytes are still scanned as opcodes when building destinations.
 def width(+op: U32) -> Nat:
-  choose(Bool.and(U32.is_ge(op,96),U32.is_le(op,127)),U32.to_nat(U32.sub(op,94)),choose(Bool.and(U32.is_ge(op,230),U32.is_le(op,232)),2n,1n))
+  choose(Bool.and(U32.is_ge(op,96),U32.is_le(op,127)),U32.to_nat(U32.sub(op,94)),1n)
 
 def jump_scan(code: +List<U32>,+target: Nat,+pc: Nat,skip: Nat) -> Bool:
   match code:

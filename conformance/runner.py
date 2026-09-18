@@ -5,7 +5,7 @@ An adapter receives inputs only, not expected post-state roots. It must execute
 Bend and use an independent commitment helper to return state_root/logs_hash.
 Absent capabilities are BLOCKED, never PASS. All required cases retain a row.
 """
-import argparse,collections,hashlib,json,os,shlex,subprocess,time
+import argparse,collections,hashlib,json,os,shlex,subprocess,time,signal
 from functools import lru_cache
 from pathlib import Path
 HERE=Path(__file__).resolve().parent
@@ -54,7 +54,11 @@ def compare_state(unit,post,actual):
  return errors
 
 def adapter_call(command,request,timeout):
- p=subprocess.run(command,input=json.dumps(request,separators=(',',':')),capture_output=True,text=True,timeout=timeout)
+ p=subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,start_new_session=True)
+ try:stdout,stderr=p.communicate(json.dumps(request,separators=(',',':')),timeout=timeout)
+ except subprocess.TimeoutExpired:
+  os.killpg(p.pid,signal.SIGKILL);p.communicate();raise
+ p.stdout=stdout;p.stderr=stderr
  if p.returncode:raise RuntimeError(f'adapter exit {p.returncode}: {p.stderr[-2000:]}')
  result=json.loads(p.stdout)
  if not isinstance(result,dict):raise ValueError('adapter result must be an object')
@@ -70,7 +74,8 @@ def execute(row,command,capabilities,timeout):
   for n,post in enumerate(posts):
    actual=adapter_call(command,state_input(unit,post),timeout)
    if actual.get('status') in ('unsupported','host_error'):
-    results.append(dict(post_index=n,status='blocked' if actual['status']=='unsupported' else 'error',reason=actual.get('reason','unspecified')));continue
+    results.append(dict(post_index=n,status='blocked' if actual['status']=='unsupported' else 'error',reason=actual.get('reason','unspecified'),actual=actual));continue
+   if actual.get('status') not in ('executed','rejected'):raise ValueError('invalid state adapter status: '+str(actual.get('status')))
    failures=compare_state(unit,post,actual)
    results.append(dict(post_index=n,status='fail' if failures else 'pass',failures=failures,actual=actual))
   status=next((s for s in ['error','blocked','fail'] if any(x['status']==s for x in results)),'pass')
@@ -116,22 +121,38 @@ def integer(v):return int(v,16) if isinstance(v,str) and v.startswith('0x') else
 def canonical_alloc(alloc):
  return {integer(a):dict(nonce=integer(x['nonce']),balance=integer(x['balance']),code=bytes.fromhex(x['code'].removeprefix('0x')),storage={integer(k):integer(v) for k,v in x.get('storage',{}).items() if integer(v)}) for a,x in alloc.items()}
 
+def implementation_fingerprint(command,backend):
+ root=HERE.parent; h=hashlib.sha256()
+ h.update(json.dumps([command,backend],sort_keys=True).encode())
+ paths=list(root.glob('*.bend'))+list((root/'full').glob('*.bend'))+[root/'full/precompile.c',root/'full/precompile.js']
+ paths += list(HERE.glob('*.py'))
+ paths += [root/'evm.py',HERE/'bend_adapter.py',root/('evm-transaction-native' if backend=='native' else 'evm-transaction.js')]
+ for folder,binary in [('envelope-host','evm-bend-envelope'),('revm-adapter','revm-adapter'),('precompile-host','bend-evm-precompile-host')]:
+  paths += list((root/folder/'src').glob('*.rs'))+[root/folder/'Cargo.lock',root/folder/'target/debug'/binary]
+ for path in sorted(set(paths)):
+  if path.is_file():
+   h.update(str(path.relative_to(root)).encode()+b'\0')
+   with path.open('rb') as f:
+    for chunk in iter(lambda:f.read(1048576),b''):h.update(chunk)
+ return h.hexdigest()
+
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--adapter',help='argv command receiving one JSON request on stdin; shell disabled');ap.add_argument('--capabilities',default='',help='comma-separated fixture formats actually supported by adapter');ap.add_argument('--backend',choices=['native','js'],default='native');ap.add_argument('--timeout',type=float,default=120);ap.add_argument('--match',default='');ap.add_argument('--limit',type=int);ap.add_argument('--resume',action='store_true');ap.add_argument('--validate-inputs',action='store_true');ap.add_argument('--output',default='results');args=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--format',choices=['state_test','transaction_test','blockchain_test'],help='Conformance gate scope; omitted includes all required formats');ap.add_argument('--adapter',help='argv command receiving one JSON request on stdin; shell disabled');ap.add_argument('--capabilities',default='',help='comma-separated fixture formats actually supported by adapter');ap.add_argument('--backend',choices=['native','js'],default='native');ap.add_argument('--timeout',type=float,default=120);ap.add_argument('--match',default='');ap.add_argument('--limit',type=int);ap.add_argument('--resume',action='store_true');ap.add_argument('--validate-inputs',action='store_true');ap.add_argument('--output',default='results');args=ap.parse_args()
  command=shlex.split(args.adapter) if args.adapter else None
  capabilities=set(args.capabilities.split(',')) if command else set()
- rows=list(read_inventory());out=HERE/args.output;out.mkdir(parents=True,exist_ok=True);journal=out/f'{args.backend}.jsonl';previous={}
+ rows=[r for r in read_inventory() if args.format is None or r['format']==args.format];out=HERE/args.output;out.mkdir(parents=True,exist_ok=True);journal=out/f'{args.backend}.jsonl';previous={}
  if args.resume and journal.exists():
   for line in journal.read_text().splitlines():
    r=json.loads(line);previous[r['id']]=r
  else:journal.write_text('')
+ fingerprint=implementation_fingerprint(command,args.backend)
  selected=0;start=time.monotonic();failures=0
  with journal.open('a') as f:
   for n,row in enumerate(rows):
    old=previous.get(row['id'])
    if old and old.get('fixture_hash')!=row['fixture_hash']:raise ValueError('resume fixture hash mismatch')
-   if args.resume and old and old['status']=='pass':continue
-   base={k:row[k] for k in ['id','format','json_path','fixture_hash']};base['backend']=args.backend
+   if args.resume and old and old['status']=='pass' and old.get('implementation_sha256')==fingerprint:continue
+   base={k:row[k] for k in ['id','format','json_path','fixture_hash']};base['backend']=args.backend;base['implementation_sha256']=fingerprint
    wanted=args.match in row['id'] and (args.limit is None or selected<args.limit)
    if not wanted:
     if old:continue
@@ -148,7 +169,7 @@ def main():
    if result['status'] in ('error','fail'):failures+=1
    if (n+1)%1000==0:print('recorded',n+1,'/',len(rows),'failures',failures,flush=True)
  counts=collections.Counter(r['status'] for r in previous.values());manifest=json.loads((HERE/'corpus-manifest.json').read_text())
- summary=dict(backend=args.backend,release=manifest['release'],archive_sha256=manifest['archive_sha256'],required=len(rows),recorded=len(previous),selected_this_run=selected,status_counts={s:counts[s] for s in sorted(STATUSES)},complete_pass=len(previous)==len(rows) and counts['pass']==len(rows),seconds=time.monotonic()-start,command=command)
+ summary=dict(scope=args.format or 'all_required',implementation_sha256=fingerprint,backend=args.backend,release=manifest['release'],archive_sha256=manifest['archive_sha256'],required=len(rows),recorded=len(previous),selected_this_run=selected,status_counts={s:counts[s] for s in sorted(STATUSES)},complete_pass=len(previous)==len(rows) and counts['pass']==len(rows) and all(r.get('implementation_sha256')==fingerprint for r in previous.values()),seconds=time.monotonic()-start,command=command)
  path=out/f'{args.backend}-summary.json';temp=path.with_suffix('.tmp');temp.write_text(json.dumps(summary,indent=2)+'\n');os.replace(temp,path);print(json.dumps(summary,indent=2))
  return 0 if summary['complete_pass'] else 1
 if __name__=='__main__':raise SystemExit(main())

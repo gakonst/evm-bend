@@ -5,31 +5,31 @@ import ./transaction-environment.bend as Env
 import ./codec.bend as C
 import ./model.bend as M
 import ./render.bend as R
-import ./transaction.bend as Tx
+import ./transaction-wide.bend as Tx
 import ./transaction-runtime.bend as Run
 import ./transaction-finish.bend as F
 import ./transaction-codec.bend as Codec
 
-def render_gas(gas: F.GasSettlement) -> String:
+def render_gas(gas: Tx.Settlement) -> String:
   match gas:
-    case F.GasSettlement{used,left,execution,state}:
-      "{\"used\":" ++ Nat.show(used) ++ ",\"left\":" ++ Nat.show(left) ++ ",\"execution\":" ++ Nat.show(execution) ++ ",\"state\":" ++ R.word(state) ++ "}"
+    case Tx.Gas{used,left,execution,state}:
+      "{\"used\":" ++ R.word(used) ++ ",\"left\":" ++ R.word(left) ++ ",\"execution\":" ++ R.word(execution) ++ ",\"state\":" ++ R.word(state) ++ "}"
 
 def completed(result: Tx.Completion) -> IO(Unit):
   match result:
     case Tx.Incomplete{}: IO.print("{\"status\":\"host_error\",\"reason\":\"incomplete_execution\"}")
-    case Tx.Completed{engine,gas}:
+    case Tx.Completed{engine,gas,reservoir}:
       IO.print("{\"status\":\"executed\",\"frame\":" ++ R.engine(engine) ++ ",\"transaction_gas\":" ++ render_gas(gas) ++ "}")
 
 def prepared(result: Tx.Preparation) -> IO(Unit):
   match result:
     case Tx.Rejected{reason}: IO.print("{\"status\":\"rejected\",\"reason\":" ++ U32.show(reason) ++ "}")
-    case Tx.Prepared{engine,metadata}:
+    case Tx.Prepared{engine,metadata,gas,+escrow}:
       do IO<Unit>:
-        terminal : M.Engine <- Run.execute(engine)
-        completed(Tx.finish(metadata,terminal))
+        terminal : M.Engine <- Tx.execute(engine,escrow)
+        completed(Tx.finish(metadata,gas,escrow,terminal))
 
-def priced(price: +Maybe<W.Word>,tx: T.Transaction,world: M.World,context: M.Context) -> IO(Unit):
+def priced(price: +Maybe<W.Word>,tx: Tx.Transaction,world: M.World,context: M.Context) -> IO(Unit):
   match price:
     case None{}: IO.print("{\"status\":\"host_error\",\"reason\":\"blob_price_representation_limit\"}")
     case Some{price}: prepared(Tx.prepare(tx,world,M.Context.set_blobbasefee(context,price)))

@@ -3,6 +3,7 @@
 import argparse,json,os,pathlib,subprocess,sys,tempfile
 ROOT=pathlib.Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import evm
+from rejection_mapping import rejection_exception
 ORACLE=ROOT/'revm-adapter/target/debug/revm-adapter'
 ENVELOPE=ROOT/'envelope-host/target/debug/evm-bend-envelope'
 class Unsupported(Exception):pass
@@ -29,7 +30,7 @@ def encode_accounts(pre):
 def encode_transaction(t, verified_authorities=None):
  if not t.get('sender'):raise Unsupported('sender_signature_recovery_not_yet_integrated')
  gas=evm.number(t['gasLimit'])
- if gas<0 or gas>=1<<48:raise Unsupported('gas_exceeds_current_Bend_Nat_representation')
+ if gas<0 or gas>=1<<256:raise Unsupported('gas_exceeds_Word_representation')
  if t.get('type') is not None:kind=evm.number(t['type'])
  else:kind=4 if 'authorizationList' in t else 3 if 'maxFeePerBlobGas' in t or 'blobVersionedHashes' in t else 2 if 'maxFeePerGas' in t else 1 if t.get('accessList') is not None else 0
  if not 0<=kind<=255:raise Unsupported('transaction_type_outside_wire_byte')
@@ -49,7 +50,7 @@ def encode_transaction(t, verified_authorities=None):
  chain=t.get('chainId')
  if chain is None and kind>0:chain=1
  to=t.get('to') or None
- return bytes([kind])+evm.word(t['sender'])+evm.word(t.get('nonce',0))+gas.to_bytes(6,'big')+optional(to)+evm.word(t.get('value',0))+evm.blob(t.get('data','0x'))+optional(chain)+evm.word(fee)+evm.word(tip)+evm.word(t.get('maxFeePerBlobGas',0))+evm.words(t.get('blobVersionedHashes',[]))+access+evm.count(len(auth))+b''.join(auth)
+ return bytes([kind])+evm.word(t['sender'])+evm.word(t.get('nonce',0))+evm.word(gas)+optional(to)+evm.word(t.get('value',0))+evm.blob(t.get('data','0x'))+optional(chain)+evm.word(fee)+evm.word(tip)+evm.word(t.get('maxFeePerBlobGas',0))+evm.words(t.get('blobVersionedHashes',[]))+access+evm.count(len(auth))+b''.join(auth)
 
 def execute(request,backend='native',timeout=120):
  if request.get('format')!='state_test':raise Unsupported('Bend_entrypoint_for_'+str(request.get('format'))+'_not_yet_integrated')
@@ -81,15 +82,16 @@ def execute(request,backend='native',timeout=120):
   raw=json.loads(p.stdout)
  if raw['status']=='host_error':return raw
  if raw['status']=='rejected':
-  # Preserve precise validation reason; canonical EEST mapping is integrated
-  # alongside transaction validation, never accept an arbitrary rejection.
-  return dict(status='unsupported',reason='EEST_rejection_mapping_pending',bend_reason=raw['reason'])
+  try:exception=rejection_exception(raw['reason'])
+  except KeyError:return dict(status='unsupported',reason='unmapped_Bend_rejection',bend_reason=raw['reason'])
+  roots=crypto(dict(mode='commitment',alloc=request['pre'],logs=[]))
+  return dict(status='rejected',exception=exception,bend_reason=raw['reason'],state_root=roots['state_root'],logs_hash=roots['logs_hash'],post_state=request['pre'],output='0x',logs=[])
  if raw['status']!='executed':raise ValueError('unknown Bend transaction status')
  frame=evm.normalize(raw['frame']);alloc={}
  for a,x in frame['accounts'].items():
   if x['exists']:alloc[a]=dict(nonce=x['nonce'],balance=x['balance'],code=x['code'],storage={k:v for k,v in x['storage'].items() if evm.number(v)})
  roots=crypto(dict(mode='commitment',alloc=alloc,logs=frame['logs']))
- return dict(status='executed',exception=None,state_root=roots['state_root'],logs_hash=roots['logs_hash'],post_state=alloc,output=frame['output'],logs=frame['logs'],gas=raw['transaction_gas'],frame_status=frame['status'])
+ return dict(status='executed',exception=None,state_root=roots['state_root'],logs_hash=roots['logs_hash'],post_state=alloc,output=frame['output'],logs=frame['logs'],gas={k:evm.integer(v) for k,v in raw['transaction_gas'].items()},frame_status=frame['status'])
 
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--backend',choices=['native','js'],default='native');ap.add_argument('--timeout',type=float,default=120);a=ap.parse_args()

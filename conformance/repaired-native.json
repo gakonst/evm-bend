@@ -1,0 +1,146 @@
+[
+  {
+    "id": "tests/ported_static/stMemoryTest/test_buffer.py::test_buffer[fork_Amsterdam-state_test-fail118]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.217212917006691
+  },
+  {
+    "id": "tests/ported_static/stMemoryTest/test_buffer.py::test_buffer[fork_Amsterdam-state_test-fail108]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.20997984700079542
+  },
+  {
+    "id": "tests/amsterdam/eip8024_dupn_swapn_exchange/test_exchange.py::test_endofcode_behavior[fork_Amsterdam-state_test]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.11608587400405668
+  },
+  {
+    "id": "tests/ported_static/stMemoryTest/test_buffer.py::test_buffer[fork_Amsterdam-state_test-fail96]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.23265291900315788
+  },
+  {
+    "id": "tests/ported_static/stMemoryTest/test_buffer.py::test_buffer[fork_Amsterdam-state_test-fail74]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.24632070699590258
+  },
+  {
+    "id": "tests/amsterdam/eip8024_dupn_swapn_exchange/test_eip_vectors.py::test_eip_vector_jump_over_invalid_dupn[fork_Amsterdam-state_test]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.08356842400098685
+  },
+  {
+    "id": "tests/ported_static/stMemoryTest/test_buffer.py::test_buffer[fork_Amsterdam-state_test-fail109]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.26092298900766764
+  },
+  {
+    "id": "tests/ported_static/stMemoryTest/test_buffer.py::test_buffer[fork_Amsterdam-state_test-fail36]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.22718231700127944
+  },
+  {
+    "id": "tests/amsterdam/eip8024_dupn_swapn_exchange/test_eip_vectors.py::test_vector_push_in_immediate_masks_jumpdest[fork_Amsterdam-state_test-opcode_SWAPN]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.12316416201065294
+  },
+  {
+    "id": "tests/amsterdam/eip8024_dupn_swapn_exchange/test_eip_vectors.py::test_eip_vector_end_of_code[fork_Amsterdam-state_test-swapn]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.08801218599546701
+  },
+  {
+    "id": "tests/ported_static/stMemoryTest/test_buffer.py::test_buffer[fork_Amsterdam-state_test-fail85]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.25371479699970223
+  },
+  {
+    "id": "tests/amsterdam/eip8024_dupn_swapn_exchange/test_dupn.py::test_endofcode_behavior[fork_Amsterdam-state_test]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.0990352529915981
+  },
+  {
+    "id": "tests/ported_static/stMemoryTest/test_buffer.py::test_buffer[fork_Amsterdam-state_test-fail107]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.22978979599429294
+  },
+  {
+    "id": "tests/ported_static/stMemoryTest/test_buffer.py::test_buffer[fork_Amsterdam-state_test-fail84]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.21768445400812197
+  },
+  {
+    "id": "tests/ported_static/stMemoryTest/test_buffer.py::test_buffer[fork_Amsterdam-state_test-fail86]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.26605228400148917
+  },
+  {
+    "id": "tests/amsterdam/eip8024_dupn_swapn_exchange/test_eip_vectors.py::test_eip_vector_end_of_code[fork_Amsterdam-state_test-exchange]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.09675829000480007
+  },
+  {
+    "id": "tests/amsterdam/eip8024_dupn_swapn_exchange/test_swapn.py::test_swapn_jump_to_immediate_byte_0x5b_succeeds[fork_Amsterdam-state_test]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.11361572898749728
+  },
+  {
+    "id": "tests/ported_static/stMemoryTest/test_buffer.py::test_buffer[fork_Amsterdam-state_test-fail75]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.2626460239989683
+  },
+  {
+    "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_jumpdest_in_immediate[fork_Amsterdam-state_test-swapn_immediate_accepted]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.2571403819893021
+  },
+  {
+    "id": "tests/ported_static/stMemoryTest/test_buffer.py::test_buffer[fork_Amsterdam-state_test-fail95]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.22820064700499643
+  },
+  {
+    "id": "tests/amsterdam/eip8024_dupn_swapn_exchange/test_eip_vectors.py::test_vector_push_in_immediate_masks_jumpdest[fork_Amsterdam-state_test-opcode_EXCHANGE]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.10161223700561095
+  },
+  {
+    "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_jumpdest_in_immediate[fork_Amsterdam-state_test-dupn_immediate_accepted]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.2706346030026907
+  },
+  {
+    "id": "tests/amsterdam/eip8024_dupn_swapn_exchange/test_exchange.py::test_exchange_jump_to_immediate_byte[fork_Amsterdam-state_test-imm_0x5b]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.12234391499077901
+  },
+  {
+    "id": "tests/ported_static/stMemoryTest/test_buffer.py::test_buffer[fork_Amsterdam-state_test-fail76]",
+    "status": "pass",
+    "errors": [],
+    "seconds": 0.2938414150121389
+  }
+]
