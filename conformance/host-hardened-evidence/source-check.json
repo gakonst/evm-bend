@@ -1,0 +1,10 @@
+{
+  "execution_source_commit": "a4e6187de6c0c0736534301973c23310acde68cc",
+  "execution_source_tree": "a652b6e337da8a6fe3ce00655283597a79123cb3",
+  "tracked_files_checked": 267,
+  "implementation_source_matches_public_tree": true,
+  "nonimplementation_difference": [
+    "tests-results.json"
+  ],
+  "note": "Existing local regression-result file differs; excluded from this publication. All other 266 public files match Git blob hashes."
+}

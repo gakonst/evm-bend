@@ -4,7 +4,7 @@ Signed-byte requests no longer require redundant transaction metadata. Signed fi
 
 Verified: 8 fixture-backed bridge tests and 11 runner tests pass. The exhaustive serialization/context audit checked 15,918 contexts and 15,898 decoded transactions, including both accepted gas values above Nat48; 7,329 authorizations were preserved, including 21 unrecoverable signatures. All 20 wire rejection commitments and 933 expected-rejection prestate commitments match. Zero unexpected bridge mismatches or host limits. These are bridge checks, not EVM execution passes.
 
-The previous native and JS execution runs each passed 15,918/15,918 at commit 35db6bfb7464a12a8013f5ce61dde6876813be91. The adapter change invalidates reuse of that fingerprint for current source. Fresh execution gates are pending; remaining execution failures are not yet known. No binaries or Bend source changed.
+The previous native and JS execution runs each passed 15,918/15,918 at commit 35db6bfb7464a12a8013f5ce61dde6876813be91. The adapter change invalidates reuse of that fingerprint for current source. Fresh native execution now passes all 15,918 fixtures in 462.06 seconds, with zero failures, skips, unsupported cases or host errors. Independent verification confirmed exact unique inventory coverage, fixture hashes, all post commitments, current fingerprint and unchanged source/binary manifest. See native-host-hardened-summary.json. The fresh JavaScript gate is running; its final outcome remains pending. No binaries or Bend source changed.
 
 ```sh
 python3 -m unittest discover -s conformance -p test_host_bridge.py -v
