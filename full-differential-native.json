@@ -1,6 +1,6 @@
 {
   "backend": "native",
-  "cases": 616,
+  "cases": 624,
   "failures": [],
-  "seconds": 17.346107006072998
+  "seconds": 3.2938644886016846
 }

@@ -1,0 +1,78 @@
+{
+  "cases_per_backend": 6,
+  "results": [
+    {
+      "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_jumpdest_in_immediate[fork_Amsterdam-state_test-push1_data_rejected]",
+      "backend": "native",
+      "status": "pass",
+      "seconds": 0.16792235799948685
+    },
+    {
+      "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_jumpdest_in_immediate[fork_Amsterdam-state_test-swapn_immediate_accepted]",
+      "backend": "native",
+      "status": "pass",
+      "seconds": 0.16884691099403426
+    },
+    {
+      "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_jumpdest_in_immediate[fork_Amsterdam-state_test-dupn_immediate_accepted]",
+      "backend": "native",
+      "status": "pass",
+      "seconds": 0.1619379339972511
+    },
+    {
+      "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_high_jumpdest[fork_Amsterdam-state_test-valid_high_jumpdest]",
+      "backend": "native",
+      "status": "pass",
+      "seconds": 0.18663546501193196
+    },
+    {
+      "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_high_jumpdest[fork_Amsterdam-state_test-invalid_high_dest]",
+      "backend": "native",
+      "status": "pass",
+      "seconds": 0.15986048799823038
+    },
+    {
+      "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_jumpdest_in_immediate[fork_Amsterdam-state_test-exchange_immediate_accepted]",
+      "backend": "native",
+      "status": "pass",
+      "seconds": 0.16389120600069873
+    },
+    {
+      "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_jumpdest_in_immediate[fork_Amsterdam-state_test-push1_data_rejected]",
+      "backend": "js",
+      "status": "pass",
+      "seconds": 0.6750317450059811
+    },
+    {
+      "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_jumpdest_in_immediate[fork_Amsterdam-state_test-swapn_immediate_accepted]",
+      "backend": "js",
+      "status": "pass",
+      "seconds": 0.6039841859892476
+    },
+    {
+      "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_jumpdest_in_immediate[fork_Amsterdam-state_test-dupn_immediate_accepted]",
+      "backend": "js",
+      "status": "pass",
+      "seconds": 0.5934226469980786
+    },
+    {
+      "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_high_jumpdest[fork_Amsterdam-state_test-valid_high_jumpdest]",
+      "backend": "js",
+      "status": "pass",
+      "seconds": 0.580904829010251
+    },
+    {
+      "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_high_jumpdest[fork_Amsterdam-state_test-invalid_high_dest]",
+      "backend": "js",
+      "status": "pass",
+      "seconds": 0.5829034630005481
+    },
+    {
+      "id": "tests/amsterdam/eip7954_increase_max_contract_size/test_max_code_size.py::test_max_code_size_jumpdest_in_immediate[fork_Amsterdam-state_test-exchange_immediate_accepted]",
+      "backend": "js",
+      "status": "pass",
+      "seconds": 0.6048798489937326
+    }
+  ],
+  "source_sha256": "8a32e2055be2fdf3a88a5f535f77f0af686096cb617c4fbdbad4b687531c8512"
+}

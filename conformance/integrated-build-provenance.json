@@ -1,6 +1,6 @@
 {
-  "source_workspace": "/srv/nanocodex/workspace/evm-bend-large-fix",
-  "method": "Observed fresh builds after comparison and code-empty repairs; shared source snapshot verified unchanged before and after build and before copying binaries",
+  "method": "Fresh combined builds; source manifest checked unchanged after builds and exact shared-source equality verified at integration",
+  "source_workspace": "/srv/nanocodex/workspace/evm-bend-js-stack-fix",
   "sha256": {
     "gas.bend": "14a814b1d2422769861861457edc0d8a8d2283ab048aab51e23f0b54b75034e1",
     "LAWS.bend": "2fa91f1c0d9b754350a42af55c7bdc7b0603c6dfe5f7916dbaddba498b9176f4",
@@ -32,7 +32,7 @@
     "tests-batch-12.bend": "ee20fd724aadf79c48bef9dc42aa2b14132089527d09288db96d4e5521ac905d",
     "tests-batch-13.bend": "6ad2589e6fda7d7d463425db5d380c53d872e55bab6c37b330c5afdb4402a3fd",
     "tests-batch-14.bend": "17561aab377c62e37eb3a68593962b5c095a1b8df937b9477f0401e3ac848028",
-    "word-ops.bend": "7af1742deefd14339996bb33be0521b6786f64a47e2a5a2df44b5f60d9798b1e",
+    "word-ops.bend": "27e790ae2751a9f0bd60643dec824498fdcc82efba727454e2292e88cf84354c",
     "word-ops-tests-generated.bend": "724245dc9c82dafbfa1faceb52b50735adc1d2e64d03fdbe017808542fba9ee4",
     "evmword.bend": "8987ddf34485adda084d9c0e3125cd9aadeee100014df0b6f9734a90c2f1d4f7",
     "full/model.bend": "99c78a65f36a3b3388e29327092c864149f5496f7cdaf0abfb9c97a2f14e0446",
@@ -61,7 +61,7 @@
     "full/world-tests.bend": "33a9d37556494a21fdc9bcb2e3808f54a48a7fd9ba760c3deb3df71dec7fc4ce",
     "full/call-common.bend": "21ce62bbc9ce9d8046cdc61c9992b4fbeef17fe948e26f7a64bc639a67178574",
     "full/opcode-stack.bend": "6c10c415292ba3b8a9d5626545e00d1ca92ee82d26c16245b22db180cb5cbc47",
-    "full/opcode-common.bend": "ffeeb4f3f78ae95a030ddfab63cef9456a0daf9aa16b8ccf974518fb73b6e1f8",
+    "full/opcode-common.bend": "8a32e2055be2fdf3a88a5f535f77f0af686096cb617c4fbdbad4b687531c8512",
     "full/call-enter.bend": "007409e1db7966d8453f14ba57f49089e03ca3d4a76de6618d65e64a386e72e7",
     "full/vm.bend": "6fd0a5c6a07796436161a8e71dc32cf0a448b7606e97fcc71b0f8a2e0cb5efed",
     "full/opcode-tests.bend": "f5b0ca0e48cc21a3bbac44e9f7a81ac3c020c1652eee221a30ff797e755bfbb0",
@@ -82,14 +82,16 @@
     "full/large-regression.bend": "8713d16044954b221468ea6b52f6f4114c11b5d84c34f9a9ef38e7fcb6e971e2",
     "full/large-memory-cost-tests.bend": "d8a43d068f53d29f9b98ce3e8d9bd793f0fb41cc71e7b051564559a20950cd5a",
     "full/large-warm-tests.bend": "de041d18a990bc294365fa9d3f94e08a152fe4e8e509e5897210688b193b44d3",
-    "evm-transaction-native": "58a65f4745d9d33035ab3dd7f8a9d0be13d1063ffd1c4dd80f2cc7367ad402a1",
-    "evm-transaction.js": "cc2c958343c17de28e82dd760869ed54fbe1ea2570ecbf11c097893a0ef10f32",
-    "evm-native": "54a1431789c4c7472f73a2920f296b2ba6632374b1fbbc02b451c69ccb44bfd5",
-    "evm-full.js": "c979431988064fbae1b61ef766ea4982b29ca01d51387f2ca233186592c3412e",
     "full/precompile.c": "2a31cb6a4aaf512b0ce095555b9a9b3787a2843c585c224d310c27b10fa69ff9",
     "full/precompile.js": "ac3a5c3214e2368c585a06f7211098eccb4e09650590922fb6779eb57c2038f6",
+    "evm-transaction-native": "c2aff86978bd4a3298ec804e6d5acca78a91d0155c486a137779e329e6c24d2c",
+    "evm-transaction.js": "d47931435ed0af178168f9d1a98acf2ff605ed7b59cd504bfc7db6755f6c88bf",
+    "evm-native": "a8b08aa187f617313f8516bf6051ef0854bdaaaa20668924d4346f7e617777c0",
+    "evm-full.js": "92cc5ec55831e35dcdaff1d9ac86b48953853e2fd79c59e3e8dcff6a0ffc44a7",
     "bend-local.sh": "b6043e6038babe1b36bfeea548920d9d1593f0e723e2568330995e1262d6745f",
     "toolchain-debug/main.ts": "2a8c6fafcd855feec524cdc62a6f2411c430f0b7c93b875d72dfb022234191e7",
+    "toolchain-debug/base.bend": "b2d53bbd83639c3ae27260b318efa09de9df6006a556ac6ef41c104ea164917a",
+    "toolchain-debug/bend.ts": "fe3c2b0b306fccbe44efec349d8f339b6efdaceb090b3d3049c74a1a6015c859",
     "toolchain-debug/comp.ts": "1e4e750fb70d14a896ef4ebe44726dd3fe2d0bd4a924c93842bf0365cc451728"
   }
 }

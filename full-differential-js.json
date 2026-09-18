@@ -1,6 +1,6 @@
 {
   "backend": "js",
-  "cases": 616,
+  "cases": 624,
   "failures": [],
-  "seconds": 79.51693844795227
+  "seconds": 55.67855644226074
 }

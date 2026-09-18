@@ -3,26 +3,16 @@
   "quick": false,
   "seed": 256,
   "backends": {
-    "js": 6733,
-    "native": 6733
+    "js": {
+      "start": 0,
+      "end": 6733,
+      "passed": 6733
+    },
+    "native": {
+      "start": 0,
+      "end": 6733,
+      "passed": 6733
+    }
   },
-  "evidence": {
-    "js": "word-ops-full.log",
-    "native": [
-      {
-        "file": "word-ops-full.log",
-        "range": [
-          0,
-          2496
-        ]
-      },
-      {
-        "file": "word-ops-resume.log",
-        "range": [
-          2496,
-          6733
-        ]
-      }
-    ]
-  }
+  "word_ops_sha256": "27e790ae2751a9f0bd60643dec824498fdcc82efba727454e2292e88cf84354c"
 }

@@ -1,6 +1,8 @@
 # Pinned Amsterdam state gate
 
-Native: **15,918 / 15,918 passed**, zero failed, blocked, skipped, or host-error cases. The fresh run completed in 902 seconds and verified its implementation fingerprint was unchanged. The full JavaScript gate is running; no complete JavaScript pass is claimed yet.
+Current native: **15,918 / 15,918 passed**, zero failed, blocked, skipped, or host-error cases. The fresh combined-source run completed in 391 seconds and verified that its implementation fingerprint was unchanged. The fresh full JavaScript gate is running; no complete JavaScript pass is claimed yet.
+
+The previous JavaScript run exposed four host stack overflows in maximum-size jump-destination scans. The scan is now tail-recursive, preserving PUSH-data exclusion and EIP-8024 immediate semantics. All six related fixtures pass on both backends. The combined source also includes exact EXP early termination, checked by all 6,733 arithmetic cases and 320 extra EXP vectors per backend.
 
 The immediate scope is the 15,918 state fixtures in `tests-glamsterdam-devnet@v8.1.4`, pinned to execution-specs `7341820b5b394b1934dfe7bb6f621fcdab7baf7f`. The broader inventory contains 40,911 required state, blockchain, and transaction fixtures; the additional formats remain unfinished. Passing tests is not a formal correctness proof.
 

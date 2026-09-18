@@ -118,14 +118,18 @@ def slice(+offset: W.Word,count: Nat,+bytes: +List<U32>) -> +List<U32>:
 def width(+op: U32) -> Nat:
   choose(Bool.and(U32.is_ge(op,96),U32.is_le(op,127)),U32.to_nat(U32.sub(op,94)),1n)
 
-def jump_scan(code: +List<U32>,+target: Nat,+pc: Nat,skip: Nat) -> Bool:
+# Tail recursion keeps maximum-size code scans off the JavaScript call stack.
+def jump_scan_go(code: +List<U32>,+target: Nat,+pc: Nat,skip: Nat,hit: Bool) -> Bool:
   match code:
     case Nil{}: False{}
     case Con{+op,rest}:
-      match skip:
-        case 0n:
-          Bool.or(Bool.and(Nat.is_eq(pc,target),U32.is_eq(op,91)),jump_scan(rest,target,1n+pc,Nat.sub(width(op),1n)))
-        case 1n+p: jump_scan(rest,target,1n+pc,p)
+      match skip hit:
+        case 0n True{}: U32.is_eq(op,91)
+        case 0n False{}: jump_scan_go(rest,target,1n+pc,Nat.sub(width(op),1n),Nat.is_eq(1n+pc,target))
+        case 1n+p found: jump_scan_go(rest,target,1n+pc,p,Nat.is_eq(1n+pc,target))
+
+def jump_scan(code: +List<U32>,+target: Nat,+pc: Nat,skip: Nat) -> Bool:
+  jump_scan_go(code,target,pc,skip,Nat.is_eq(pc,target))
 
 def jumpok(ok: Bool,f: M.Frame,target: W.Word) -> M.Frame:
   match ok:

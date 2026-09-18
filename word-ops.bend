@@ -188,17 +188,42 @@ def mulmod_if(a: L.Word,b: L.Word,m: L.Word,z: Bool) -> L.Word:
 def mulmod(a: L.Word,b: L.Word,+m: L.Word) -> L.Word:
   mulmod_if(a,b,m,L.is_zero(m))
 
-# Exponentiation by squaring consumes the exponent's 256 bits.
-def exp_go(n: Nat,e: Word(n),+base: L.Word,acc: L.Word) -> L.Word:
+# Exponentiation is modulo 2^256. Check the exponent first so 0^0 is 1.
+def exp_zero(n: Nat,e: Word(n)) -> Bool:
   match n:
     case 0n:
-      acc
+      True{}
     case 1n+p:
       match e:
         case WCon{False{},tail}:
-          exp_go(p,tail,mul(base,base),acc)
+          exp_zero(p,tail)
         case WCon{True{},tail}:
-          exp_go(p,tail,mul(base,base),mul(acc,base))
+          False{}
+
+def exp_stop(ezero: Bool,bzero: Bool,acc: L.Word,next: Unit -> L.Word) -> L.Word:
+  match ezero:
+    case True{}:
+      acc
+    case False{}:
+      match bzero:
+        case True{}:
+          L.zero()
+        case False{}:
+          next(Unit{})
+
+# The original structurally decreasing 256-bit bound is retained.
+def exp_go(n: Nat,+e: Word(n),+base: L.Word,+acc: L.Word) -> L.Word:
+  match n:
+    case 0n:
+      acc
+    case 1n++p:
+      match e:
+        case WCon{False{},+tail}:
+          exp_stop(exp_zero(p,tail),L.is_zero(base),acc,
+            u => exp_go(p,tail,mul(base,base),acc))
+        case WCon{True{},tail}:
+          exp_stop(False{},L.is_zero(base),acc,
+            u => exp_go(p,tail,mul(base,base),mul(acc,base)))
 
 def exp(base: L.Word,exponent: L.Word) -> L.Word:
   exp_go(256n,bits(exponent),base,L.from_u32(1))

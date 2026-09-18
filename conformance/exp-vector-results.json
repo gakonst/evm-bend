@@ -1,0 +1,17 @@
+{
+  "cases": 320,
+  "quick": false,
+  "seed": 612256,
+  "backends": {
+    "js": {
+      "start": 0,
+      "end": 320,
+      "passed": 320
+    },
+    "native": {
+      "start": 0,
+      "end": 320,
+      "passed": 320
+    }
+  }
+}
