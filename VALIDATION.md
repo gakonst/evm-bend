@@ -1,5 +1,7 @@
 # Validation record
 
+> Host-bridge hardening update: the adapter has changed since the complete runs below. Eight fixture-backed bridge tests and 11 runner tests pass; the exhaustive bridge audit reports zero mismatches or host limits. Fresh full native and JS execution gates are pending for this new fingerprint. Prior 15,918/15,918 results remain valid only for their recorded implementation. See conformance/HOST-BRIDGE-PROGRESS.md (HOST-BRIDGE-PROGRESS.md within conformance).
+
 This is execution evidence for the pinned Amsterdam interpreter, not a correctness proof.
 
 | Suite | Completed evidence |

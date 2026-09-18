@@ -1,5 +1,7 @@
 # Goal: 100% passing EVM on Bend
 
+> Host-bridge hardening update: the adapter has changed since the complete runs below. Eight fixture-backed bridge tests and 11 runner tests pass; the exhaustive bridge audit reports zero mismatches or host limits. Fresh full native and JS execution gates are pending for this new fingerprint. Prior 15,918/15,918 results remain valid only for their recorded implementation. See conformance/HOST-BRIDGE-PROGRESS.md (HOST-BRIDGE-PROGRESS.md within conformance).
+
 The user's standing completion criterion is complete EVM conformance in Bend, targeting the pinned latest Amsterdam/Glamsterdam execution specification. Passing selected differential cases is a milestone, not completion.
 
 Completion requires:

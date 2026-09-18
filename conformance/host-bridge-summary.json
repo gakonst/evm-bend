@@ -1,0 +1,32 @@
+{
+  "scope": "wire serialization/context/commitment only; no EVM semantic execution",
+  "state_cases": 15918,
+  "unique_signed_bytes": 14281,
+  "counts": {
+    "context_lossless_serialization": 15918,
+    "decoded_tx_lossless_serialization": 15898,
+    "authorizations": 7329,
+    "unrecoverable_authorizations": 21,
+    "genuine_wire_error_prestate_commitment_verified": 20,
+    "expected_rejection_prestate_commitment_verified": 933
+  },
+  "failures": [],
+  "host_limit_cases": [],
+  "environment_keys": {
+    "currentCoinbase": 15918,
+    "currentGasLimit": 15918,
+    "currentNumber": 15918,
+    "currentTimestamp": 15918,
+    "currentRandom": 15918,
+    "currentDifficulty": 15918,
+    "currentBaseFee": 15918,
+    "currentExcessBlobGas": 15918,
+    "slotNumber": 15918
+  },
+  "unique_pre_allocations_lossless": 6098,
+  "seconds": 3.506644633001997,
+  "bridge_tests_passed": 8,
+  "runner_tests_passed": 11,
+  "execution_gate_status": "pending fresh native and JS gates after adapter change",
+  "previous_complete_commit": "35db6bfb7464a12a8013f5ce61dde6876813be91"
+}

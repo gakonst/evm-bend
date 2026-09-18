@@ -1,5 +1,7 @@
 # EVM in Bend — Amsterdam
 
+> Host-bridge hardening update: the adapter has changed since the complete runs below. Eight fixture-backed bridge tests and 11 runner tests pass; the exhaustive bridge audit reports zero mismatches or host limits. Fresh full native and JS execution gates are pending for this new fingerprint. Prior 15,918/15,918 results remain valid only for their recorded implementation. See conformance/HOST-BRIDGE-PROGRESS.md (HOST-BRIDGE-PROGRESS.md within conformance).
+
 An EVM transaction and frame interpreter written in Bend 2.0.5, targeting the pinned Amsterdam execution fork of Glamsterdam. Opcode execution, 256-bit arithmetic, Keccak, memory, account/storage journals, nested calls, creation and gas accounting are Bend. Standard cryptographic precompiles use an explicit Rust host adapter backed by evm2. Python only serializes JSON/binary inputs and normalizes output.
 
 This is a correctness-first experimental implementation, **not an end-to-end proved EVM or a production client**. The earlier Shanghai subset and its laws remain regression material; `full/main.bend` is the current interpreter.

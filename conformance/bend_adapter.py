@@ -8,6 +8,46 @@ ORACLE=ROOT/'revm-adapter/target/debug/revm-adapter'
 ENVELOPE=ROOT/'envelope-host/target/debug/evm-bend-envelope'
 class Unsupported(Exception):pass
 
+# Only the pinned envelope decoder's structural/cryptographic vocabulary may
+# produce a transaction rejection here. Semantic Bend errors are mapped later.
+WIRE_CRYPTO_EXCEPTIONS=frozenset('TransactionException.'+name for name in (
+ 'TYPE_NOT_SUPPORTED','ADDRESS_TOO_SHORT','ADDRESS_TOO_LONG',
+ 'NONCE_OVERFLOW','GASLIMIT_OVERFLOW','VALUE_OVERFLOW','INVALID_CHAINID',
+ 'INVALID_SIGNATURE_VRS','EC_RECOVERY_FAIL',
+ 'RLP_INVALID_SIGNATURE_R','RLP_INVALID_SIGNATURE_S',
+ 'RLP_LEADING_ZEROS_GASLIMIT','RLP_LEADING_ZEROS_GASPRICE',
+ 'RLP_LEADING_ZEROS_VALUE','RLP_LEADING_ZEROS_NONCE','RLP_LEADING_ZEROS_R',
+ 'RLP_LEADING_ZEROS_S','RLP_LEADING_ZEROS_V','RLP_LEADING_ZEROS_BASEFEE',
+ 'RLP_LEADING_ZEROS_PRIORITY_FEE','RLP_LEADING_ZEROS_DATA_SIZE',
+ 'RLP_LEADING_ZEROS_NONCE_SIZE','RLP_TOO_FEW_ELEMENTS','RLP_TOO_MANY_ELEMENTS',
+ 'RLP_ERROR_EOF','RLP_ERROR_SIZE','RLP_ERROR_SIZE_LEADING_ZEROS',
+ 'RLP_INVALID_DATA','RLP_INVALID_GASLIMIT','RLP_INVALID_NONCE','RLP_INVALID_TO',
+ 'RLP_INVALID_ACCESS_LIST_ADDRESS_TOO_LONG','RLP_INVALID_ACCESS_LIST_ADDRESS_TOO_SHORT',
+ 'RLP_INVALID_ACCESS_LIST_STORAGE_TOO_LONG','RLP_INVALID_ACCESS_LIST_STORAGE_TOO_SHORT',
+ 'RLP_INVALID_HEADER','RLP_INVALID_VALUE',
+ 'TYPE_4_INVALID_AUTHORITY_SIGNATURE','TYPE_4_INVALID_AUTHORITY_SIGNATURE_S_TOO_HIGH',
+ 'TYPE_4_INVALID_AUTHORIZATION_FORMAT',
+))
+
+def signed_authorities(transaction):
+ # Missing recovery data is a broken host contract, not a failed signature.
+ # Only an explicit null returned by crypto recovery means unrecoverable.
+ recovered=[]
+ authorizations=transaction['authorizationList']
+ if not isinstance(authorizations,list):raise ValueError('envelope authorizationList must be an array')
+ for authorization in authorizations:
+  authority=authorization['authority']
+  recovery_error=authorization['recoveryError']
+  if (authority is None)!=(recovery_error is not None):
+   raise ValueError('inconsistent envelope authority recovery result')
+  if authority is None:
+   if not isinstance(recovery_error,dict) or recovery_error.get('category')!='crypto' or recovery_error.get('exception') not in ('TransactionException.TYPE_4_INVALID_AUTHORITY_SIGNATURE','TransactionException.TYPE_4_INVALID_AUTHORITY_SIGNATURE_S_TOO_HIGH'):
+    raise ValueError('invalid envelope authority crypto error')
+  else:evm.address(authority)
+  recovered.append(authority)
+ return recovered
+
+
 def crypto(request):
  p=subprocess.run([str(ORACLE)],input=json.dumps(request),capture_output=True,text=True,check=True)
  r=json.loads(p.stdout)
@@ -55,18 +95,20 @@ def encode_transaction(t, verified_authorities=None):
 def execute(request,backend='native',timeout=120):
  if request.get('format')!='state_test':raise Unsupported('Bend_entrypoint_for_'+str(request.get('format'))+'_not_yet_integrated')
  if request.get('fork')!='Amsterdam':raise Unsupported('fork_not_Amsterdam')
- transaction=request['transaction'];authorities=None
+ authorities=None
  if 'txbytes' in request:
   if not ENVELOPE.exists():raise Unsupported('signed_envelope_executable_not_built')
   decoded=subprocess.run([str(ENVELOPE)],input=json.dumps(dict(mode='decode',txbytes=request['txbytes'])),capture_output=True,text=True,check=True,timeout=timeout)
   envelope=json.loads(decoded.stdout)
   if 'error' in envelope:
    error=envelope['error']
-   if error.get('category') not in ('wire','crypto') or not error.get('exception'):raise ValueError('envelope host input error: '+str(error))
+   if error.get('category') not in ('wire','crypto') or error.get('exception') not in WIRE_CRYPTO_EXCEPTIONS:raise ValueError('envelope host input error: '+str(error))
    roots=crypto(dict(mode='commitment',alloc=request['pre'],logs=[]))
    return dict(status='rejected',exception=error['exception'],state_root=roots['state_root'],logs_hash=roots['logs_hash'],post_state=request['pre'],output='0x',logs=[])
   transaction=envelope['decoded']
-  authorities=[a.get('authority') for a in transaction.get('authorizationList',[])]
+  authorities=signed_authorities(transaction)
+ else:
+  transaction=request['transaction']
  env=request['env']
  if 'currentBeaconRoot' in env or 'previousHash' in env:raise Unsupported('pre_transaction_system_calls_not_yet_integrated')
  binary=encode_context(env)+encode_accounts(request['pre'])+encode_transaction(transaction,authorities)

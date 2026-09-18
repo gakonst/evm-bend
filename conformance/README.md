@@ -1,5 +1,7 @@
 # Pinned Amsterdam state conformance
 
+> Host-bridge hardening update: the adapter has changed since the complete runs below. Eight fixture-backed bridge tests and 11 runner tests pass; the exhaustive bridge audit reports zero mismatches or host limits. Fresh full native and JS execution gates are pending for this new fingerprint. Prior 15,918/15,918 results remain valid only for their recorded implementation. See conformance/HOST-BRIDGE-PROGRESS.md (HOST-BRIDGE-PROGRESS.md within conformance).
+
 The completed gate is all **15,918 state fixtures**, passing on both native Bend and JavaScript. The full inventory also contains blockchain and standalone transaction fixtures (40,911 required cases total); those additional formats are outside this state gate and remain unfinished. See [STATE-PROGRESS.md](STATE-PROGRESS.md) for current measured results.
 
 `full_state_gate.py` executes every state fixture, compares its expected exception or success, state root, logs hash, and output when specified, and retains the full denominator. Blocked cases, host errors, timeouts, and failures never count as passes. Resume accepts only matching fixture hashes and exact implementation fingerprints. A final passing report requires all 15,918 fixtures and an unchanged fingerprint.
