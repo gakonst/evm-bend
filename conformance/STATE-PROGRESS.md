@@ -1,15 +1,18 @@
-# Pinned Amsterdam state gate
+# Pinned Amsterdam state gate: complete
 
-Current native: **15,918 / 15,918 passed**, zero failed, blocked, skipped, or host-error cases. The fresh combined-source run completed in 391 seconds and verified that its implementation fingerprint was unchanged. The fresh full JavaScript gate is running; no complete JavaScript pass is claimed yet.
+| Backend | Passed | Failed / blocked / skipped / host error | Duration |
+|---|---:|---:|---:|
+| Native | 15,918 / 15,918 | 0 | 390.65 seconds |
+| JavaScript | 15,918 / 15,918 | 0 | 1,649.77 seconds |
 
-The previous JavaScript run exposed four host stack overflows in maximum-size jump-destination scans. The scan is now tail-recursive, preserving PUSH-data exclusion and EIP-8024 immediate semantics. All six related fixtures pass on both backends. The combined source also includes exact EXP early termination, checked by all 6,733 arithmetic cases and 320 extra EXP vectors per backend.
+Both fresh complete runs verified unchanged implementation fingerprints. An independent audit confirmed every required fixture ID appears exactly once per backend, fixture hashes match the pinned inventory, all post variants pass, and current source/binary hashes match the recorded manifests. No old pass rows were reused across implementation changes.
 
-The immediate scope is the 15,918 state fixtures in `tests-glamsterdam-devnet@v8.1.4`, pinned to execution-specs `7341820b5b394b1934dfe7bb6f621fcdab7baf7f`. The broader inventory contains 40,911 required state, blockchain, and transaction fixtures; the additional formats remain unfinished. Passing tests is not a formal correctness proof.
+The corpus is `tests-glamsterdam-devnet@v8.1.4`, execution-specs commit `7341820b5b394b1934dfe7bb6f621fcdab7baf7f`, archive SHA-256 `aed315489163dc67c4e5607d7bbb8902e8329afe939be58193b125f2e81a85d4`.
 
-See [native-state-gate-summary.json](native-state-gate-summary.json) for the exact count, command, implementation fingerprint, binary hash, and journal hash, and [integrated-build-provenance.json](integrated-build-provenance.json) for source and compiler hashes.
+[Complete evidence](state-conformance-complete.json), [native summary](native-state-gate-summary.json), [JavaScript summary](js-state-gate-summary.json), and [source/compiler/binary hashes](integrated-build-provenance.json) contain exact commands and hashes. Full local journals are `state-gate-complete/native.jsonl` and `state-gate-complete/js.jsonl`; their hashes are recorded in the summaries.
 
-Execution and transaction semantics remain in Bend. The integrated repairs cover full-Word transaction gas, precise rejection facets and pinned EEST aliases, checked memory charging, missing EIP-8024 immediates and jump destinations, persistent sparse memory, immutable calldata views, stack-safe large byte processing, storage warmth as a set, constant-time code emptiness, and exact limb comparisons. The host supplies only the established crypto/wire/commitment boundaries.
+Execution and transaction semantics remain in Bend. The host supplies the established crypto, wire-decoding, and commitment boundaries. Repairs include full-Word gas accounting, precise rejection facets and pinned EEST aliases, checked memory charging, correct EIP-8024 immediates and jump destinations, persistent sparse memory, immutable calldata views, stack-safe byte handling and jump scanning, storage warmth as a set, constant-time code emptiness, exact limb comparison, and exact EXP early termination.
 
-Supplementary checks on the integrated binaries passed 624 prepared-frame differentials and 22 transaction integrations per backend. The comparison change passed 1,316 independent vectors per backend. Large byte/view/memory-cost regressions pass on both backends. The previously slow static-call fixture passes on JavaScript with exact roots and logs in 126 seconds; its earlier 120-second timeout is not counted as a pass. The full JavaScript gate uses a 3,600-second host deadline.
+Supplementary validation passes on both backends: 624 prepared-frame differentials, 22 decoded transaction integrations, 6,733 arithmetic cases, 320 extra EXP vectors, and six large jump-destination fixtures. Core proof, mutation and differential checks pass. Timeouts and host errors from superseded diagnostic runs were retained as non-passing results and repaired; they were never counted as passes.
 
-The mandatory core proof, mutation, and differential checks also pass. These supplemental suites do not replace the full state gate.
+This completes the requested state-test scope. The broader 40,911-case inventory also contains blockchain and standalone transaction formats, which remain unfinished. Passing this test corpus is not a formal correctness proof.

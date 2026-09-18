@@ -1,13 +1,13 @@
 # Pinned Amsterdam state conformance
 
-The immediate gate is all **15,918 state fixtures**, on native Bend and JavaScript. The full inventory also contains blockchain and standalone transaction fixtures (40,911 required cases total); those additional formats are outside this state gate and remain unfinished. See [STATE-PROGRESS.md](STATE-PROGRESS.md) for current measured results.
+The completed gate is all **15,918 state fixtures**, passing on both native Bend and JavaScript. The full inventory also contains blockchain and standalone transaction fixtures (40,911 required cases total); those additional formats are outside this state gate and remain unfinished. See [STATE-PROGRESS.md](STATE-PROGRESS.md) for current measured results.
 
 `full_state_gate.py` executes every state fixture, compares its expected exception or success, state root, logs hash, and output when specified, and retains the full denominator. Blocked cases, host errors, timeouts, and failures never count as passes. Resume accepts only matching fixture hashes and exact implementation fingerprints. A final passing report requires all 15,918 fixtures and an unchanged fingerprint.
 
 ```sh
 ./conformance/build_transactions.sh
-python3 conformance/full_state_gate.py --backend native --workers 12 --timeout 1200 --output state-gate-final
-python3 conformance/full_state_gate.py --backend js --workers 12 --timeout 3600 --output state-gate-final
+python3 conformance/full_state_gate.py --backend native --workers 12 --timeout 1200 --output state-gate-complete
+python3 conformance/full_state_gate.py --backend js --workers 12 --timeout 3600 --output state-gate-complete
 ```
 
 These commands require the pinned corpus and built Rust helpers described below and in the root README. The timeout is a host resource deadline, not an EVM exception. Full JavaScript execution follows the native gate.

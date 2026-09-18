@@ -10,6 +10,6 @@ Completion requires:
 - Implement missing execution or transaction-boundary behavior needed by the applicable corpus. A prepared-frame runner alone is not the completion gate.
 - Regressions, arithmetic checks and existing laws continue to pass. Keep the crypto and compiler trust boundaries explicit. Test-suite success is not an end-to-end correctness proof.
 
-Current status: NOT COMPLETE. The existing passing differential and fixture suites establish a working baseline, not full conformance.
+Current state-test scope: COMPLETE — all 15,918 pinned Amsterdam state fixtures pass on both native and JavaScript, with zero skipped or unsupported cases. The broader full-conformance goal remains unfinished because blockchain and standalone transaction formats are not yet complete. See conformance/state-conformance-complete.json for the exact state-gate evidence.
 
 Prioritize reaching this goal before major performance optimization. Preserve conformance while optimizing afterward.

@@ -1,0 +1,110 @@
+{
+  "execution_source_commit": "16888e001cc824c6014edbae330e27a565109279",
+  "scope": "All 15918 pinned Amsterdam state fixtures on native and JavaScript",
+  "release": "tests-glamsterdam-devnet@v8.1.4",
+  "execution_specs_commit": "7341820b5b394b1934dfe7bb6f621fcdab7baf7f",
+  "archive_sha256": "aed315489163dc67c4e5607d7bbb8902e8329afe939be58193b125f2e81a85d4",
+  "inventory_sha256": "75b5f8923011b13e6e51d8a24119a755386f25aa0da99279562521140f4131e4",
+  "backends": {
+    "native": {
+      "backend": "native",
+      "required": 15918,
+      "recorded": 15918,
+      "status_counts": {
+        "pass": 15918,
+        "not_run": 0
+      },
+      "implementation_sha256": "2ab730a254429cebd7577828d524f6f71f3ee280e0358de0d055348f29731cbe",
+      "implementation_unchanged": true,
+      "complete_pass": true,
+      "release": "tests-glamsterdam-devnet@v8.1.4",
+      "archive_sha256": "aed315489163dc67c4e5607d7bbb8902e8329afe939be58193b125f2e81a85d4",
+      "command": [
+        "/usr/bin/python3",
+        "/srv/nanocodex/workspace/evm-bend/conformance/bend_adapter.py",
+        "--backend",
+        "native",
+        "--timeout",
+        "1200.0"
+      ],
+      "seconds": 390.6485944099986,
+      "journal_sha256": "c1bff69aea7e50374fd42f936b0fe6a8df52d67f3cccc0bb37d70f171047a137",
+      "journal_gzip_sha256": "4f5e41346f30603830131665f367e9b1d2c8d71c8c82601171d5dd88797181ed",
+      "journal_gzip_bytes": 2491943,
+      "post_variants": 15918,
+      "transaction_binary_sha256": "c2aff86978bd4a3298ec804e6d5acca78a91d0155c486a137779e329e6c24d2c",
+      "gate_command": [
+        "python3",
+        "-u",
+        "conformance/full_state_gate.py",
+        "--backend",
+        "native",
+        "--workers",
+        "12",
+        "--timeout",
+        "1200",
+        "--output",
+        "state-gate-complete"
+      ]
+    },
+    "js": {
+      "backend": "js",
+      "required": 15918,
+      "recorded": 15918,
+      "status_counts": {
+        "pass": 15918,
+        "not_run": 0
+      },
+      "implementation_sha256": "c9ead27297302902e0e56dcb032bfea73bc2ce66964ecd8cfc5a5d78d76f6bbb",
+      "implementation_unchanged": true,
+      "complete_pass": true,
+      "release": "tests-glamsterdam-devnet@v8.1.4",
+      "archive_sha256": "aed315489163dc67c4e5607d7bbb8902e8329afe939be58193b125f2e81a85d4",
+      "command": [
+        "/usr/bin/python3",
+        "/srv/nanocodex/workspace/evm-bend/conformance/bend_adapter.py",
+        "--backend",
+        "js",
+        "--timeout",
+        "3600.0"
+      ],
+      "seconds": 1649.7701441819954,
+      "journal_sha256": "716b8f7e970db6a8d41a7a6585bcf15e797c0bbb8d0a6f4e350a595858a46818",
+      "journal_gzip_sha256": "755208766d994cac03391ae299f5148d2021f5702547e9fb4386f7828699b615",
+      "journal_gzip_bytes": 2490393,
+      "post_variants": 15918,
+      "transaction_binary_sha256": "d47931435ed0af178168f9d1a98acf2ff605ed7b59cd504bfc7db6755f6c88bf",
+      "gate_command": [
+        "python3",
+        "-u",
+        "conformance/full_state_gate.py",
+        "--backend",
+        "js",
+        "--workers",
+        "12",
+        "--timeout",
+        "3600",
+        "--output",
+        "state-gate-complete"
+      ]
+    }
+  },
+  "source_manifest": "integrated-build-provenance.json",
+  "source_manifest_sha256": "90cf212937a0a5f649d35fc1dc22514c2ae87124928c6b9c07cfbb791eb99cba",
+  "complete_pass": true,
+  "independent_audit": {
+    "all_required_ids_exactly_once": true,
+    "all_fixture_hashes_match_inventory": true,
+    "all_post_variants_pass": true,
+    "all_commitments_present": true,
+    "both_current_fingerprints_match": true,
+    "source_and_binary_manifest_matches": true
+  },
+  "supplemental": {
+    "frame_differentials_per_backend": 624,
+    "transaction_integrations_per_backend": 22,
+    "arithmetic_cases_per_backend": 6733,
+    "extra_exp_vectors_per_backend": 320,
+    "large_jumpdest_fixtures_per_backend": 6
+  }
+}

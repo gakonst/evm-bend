@@ -6,9 +6,9 @@ This is a correctness-first experimental implementation, **not an end-to-end pro
 
 ## Current status
 
-**Goal: 100% of applicable Amsterdam EVM conformance tests passing in Bend. This goal has not been reached.**
+**State-test gate complete: all 15,918 pinned Amsterdam state fixtures pass on both native and JavaScript.** There are zero skipped, blocked, failed, or host-error cases. Both fresh runs verified unchanged implementation fingerprints.
 
-The pinned official corpus contains 40,911 required state, blockchain and transaction cases. The current integration gate targets all **15,918 state fixtures on native and JavaScript**, without skipped cases or host errors counted as passes. Full native and JavaScript results are tracked in [conformance/STATE-PROGRESS.md](conformance/STATE-PROGRESS.md); the repaired source passed all 15,918 native cases and its fresh full JavaScript gate is running. Blockchain and standalone transaction execution remain unfinished. Engine/sync API fixtures are separately inventoried.
+The pinned official corpus contains 40,911 required state, blockchain and transaction cases. The complete state-fixture result is recorded in [conformance/state-conformance-complete.json](conformance/state-conformance-complete.json), with commands, source/binary hashes, journal hashes and an independent inventory audit. Blockchain and standalone transaction execution remain unfinished. Engine/sync API fixtures are separately inventoried.
 
 `full/transaction-main.bend` performs transaction preparation and settlement in Bend. Signed envelopes are decoded and cryptographically verified by the strict Rust wire/crypto helper; transaction semantics remain in Bend. Total gas is a 256-bit Word, including accepted values beyond the runtime Nat range. Expected rejections use the pinned EEST exception-matching contract. Supplementary decoded-envelope and prepared-frame regressions are rerun against the integrated source; they do not replace the official state gate.
 

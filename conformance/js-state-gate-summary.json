@@ -1,12 +1,12 @@
 {
-  "backend": "native",
+  "backend": "js",
   "required": 15918,
   "recorded": 15918,
   "status_counts": {
     "pass": 15918,
     "not_run": 0
   },
-  "implementation_sha256": "2ab730a254429cebd7577828d524f6f71f3ee280e0358de0d055348f29731cbe",
+  "implementation_sha256": "c9ead27297302902e0e56dcb032bfea73bc2ce66964ecd8cfc5a5d78d76f6bbb",
   "implementation_unchanged": true,
   "complete_pass": true,
   "release": "tests-glamsterdam-devnet@v8.1.4",
@@ -15,26 +15,26 @@
     "/usr/bin/python3",
     "/srv/nanocodex/workspace/evm-bend/conformance/bend_adapter.py",
     "--backend",
-    "native",
+    "js",
     "--timeout",
-    "1200.0"
+    "3600.0"
   ],
-  "seconds": 390.6485944099986,
-  "journal_sha256": "c1bff69aea7e50374fd42f936b0fe6a8df52d67f3cccc0bb37d70f171047a137",
-  "journal_gzip_sha256": "4f5e41346f30603830131665f367e9b1d2c8d71c8c82601171d5dd88797181ed",
-  "journal_gzip_bytes": 2491943,
+  "seconds": 1649.7701441819954,
+  "journal_sha256": "716b8f7e970db6a8d41a7a6585bcf15e797c0bbb8d0a6f4e350a595858a46818",
+  "journal_gzip_sha256": "755208766d994cac03391ae299f5148d2021f5702547e9fb4386f7828699b615",
+  "journal_gzip_bytes": 2490393,
   "post_variants": 15918,
-  "transaction_binary_sha256": "c2aff86978bd4a3298ec804e6d5acca78a91d0155c486a137779e329e6c24d2c",
+  "transaction_binary_sha256": "d47931435ed0af178168f9d1a98acf2ff605ed7b59cd504bfc7db6755f6c88bf",
   "gate_command": [
     "python3",
     "-u",
     "conformance/full_state_gate.py",
     "--backend",
-    "native",
+    "js",
     "--workers",
     "12",
     "--timeout",
-    "1200",
+    "3600",
     "--output",
     "state-gate-complete"
   ]
