@@ -1,0 +1,156 @@
+{
+  "execution_source_commit": "a4e6187de6c0c0736534301973c23310acde68cc",
+  "execution_source_tree": "a652b6e337da8a6fe3ce00655283597a79123cb3",
+  "scope": "All 15918 pinned Amsterdam state fixtures on actual Bend native then JavaScript after host-bridge hardening",
+  "release": "tests-glamsterdam-devnet@v8.1.4",
+  "execution_specs_commit": "7341820b5b394b1934dfe7bb6f621fcdab7baf7f",
+  "archive_sha256": "aed315489163dc67c4e5607d7bbb8902e8329afe939be58193b125f2e81a85d4",
+  "inventory_sha256": "75b5f8923011b13e6e51d8a24119a755386f25aa0da99279562521140f4131e4",
+  "adapter_sha256": "80dd779d577bc5cdf2d5f0e7229f7b76db235b6f9965ccf2812009e2febde8be",
+  "backends": {
+    "native": {
+      "backend": "native",
+      "required": 15918,
+      "recorded": 15918,
+      "status_counts": {
+        "pass": 15918,
+        "not_run": 0
+      },
+      "implementation_sha256": "39f12440876e9913ce0fb02f943f6a109502af8e5ad8724cb2354101f6447dbb",
+      "implementation_unchanged": true,
+      "complete_pass": true,
+      "release": "tests-glamsterdam-devnet@v8.1.4",
+      "archive_sha256": "aed315489163dc67c4e5607d7bbb8902e8329afe939be58193b125f2e81a85d4",
+      "command": [
+        "/usr/bin/python3",
+        "/srv/nanocodex/workspace/evm-bend/conformance/bend_adapter.py",
+        "--backend",
+        "native",
+        "--timeout",
+        "1200.0"
+      ],
+      "seconds": 462.0633174849936,
+      "journal_sha256": "b5f8439f92cd8099f622c2a2c244bd3d75ac6635695971054a1c2aa1d07394f6",
+      "journal_gzip_sha256": "b7ff645aafcc71699af0f4354fa9a69f856cc693a28f7ab11010ecf697e7d4fd",
+      "journal_gzip_bytes": 2491443,
+      "post_variants": 15918,
+      "actual_status_counts": {
+        "rejected": 933,
+        "executed": 14985
+      },
+      "source_manifest_sha256": "90cf212937a0a5f649d35fc1dc22514c2ae87124928c6b9c07cfbb791eb99cba",
+      "adapter_sha256": "80dd779d577bc5cdf2d5f0e7229f7b76db235b6f9965ccf2812009e2febde8be",
+      "inventory_sha256": "75b5f8923011b13e6e51d8a24119a755386f25aa0da99279562521140f4131e4",
+      "transaction_binary_sha256": "c2aff86978bd4a3298ec804e6d5acca78a91d0155c486a137779e329e6c24d2c",
+      "gate_command": [
+        "python3",
+        "-u",
+        "conformance/full_state_gate.py",
+        "--backend",
+        "native",
+        "--workers",
+        "12",
+        "--timeout",
+        "1200",
+        "--output",
+        "state-gate-host-hardened"
+      ],
+      "independent_audit": {
+        "all_required_ids_exactly_once": true,
+        "all_fixture_hashes_match_inventory": true,
+        "all_post_variants_recompared": true,
+        "all_commitments_present": true,
+        "current_fingerprint_matches": true,
+        "source_and_binary_manifest_matches": true
+      }
+    },
+    "js": {
+      "backend": "js",
+      "required": 15918,
+      "recorded": 15918,
+      "status_counts": {
+        "pass": 15918,
+        "not_run": 0
+      },
+      "implementation_sha256": "a4aa7fc2893c90c0e7f23f06421b7bfe46f7a902a2ea7e123f83a7e3814c1084",
+      "implementation_unchanged": true,
+      "complete_pass": true,
+      "release": "tests-glamsterdam-devnet@v8.1.4",
+      "archive_sha256": "aed315489163dc67c4e5607d7bbb8902e8329afe939be58193b125f2e81a85d4",
+      "command": [
+        "/usr/bin/python3",
+        "/srv/nanocodex/workspace/evm-bend/conformance/bend_adapter.py",
+        "--backend",
+        "js",
+        "--timeout",
+        "3600.0"
+      ],
+      "seconds": 1905.4895785319968,
+      "journal_sha256": "f40da13632956c44ae5c20632abe9fec87225af54c2404dc069f808c287082c6",
+      "journal_gzip_sha256": "dc645be9c4d53e88b3fc3f647fad1d4ce817686d31cb6d3ce87336c0c832fb5f",
+      "journal_gzip_bytes": 2492791,
+      "post_variants": 15918,
+      "actual_status_counts": {
+        "rejected": 933,
+        "executed": 14985
+      },
+      "source_manifest_sha256": "90cf212937a0a5f649d35fc1dc22514c2ae87124928c6b9c07cfbb791eb99cba",
+      "adapter_sha256": "80dd779d577bc5cdf2d5f0e7229f7b76db235b6f9965ccf2812009e2febde8be",
+      "inventory_sha256": "75b5f8923011b13e6e51d8a24119a755386f25aa0da99279562521140f4131e4",
+      "transaction_binary_sha256": "d47931435ed0af178168f9d1a98acf2ff605ed7b59cd504bfc7db6755f6c88bf",
+      "gate_command": [
+        "python3",
+        "-u",
+        "conformance/full_state_gate.py",
+        "--backend",
+        "js",
+        "--workers",
+        "12",
+        "--timeout",
+        "3600",
+        "--output",
+        "state-gate-host-hardened"
+      ],
+      "independent_audit": {
+        "all_required_ids_exactly_once": true,
+        "all_fixture_hashes_match_inventory": true,
+        "all_post_variants_recompared": true,
+        "all_commitments_present": true,
+        "current_fingerprint_matches": true,
+        "source_and_binary_manifest_matches": true
+      }
+    }
+  },
+  "source_manifest": "integrated-build-provenance.json",
+  "source_manifest_sha256": "90cf212937a0a5f649d35fc1dc22514c2ae87124928c6b9c07cfbb791eb99cba",
+  "source_publication_verification": {
+    "execution_source_commit": "a4e6187de6c0c0736534301973c23310acde68cc",
+    "execution_source_tree": "a652b6e337da8a6fe3ce00655283597a79123cb3",
+    "tracked_files_checked": 267,
+    "implementation_source_matches_public_tree": true,
+    "nonimplementation_difference": [
+      "tests-results.json"
+    ],
+    "note": "Existing local regression-result file differs; excluded from this publication. All other 266 public files match Git blob hashes."
+  },
+  "complete_pass": true,
+  "previous_evidence": {
+    "path": "state-conformance-complete.json",
+    "publication_commit": "35db6bfb7464a12a8013f5ce61dde6876813be91",
+    "execution_source_commit": "16888e001cc824c6014edbae330e27a565109279",
+    "preserved_unchanged": true
+  },
+  "limitations": "State-test scope only; blockchain and standalone transaction conformance remain unfinished. Not a formal correctness proof.",
+  "runtime_sha256": {
+    "conformance/bend_adapter.py": "80dd779d577bc5cdf2d5f0e7229f7b76db235b6f9965ccf2812009e2febde8be",
+    "conformance/runner.py": "957316da131b863925fcf52eee067c7d6e942198f725f7ed89231a84160c898d",
+    "conformance/full_state_gate.py": "1df76f7037e0611be186ee1136c91a4270ad631d637c799f46da3f3c2046bc19",
+    "conformance/rejection_mapping.py": "77ee64444073b3204738d6640a4c762bb0876a78e052ec18f75748c98a1edd21",
+    "envelope-host/target/debug/evm-bend-envelope": "f172a75844a9f493bb283fa7eb53eccb41f3ea3a7fb16afce1c753490862bad3",
+    "revm-adapter/target/debug/revm-adapter": "8773e078f20314d054daa3578861211cbda85ae1d92b8132448e967898e85d41",
+    "precompile-host/target/debug/bend-evm-precompile-host": "44f7457cf6c50414c998525b169947a978c8d668c5c0828f701458f5d774f8de",
+    "evm-transaction-native": "c2aff86978bd4a3298ec804e6d5acca78a91d0155c486a137779e329e6c24d2c",
+    "evm-transaction.js": "d47931435ed0af178168f9d1a98acf2ff605ed7b59cd504bfc7db6755f6c88bf"
+  },
+  "native_milestone_commit": "b55f2776a6b88dd5f7ae9265df727888eae74d24"
+}

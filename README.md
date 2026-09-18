@@ -1,7 +1,5 @@
 # EVM in Bend — Amsterdam
 
-> Host-bridge hardening update: the adapter has changed since the complete runs below. Eight fixture-backed bridge tests and 11 runner tests pass; the exhaustive bridge audit reports zero mismatches or host limits. Fresh full native and JS execution gates are pending for this new fingerprint. Prior 15,918/15,918 results remain valid only for their recorded implementation. See conformance/HOST-BRIDGE-PROGRESS.md (HOST-BRIDGE-PROGRESS.md within conformance).
-
 An EVM transaction and frame interpreter written in Bend 2.0.5, targeting the pinned Amsterdam execution fork of Glamsterdam. Opcode execution, 256-bit arithmetic, Keccak, memory, account/storage journals, nested calls, creation and gas accounting are Bend. Standard cryptographic precompiles use an explicit Rust host adapter backed by evm2. Python only serializes JSON/binary inputs and normalizes output.
 
 This is a correctness-first experimental implementation, **not an end-to-end proved EVM or a production client**. The earlier Shanghai subset and its laws remain regression material; `full/main.bend` is the current interpreter.
@@ -10,7 +8,7 @@ This is a correctness-first experimental implementation, **not an end-to-end pro
 
 **State-test gate complete: all 15,918 pinned Amsterdam state fixtures pass on both native and JavaScript.** There are zero skipped, blocked, failed, or host-error cases. Both fresh runs verified unchanged implementation fingerprints.
 
-The pinned official corpus contains 40,911 required state, blockchain and transaction cases. The complete state-fixture result is recorded in [conformance/state-conformance-complete.json](conformance/state-conformance-complete.json), with commands, source/binary hashes, journal hashes and an independent inventory audit. Blockchain and standalone transaction execution remain unfinished. Engine/sync API fixtures are separately inventoried.
+The pinned official corpus contains 40,911 required state, blockchain and transaction cases. The complete state-fixture result is recorded in [conformance/state-conformance-host-hardened.json](conformance/state-conformance-host-hardened.json), with commands, source/binary hashes, journal hashes and an independent inventory audit. Blockchain and standalone transaction execution remain unfinished. Engine/sync API fixtures are separately inventoried.
 
 `full/transaction-main.bend` performs transaction preparation and settlement in Bend. Signed envelopes are decoded and cryptographically verified by the strict Rust wire/crypto helper; transaction semantics remain in Bend. Total gas is a 256-bit Word, including accepted values beyond the runtime Nat range. Expected rejections use the pinned EEST exception-matching contract. Supplementary decoded-envelope and prepared-frame regressions are rerun against the integrated source; they do not replace the official state gate.
 

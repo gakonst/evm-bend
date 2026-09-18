@@ -1,7 +1,5 @@
 # Goal: 100% passing EVM on Bend
 
-> Host-bridge hardening update: the adapter has changed since the complete runs below. Eight fixture-backed bridge tests and 11 runner tests pass; the exhaustive bridge audit reports zero mismatches or host limits. Fresh full native and JS execution gates are pending for this new fingerprint. Prior 15,918/15,918 results remain valid only for their recorded implementation. See conformance/HOST-BRIDGE-PROGRESS.md (HOST-BRIDGE-PROGRESS.md within conformance).
-
 The user's standing completion criterion is complete EVM conformance in Bend, targeting the pinned latest Amsterdam/Glamsterdam execution specification. Passing selected differential cases is a milestone, not completion.
 
 Completion requires:
@@ -12,6 +10,6 @@ Completion requires:
 - Implement missing execution or transaction-boundary behavior needed by the applicable corpus. A prepared-frame runner alone is not the completion gate.
 - Regressions, arithmetic checks and existing laws continue to pass. Keep the crypto and compiler trust boundaries explicit. Test-suite success is not an end-to-end correctness proof.
 
-Current state-test scope: COMPLETE — all 15,918 pinned Amsterdam state fixtures pass on both native and JavaScript, with zero skipped or unsupported cases. The broader full-conformance goal remains unfinished because blockchain and standalone transaction formats are not yet complete. See conformance/state-conformance-complete.json for the exact state-gate evidence.
+Current state-test scope: COMPLETE — all 15,918 pinned Amsterdam state fixtures pass on both native and JavaScript, with zero skipped or unsupported cases. The broader full-conformance goal remains unfinished because blockchain and standalone transaction formats are not yet complete. See conformance/state-conformance-host-hardened.json for the exact state-gate evidence.
 
 Prioritize reaching this goal before major performance optimization. Preserve conformance while optimizing afterward.

@@ -1,0 +1,56 @@
+{
+  "backend": "js",
+  "required": 15918,
+  "recorded": 15918,
+  "status_counts": {
+    "pass": 15918,
+    "not_run": 0
+  },
+  "implementation_sha256": "a4aa7fc2893c90c0e7f23f06421b7bfe46f7a902a2ea7e123f83a7e3814c1084",
+  "implementation_unchanged": true,
+  "complete_pass": true,
+  "release": "tests-glamsterdam-devnet@v8.1.4",
+  "archive_sha256": "aed315489163dc67c4e5607d7bbb8902e8329afe939be58193b125f2e81a85d4",
+  "command": [
+    "/usr/bin/python3",
+    "/srv/nanocodex/workspace/evm-bend/conformance/bend_adapter.py",
+    "--backend",
+    "js",
+    "--timeout",
+    "3600.0"
+  ],
+  "seconds": 1905.4895785319968,
+  "journal_sha256": "f40da13632956c44ae5c20632abe9fec87225af54c2404dc069f808c287082c6",
+  "journal_gzip_sha256": "dc645be9c4d53e88b3fc3f647fad1d4ce817686d31cb6d3ce87336c0c832fb5f",
+  "journal_gzip_bytes": 2492791,
+  "post_variants": 15918,
+  "actual_status_counts": {
+    "rejected": 933,
+    "executed": 14985
+  },
+  "source_manifest_sha256": "90cf212937a0a5f649d35fc1dc22514c2ae87124928c6b9c07cfbb791eb99cba",
+  "adapter_sha256": "80dd779d577bc5cdf2d5f0e7229f7b76db235b6f9965ccf2812009e2febde8be",
+  "inventory_sha256": "75b5f8923011b13e6e51d8a24119a755386f25aa0da99279562521140f4131e4",
+  "transaction_binary_sha256": "d47931435ed0af178168f9d1a98acf2ff605ed7b59cd504bfc7db6755f6c88bf",
+  "gate_command": [
+    "python3",
+    "-u",
+    "conformance/full_state_gate.py",
+    "--backend",
+    "js",
+    "--workers",
+    "12",
+    "--timeout",
+    "3600",
+    "--output",
+    "state-gate-host-hardened"
+  ],
+  "independent_audit": {
+    "all_required_ids_exactly_once": true,
+    "all_fixture_hashes_match_inventory": true,
+    "all_post_variants_recompared": true,
+    "all_commitments_present": true,
+    "current_fingerprint_matches": true,
+    "source_and_binary_manifest_matches": true
+  }
+}

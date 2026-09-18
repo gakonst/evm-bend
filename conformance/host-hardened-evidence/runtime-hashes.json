@@ -1,0 +1,11 @@
+{
+  "conformance/bend_adapter.py": "80dd779d577bc5cdf2d5f0e7229f7b76db235b6f9965ccf2812009e2febde8be",
+  "conformance/runner.py": "957316da131b863925fcf52eee067c7d6e942198f725f7ed89231a84160c898d",
+  "conformance/full_state_gate.py": "1df76f7037e0611be186ee1136c91a4270ad631d637c799f46da3f3c2046bc19",
+  "conformance/rejection_mapping.py": "77ee64444073b3204738d6640a4c762bb0876a78e052ec18f75748c98a1edd21",
+  "envelope-host/target/debug/evm-bend-envelope": "f172a75844a9f493bb283fa7eb53eccb41f3ea3a7fb16afce1c753490862bad3",
+  "revm-adapter/target/debug/revm-adapter": "8773e078f20314d054daa3578861211cbda85ae1d92b8132448e967898e85d41",
+  "precompile-host/target/debug/bend-evm-precompile-host": "44f7457cf6c50414c998525b169947a978c8d668c5c0828f701458f5d774f8de",
+  "evm-transaction-native": "c2aff86978bd4a3298ec804e6d5acca78a91d0155c486a137779e329e6c24d2c",
+  "evm-transaction.js": "d47931435ed0af178168f9d1a98acf2ff605ed7b59cd504bfc7db6755f6c88bf"
+}

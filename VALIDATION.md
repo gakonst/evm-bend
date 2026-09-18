@@ -1,7 +1,5 @@
 # Validation record
 
-> Host-bridge hardening update: the adapter has changed since the complete runs below. Eight fixture-backed bridge tests and 11 runner tests pass; the exhaustive bridge audit reports zero mismatches or host limits. Fresh full native and JS execution gates are pending for this new fingerprint. Prior 15,918/15,918 results remain valid only for their recorded implementation. See conformance/HOST-BRIDGE-PROGRESS.md (HOST-BRIDGE-PROGRESS.md within conformance).
-
 This is execution evidence for the pinned Amsterdam interpreter, not a correctness proof.
 
 | Suite | Completed evidence |
@@ -19,7 +17,9 @@ This is execution evidence for the pinned Amsterdam interpreter, not a correctne
 | Earlier Shanghai subset | 452 Python and 436 evm2 comparisons pass |
 | Existing proof mutation gate | 5 semantic mutants rejected |
 
-The complete state gate is recorded in [conformance/state-conformance-complete.json](conformance/state-conformance-complete.json). Both runs verified unchanged fingerprints. An independent audit confirmed all 15,918 required fixture IDs occur exactly once per backend, all fixture hashes match the pinned inventory, and every post variant passes with state and logs commitments present. Source/compiler/binary hashes are in [conformance/integrated-build-provenance.json](conformance/integrated-build-provenance.json).
+The complete state gate is recorded in [conformance/state-conformance-host-hardened.json](conformance/state-conformance-host-hardened.json). Both runs verified unchanged fingerprints. An independent audit confirmed all 15,918 required fixture IDs occur exactly once per backend, all fixture hashes match the pinned inventory, and every post variant passes with state and logs commitments present. Source/compiler/binary hashes are in [conformance/integrated-build-provenance.json](conformance/integrated-build-provenance.json).
+
+The hardened adapter was freshly validated by the complete state gates, eight fixture-backed host-bridge tests, eleven runner tests, and the exhaustive bridge audit. The other supplementary suites below are preserved earlier evidence against the unchanged Bend implementation; they were not rerun during this adapter-only revalidation.
 
 Other machine-readable results are the corresponding `*-results.json` and `full-differential-*.json` files. The prepared-frame differential reconciles intrinsic gas and compares reference-reported storage writes; the official state gate compares complete post-state and logs commitments. No complete opcode or journal refinement theorem is claimed.
 
